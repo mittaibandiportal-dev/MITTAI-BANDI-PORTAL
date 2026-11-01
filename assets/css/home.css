@@ -40,57 +40,34 @@
   contain: paint;
 }
 
-/* YouTube IFrame Background */
-.hero-yt-wrap {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  contain: paint;
-  z-index: 1;
-}
-
-.hero-yt-wrap iframe,
-#yt-hero-player {
+/* Hero Video Background */
+.hero-video {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 100vw;
-  height: 56.25vw;
-  min-height: 100vh;
-  min-width: 177.78vh;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
   transform: translate(-50%, -50%);
-  border: none;
+  object-fit: cover;
+  z-index: 1;
   pointer-events: none;
 }
 
-/* Static fallback image — high-res local sweets photograph */
-.hero-bg-image {
-  position: absolute;
-  inset: 0;
-  background-image: url('../images/hero_sweets_bg.png');
-  background-size: cover;
-  background-position: center right;
-  z-index: 2;
-  transition: opacity 1s var(--ease-out);
-}
-.hero-bg-image.yt-loaded {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Controlled gradient overlay: high contrast on left text column, visual warmth on right */
+/* Controlled gradient overlay: high contrast on left text column, clear video on right */
 .hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(20, 2, 11, 0.94) 0%,
-    rgba(20, 2, 11, 0.84) 42%,
-    rgba(20, 2, 11, 0.45) 80%,
-    rgba(20, 2, 11, 0.35) 100%
+    rgba(20, 2, 11, 0.88) 0%,
+    rgba(20, 2, 11, 0.70) 42%,
+    rgba(20, 2, 11, 0.30) 75%,
+    rgba(20, 2, 11, 0.18) 100%
   );
-  z-index: 3;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .hero-content {
@@ -99,6 +76,11 @@
   padding-top: calc(var(--nav-height) + clamp(2rem, 4vw, 3.5rem));
   padding-bottom: clamp(3rem, 6vw, 4.5rem);
   max-width: 680px;
+}
+
+.hero-content .reveal {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero-eyebrow {

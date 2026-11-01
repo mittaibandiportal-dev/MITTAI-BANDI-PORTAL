@@ -888,11 +888,24 @@ body.contact-page {
     line-height: 1.2;
   }
   .contact-nav-tabs {
-    flex-direction: column;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.5rem;
+    padding-bottom: 0.4rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     width: 100%;
+    justify-content: flex-start;
+  }
+  .contact-nav-tabs::-webkit-scrollbar {
+    display: none;
   }
   .contact-nav-tab {
-    justify-content: center;
-    width: 100%;
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-size: 0.8125rem;
+    padding: 0.42rem 0.85rem;
   }
 }

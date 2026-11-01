@@ -585,112 +585,9 @@ em {
   transition-delay: 0.5s;
 }
 
-/* ── Preloader ──────────────────────────────────────────── */
+/* ── Preloader (Removed) ──────────────────────────────────────── */
 #preloader {
-  position: fixed;
-  inset: 0;
-  z-index: var(--z-preloader);
-  background: var(--color-dark);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  contain: strict;
-  transition: opacity 0.6s ease, visibility 0.6s ease;
-}
-
-#preloader.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.preloader-logo {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  overflow: hidden;
-  animation: fadeIn 0.5s ease both;
-}
-
-.preloader-logo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.preloader-brand {
-  margin-top: var(--space-lg);
-  text-align: center;
-  animation: fadeInUp 0.6s 0.2s ease both;
-}
-
-.preloader-brand h1 {
-  font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  color: var(--color-cream);
-  font-weight: 800;
-  letter-spacing: -0.01em;
-}
-
-.preloader-brand p {
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  color: var(--color-gold);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-top: var(--space-xs);
-}
-
-.preloader-bar-container {
-  width: 160px;
-  height: 2px;
-  background: rgba(255, 249, 243, 0.1);
-  border-radius: var(--radius-full);
-  margin-top: var(--space-2xl);
-  overflow: hidden;
-  animation: fadeIn 0.4s 0.4s ease both;
-}
-
-.preloader-bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--color-magenta), var(--color-gold));
-  border-radius: var(--radius-full);
-  animation: preloaderFill 1.8s ease forwards;
-}
-
-.preloader-tagline {
-  margin-top: var(--space-xl);
-  font-size: var(--text-xs);
-  color: rgba(255, 249, 243, 0.3);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  animation: fadeIn 0.4s 0.5s ease both;
-}
-
-.preloader-ring {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px solid rgba(201, 0, 61, 0.12);
-  animation: pulse-ring 3s ease-out infinite;
-}
-
-.preloader-ring:nth-child(1) {
-  width: 220px;
-  height: 220px;
-}
-
-.preloader-ring:nth-child(2) {
-  width: 320px;
-  height: 320px;
-  animation-delay: 0.6s;
-}
-
-.preloader-ring:nth-child(3) {
-  width: 420px;
-  height: 420px;
-  animation-delay: 1.2s;
+  display: none !important;
 }
 
 /* ── Navigation ─────────────────────────────────────────── */
@@ -1725,7 +1622,17 @@ em {
   background: #FFFAF6;
 }
 
-/* ── Responsive Adaptations for Legal Pages ──────────────── */
+/* ── Responsive Adaptations for Legal & Support Pages ──────────────── */
+@media (max-width: 991px) {
+  .nav-links,
+  .nav-actions {
+    display: none;
+  }
+  .nav-toggle {
+    display: flex;
+  }
+}
+
 @media (max-width: 768px) {
   .legal-hero {
     padding-top: calc(var(--nav-height) + 1.5rem);
@@ -1733,10 +1640,25 @@ em {
   }
   .legal-nav-tabs,
   .contact-nav-tabs {
-    gap: 0.45rem;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    padding-bottom: 0.5rem;
+    max-width: 100%;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .legal-nav-tabs::-webkit-scrollbar,
+  .contact-nav-tabs::-webkit-scrollbar {
+    display: none;
   }
   .legal-nav-tab,
   .contact-nav-tab {
+    flex-shrink: 0;
+    white-space: nowrap;
     padding: 0.42rem 0.85rem;
     font-size: 0.8125rem;
   }
@@ -1749,36 +1671,5 @@ em {
   .legal-table th,
   .legal-table td {
     padding: 0.75rem 0.85rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .legal-nav-tabs,
-  .contact-nav-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.45rem;
-    justify-content: flex-start;
-  }
-  .legal-nav-tab,
-  .contact-nav-tab {
-    padding: 0.4rem 0.75rem;
-    font-size: 0.8rem;
-    white-space: nowrap;
-  }
-}
-
-@media (max-width: 480px) {
-  .legal-nav-tabs,
-  .contact-nav-tabs {
-    flex-direction: column;
-    width: 100%;
-  }
-  .legal-nav-tab,
-  .contact-nav-tab {
-    width: 100%;
-    justify-content: center;
-    white-space: normal;
-    text-align: center;
   }
 }

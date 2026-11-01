@@ -4,33 +4,12 @@
  */
 
 /* ═══════════════════════════════════════════════
-   PRELOADER
+   HERO REVEAL (Immediate display on load)
 ═══════════════════════════════════════════════ */
-function initPreloader() {
-  const preloader = document.getElementById('preloader');
-  if (!preloader) return;
-
-  const minTime = 800;
-  const start = Date.now();
-  document.body.style.overflow = 'hidden';
-
-  const hidePreloader = () => {
-    const elapsed = Date.now() - start;
-    const remaining = Math.max(0, minTime - elapsed);
-    setTimeout(() => {
-      preloader.classList.add('hidden');
-      document.body.style.overflow = '';
-      document.querySelectorAll('.hero .reveal, .hero .reveal-left, .hero .reveal-right').forEach(el => {
-        el.classList.add('visible');
-      });
-    }, remaining);
-  };
-
-  if (document.readyState === 'complete') {
-    hidePreloader();
-  } else {
-    window.addEventListener('load', hidePreloader);
-  }
+function initHeroReveal() {
+  document.querySelectorAll('.hero .reveal, .hero .reveal-left, .hero .reveal-right').forEach(el => {
+    el.classList.add('visible');
+  });
 }
 
 /* ═══════════════════════════════════════════════
@@ -435,12 +414,30 @@ function initHeroVideo() {
   const video = document.querySelector('.hero-video');
   if (!video) return;
   video.muted = true;
+  video.defaultMuted = true;
   video.playsInline = true;
-  video.loop = true;
-  video.play().catch(() => {
-    // Autoplay blocked — hero-bg-image fallback is already visible
-    video.style.display = 'none';
-  });
+  video.setAttribute('muted', '');
+  video.setAttribute('playsinline', '');
+  video.setAttribute('autoplay', '');
+
+  const attemptPlay = () => {
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        const onFirstInteract = () => {
+          video.play().catch(() => {});
+          ['click', 'touchstart', 'scroll', 'keydown'].forEach(evt => {
+            document.removeEventListener(evt, onFirstInteract);
+          });
+        };
+        ['click', 'touchstart', 'scroll', 'keydown'].forEach(evt => {
+          document.addEventListener(evt, onFirstInteract, { once: true, passive: true });
+        });
+      });
+    }
+  };
+
+  attemptPlay();
 }
 
 /* ═══════════════════════════════════════════════
@@ -455,7 +452,7 @@ function initButtonEffects() {
    INITIALIZE
 ═══════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
-  initPreloader();
+  initHeroReveal();
   initNavigation();
   initSmoothScroll();
   initScrollReveal();

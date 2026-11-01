@@ -37,27 +37,6 @@
 
 <body>
 
-  <!-- ══════════════════════════════════════════
-     PRELOADER
-══════════════════════════════════════════ -->
-  <div id="preloader" role="status" aria-label="Loading MITTAI BANDI">
-    <div class="preloader-ring"></div>
-    <div class="preloader-ring"></div>
-    <div class="preloader-ring"></div>
-    <div class="preloader-logo">
-      <img src="assets/images/logo.png?v=2" alt="Mittai Bandi Logo"
-        onerror="this.onerror=null;this.src='assets/images/logo.jpg?v=2'" />
-    </div>
-    <div class="preloader-brand">
-      <h1>MITTAI BANDI</h1>
-      <p>Traditional Taste. Digital Convenience.</p>
-    </div>
-    <div class="preloader-bar-container">
-      <div class="preloader-bar"></div>
-    </div>
-    <p class="preloader-tagline">Powered by GURMITRAA Technologies</p>
-  </div>
-
   <!-- Page Transition -->
   <div class="page-transition" aria-hidden="true"></div>
 
@@ -166,14 +145,12 @@
 ══════════════════════════════════════════ -->
   <section class="hero" id="hero" aria-label="Hero section">
     <div class="hero-media">
-      <!-- YouTube Video Background -->
-      <div class="hero-yt-wrap" aria-hidden="true">
-        <div id="yt-hero-player"></div>
-      </div>
-      <!-- Static image fallback (shown before YT loads & on mobile) -->
-      <div class="hero-bg-image" id="hero-bg-fallback"
-        style="background-image: url('assets/images/hero_sweets_bg.png');"
-        aria-hidden="true"></div>
+      <!-- Background Video -->
+      <video class="hero-video" autoplay loop muted playsinline aria-hidden="true">
+        <source src="assets/videos/new-video.mp4" type="video/mp4" />
+        <source src="assets/videos/hero-bg.mp4" type="video/mp4" />
+        <source src="new%20video.mp4" type="video/mp4" />
+      </video>
       <div class="hero-overlay" aria-hidden="true"></div>
     </div>
 
