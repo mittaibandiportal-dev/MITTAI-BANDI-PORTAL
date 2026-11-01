@@ -1,0 +1,15 @@
+{
+  "name": "mittai-bandi-web",
+  "version": "1.0.0",
+  "description": "MITTAI BANDI — Traditional Taste. Digital Convenience. Powered by GURMITRAA Technologies Pvt. Ltd.",
+  "private": true,
+  "scripts": {
+    "dev": "npx -y serve . -l 3000 --no-clipboard",
+    "start": "npx -y serve . -l 3000 --no-clipboard"
+  },
+  "author": "GURMITRAA Technologies Pvt. Ltd.",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "firebase": "^13.1.0"
+  }
+}

@@ -1,0 +1,898 @@
+/* ============================================================
+   MITTAI BANDI — Contact & Support Page Styles (Complete Light Theme)
+   ============================================================ */
+
+body.contact-page {
+  background-color: #FFFAF6;
+  color: #24131B;
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Light Navbar Override for Contact Page ────────────────── */
+.contact-page #main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  background: rgba(255, 250, 246, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid #EDE1DC;
+  z-index: 1000;
+  transition: all var(--transition-base);
+  box-shadow: 0 1px 10px rgba(36, 19, 27, 0.04);
+}
+
+.contact-page #main-nav.scrolled {
+  background: rgba(255, 250, 246, 0.98);
+  box-shadow: 0 4px 20px rgba(36, 19, 27, 0.06);
+}
+
+.contact-page .nav-logo-name {
+  color: #24131B;
+}
+
+.contact-page .nav-logo-tag {
+  color: #D5004C;
+}
+
+.contact-page .nav-link {
+  color: #24131B;
+  font-weight: 500;
+}
+
+.contact-page .nav-link:hover,
+.contact-page .nav-link.active {
+  color: #D5004C;
+}
+
+.contact-page .nav-link.active::after {
+  background: #D5004C;
+}
+
+.contact-page .nav-toggle span {
+  background: #24131B;
+}
+
+.contact-page .nav-mobile-menu {
+  background: #FFFAF6;
+  border-bottom: 1px solid #EDE1DC;
+  box-shadow: 0 10px 30px rgba(36, 19, 27, 0.08);
+}
+
+.contact-page .nav-mobile-link {
+  color: #24131B;
+  border-bottom: 1px solid #EDE1DC;
+}
+
+.contact-page .nav-mobile-link:hover,
+.contact-page .nav-mobile-link.active {
+  color: #D5004C;
+  background: #F8EFE7;
+}
+
+/* ── Contact Hero Header ───────────────────────────────────── */
+.contact-hero {
+  position: relative;
+  padding-top: calc(var(--nav-height) + clamp(2.5rem, 5vw, 4rem));
+  padding-bottom: clamp(3rem, 5vw, 4.5rem);
+  background: linear-gradient(180deg, #FFFAF6 0%, #F8EFE7 100%);
+  border-bottom: 1px solid #EDE1DC;
+  text-align: center;
+}
+
+.contact-hero .container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.contact-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.84375rem;
+  font-weight: 500;
+  color: #8A747F;
+  margin-bottom: 1.25rem;
+}
+
+.contact-breadcrumb a {
+  color: #5A454F;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.contact-breadcrumb a:hover {
+  color: #D5004C;
+}
+
+.contact-breadcrumb span.divider {
+  color: #D2C3BD;
+  font-size: 0.75rem;
+}
+
+.contact-breadcrumb span.current {
+  color: #D5004C;
+  font-weight: 600;
+}
+
+.contact-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(213, 0, 76, 0.08);
+  color: #D5004C;
+  padding: 0.35rem 0.95rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.contact-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.75rem);
+  font-weight: 800;
+  color: #24131B;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin: 0 0 1.25rem;
+  word-break: break-word;
+}
+
+.contact-hero h1 em {
+  color: #D5004C;
+  font-style: italic;
+  font-weight: inherit;
+}
+
+.contact-hero-sub {
+  font-size: clamp(1.05rem, 1.35vw, 1.1875rem);
+  color: #5A454F;
+  line-height: 1.7;
+  max-width: 680px;
+  margin: 0 auto 2.25rem;
+}
+
+/* Policy Tabs */
+.contact-nav-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.5rem;
+}
+
+.contact-nav-tab {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 1.15rem;
+  background: #FFFFFF;
+  border: 1px solid #EDE1DC;
+  border-radius: 9999px;
+  color: #5A454F;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 6px rgba(36, 19, 27, 0.03);
+}
+
+.contact-nav-tab:hover {
+  background: #F8EFE7;
+  border-color: #D5004C;
+  color: #D5004C;
+  transform: translateY(-1px);
+}
+
+.contact-nav-tab.active {
+  background: #D5004C;
+  border-color: #D5004C;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(213, 0, 76, 0.25);
+}
+
+/* ── Content Container & Layout ────────────────────────────── */
+.contact-main {
+  padding: clamp(3.5rem, 6vw, 5.5rem) 0 clamp(4rem, 7vw, 6.5rem);
+  background-color: #FFFAF6;
+}
+
+.contact-main .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ── Section Title & Eyebrow ───────────────────────────────── */
+.contact-section-head {
+  text-align: center;
+  margin-bottom: 2.75rem;
+}
+
+.contact-section-head .eyebrow {
+  color: #D5004C;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.contact-section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+  font-weight: 800;
+  color: #24131B;
+  line-height: 1.2;
+  margin: 0 0 0.75rem;
+}
+
+.contact-section-head p {
+  color: #5A454F;
+  font-size: 1.05rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── 1. Quick Contact Channels Grid ────────────────────────── */
+.contact-channels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 4.5rem;
+}
+
+.contact-card {
+  background: #FFFFFF;
+  border: 1px solid #EDE1DC;
+  border-radius: 18px;
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-fast), box-shadow var(--transition-base), border-color var(--transition-fast);
+  box-shadow: 0 4px 16px rgba(36, 19, 27, 0.04);
+  position: relative;
+}
+
+.contact-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(213, 0, 76, 0.35);
+  box-shadow: 0 12px 30px rgba(36, 19, 27, 0.08);
+}
+
+.contact-card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(213, 0, 76, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #D5004C;
+  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+}
+
+.contact-card-icon svg {
+  width: 26px;
+  height: 26px;
+  stroke: #D5004C;
+}
+
+.contact-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #24131B;
+  margin: 0 0 0.6rem;
+  line-height: 1.3;
+}
+
+.contact-card p {
+  font-size: 0.9375rem;
+  color: #5A454F;
+  line-height: 1.6;
+  margin: 0 0 1.5rem;
+  flex-grow: 1;
+}
+
+.contact-card-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #D5004C;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  padding-top: 0.75rem;
+  border-top: 1px solid #F2E8E4;
+  transition: gap var(--transition-fast), color var(--transition-fast);
+}
+
+.contact-card-action:hover {
+  color: #BA0042;
+  gap: 0.75rem;
+}
+
+.contact-card-action svg {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transition-fast);
+}
+
+.contact-card-action:hover svg {
+  transform: translateX(2px);
+}
+
+.contact-card-badge {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: #F8EFE7;
+  color: #D5004C;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  letter-spacing: 0.05em;
+}
+
+/* ── 2. Two-Column Dedicated Support Section ───────────────── */
+.support-dual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 4.5rem;
+}
+
+.support-panel {
+  background: #FFFFFF;
+  border: 1px solid #EDE1DC;
+  border-radius: 20px;
+  padding: clamp(2rem, 3.5vw, 2.75rem);
+  box-shadow: 0 4px 18px rgba(36, 19, 27, 0.04);
+}
+
+.support-panel-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.15rem;
+  margin-bottom: 1.25rem;
+}
+
+.support-panel-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(213, 0, 76, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #D5004C;
+  flex-shrink: 0;
+}
+
+.support-panel-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.support-panel h3 {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #24131B;
+  margin: 0 0 0.4rem;
+  line-height: 1.25;
+}
+
+.support-panel p {
+  color: #5A454F;
+  font-size: 0.984375rem;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+.support-highlight-box {
+  background: #F8EFE7;
+  border-left: 3px solid #D5004C;
+  border-radius: 0 10px 10px 0;
+  padding: 1rem 1.25rem;
+  margin-top: 1.25rem;
+  font-size: 0.9375rem;
+  color: #24131B;
+}
+
+.support-highlight-box strong {
+  color: #D5004C;
+}
+
+.support-panel-cta {
+  margin-top: 1.5rem;
+}
+
+/* ── 3. Complaint Escalation Timeline ──────────────────────── */
+.escalation-section {
+  background: #F8EFE7;
+  border: 1px solid #EDE1DC;
+  border-radius: 24px;
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+  margin-bottom: 4.5rem;
+}
+
+.escalation-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+  position: relative;
+}
+
+.escalation-step {
+  background: #FFFFFF;
+  border: 1px solid #EDE1DC;
+  border-radius: 16px;
+  padding: 1.75rem 1.35rem;
+  box-shadow: 0 2px 10px rgba(36, 19, 27, 0.03);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform var(--transition-fast);
+}
+
+.escalation-step:hover {
+  transform: translateY(-3px);
+}
+
+.escalation-step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: #D5004C;
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 0.875rem;
+  border-radius: 10px;
+  margin-bottom: 1.15rem;
+}
+
+.escalation-step h4 {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #24131B;
+  margin: 0 0 0.6rem;
+  line-height: 1.3;
+}
+
+.escalation-step p {
+  color: #5A454F;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.escalation-step a {
+  color: #D5004C;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* ── 4. Grievance & Office Structured Cards ────────────────── */
+.info-dual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 4.5rem;
+}
+
+.info-card {
+  background: #FFFFFF;
+  border: 1px solid #EDE1DC;
+  border-radius: 20px;
+  padding: clamp(2rem, 3.5vw, 2.75rem);
+  box-shadow: 0 4px 18px rgba(36, 19, 27, 0.04);
+}
+
+.info-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #24131B;
+  margin: 0 0 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.info-card h3 svg {
+  color: #D5004C;
+  width: 24px;
+  height: 24px;
+}
+
+.info-card-intro {
+  color: #5A454F;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.info-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid #F4EBE8;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-weight: 600;
+  color: #8A747F;
+  text-transform: uppercase;
+  font-size: 0.78125rem;
+  letter-spacing: 0.05em;
+  padding-top: 0.15rem;
+}
+
+.info-value {
+  color: #24131B;
+  font-weight: 500;
+}
+
+.info-value strong {
+  font-weight: 700;
+  color: #24131B;
+}
+
+.info-value a {
+  color: #D5004C;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color var(--transition-fast);
+}
+
+.info-value a:hover {
+  color: #BA0042;
+  text-decoration: underline;
+}
+
+.info-note {
+  margin-top: 1.25rem;
+  font-size: 0.84375rem;
+  color: #8A747F;
+  font-style: italic;
+  line-height: 1.55;
+  background: #FFFAF6;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px dashed #EDE1DC;
+}
+
+/* ── 5. Security Warning Card ──────────────────────────────── */
+.security-alert-box {
+  background: #FFF9F5;
+  border: 1.5px solid #F6D6C8;
+  border-radius: 18px;
+  padding: clamp(1.75rem, 3vw, 2.25rem);
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  box-shadow: 0 4px 16px rgba(213, 0, 76, 0.04);
+}
+
+.security-alert-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(213, 0, 76, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #D5004C;
+  flex-shrink: 0;
+}
+
+.security-alert-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.security-alert-content h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #24131B;
+  margin: 0 0 0.5rem;
+}
+
+.security-alert-content p {
+  color: #5A454F;
+  font-size: 0.96875rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.security-alert-content strong {
+  color: #D5004C;
+  font-weight: 700;
+}
+
+.security-alert-content a {
+  color: #D5004C;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* ── 6. Light Footer for Contact Page ──────────────────────── */
+.contact-page .site-footer {
+  background: #FFFAF6 !important;
+  color: #24131B !important;
+  border-top: 1px solid #EDE1DC !important;
+  padding: clamp(4rem, 6vw, 5.5rem) 0 2rem;
+}
+
+.contact-page .site-footer a {
+  color: #5A454F;
+  transition: color var(--transition-fast);
+}
+
+.contact-page .site-footer a:hover {
+  color: #D5004C;
+}
+
+.contact-page .footer-brand-desc {
+  color: #5A454F !important;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+  max-width: 320px;
+}
+
+.contact-page .footer-powered {
+  color: #8A747F !important;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.contact-page .footer-col-title {
+  color: #24131B !important;
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.contact-page .footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contact-page .footer-link {
+  color: #5A454F !important;
+  text-decoration: none;
+  font-size: 0.9375rem;
+}
+
+.contact-page .footer-link:hover {
+  color: #D5004C !important;
+}
+
+.contact-page .footer-social-link {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #FFFFFF !important;
+  border: 1px solid #EDE1DC !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #5A454F !important;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 6px rgba(36, 19, 27, 0.03);
+}
+
+.contact-page .footer-social-link svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.contact-page .footer-social-link:hover {
+  background: #D5004C !important;
+  border-color: #D5004C !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+}
+
+.contact-page .footer-contact-item {
+  color: #5A454F !important;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.contact-page .footer-contact-item a {
+  color: #D5004C !important;
+  font-weight: 600;
+}
+
+.contact-page .footer-bottom {
+  margin-top: 3.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid #EDE1DC !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.contact-page .footer-bottom-text {
+  color: #8A747F !important;
+  font-size: 0.8125rem;
+  margin: 0;
+}
+
+.contact-page .footer-bottom-links {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.contact-page .footer-bottom-link {
+  color: #8A747F !important;
+  font-size: 0.8125rem;
+  text-decoration: none;
+}
+
+.contact-page .footer-bottom-link:hover {
+  color: #D5004C !important;
+}
+
+.contact-page .footer-social-link svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.contact-page .footer-social-link:hover {
+  background: #D5004C;
+  border-color: #D5004C;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+}
+
+.contact-page .footer-contact-item {
+  color: #5A454F;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.contact-page .footer-contact-item a {
+  color: #D5004C;
+  font-weight: 600;
+}
+
+.contact-page .footer-bottom {
+  margin-top: 3.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid #EDE1DC;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.contact-page .footer-bottom-text {
+  color: #8A747F;
+  font-size: 0.8125rem;
+  margin: 0;
+}
+
+.contact-page .footer-bottom-links {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.contact-page .footer-bottom-link {
+  color: #8A747F;
+  font-size: 0.8125rem;
+  text-decoration: none;
+}
+
+.contact-page .footer-bottom-link:hover {
+  color: #D5004C;
+}
+
+/* ── Responsive Adaptations ────────────────────────────────── */
+@media (max-width: 1024px) {
+  .contact-channels-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .escalation-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-channels-grid {
+    grid-template-columns: 1fr;
+  }
+  .support-dual-grid,
+  .info-dual-grid {
+    grid-template-columns: 1fr;
+  }
+  .escalation-grid {
+    grid-template-columns: 1fr;
+  }
+  .info-row {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+  .security-alert-box {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .contact-page .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+  .contact-page .footer-bottom-links {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-hero {
+    padding-top: calc(var(--nav-height) + 1.75rem);
+    padding-bottom: 2.5rem;
+  }
+  .contact-hero h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  .contact-nav-tabs {
+    flex-direction: column;
+    width: 100%;
+  }
+  .contact-nav-tab {
+    justify-content: center;
+    width: 100%;
+  }
+}

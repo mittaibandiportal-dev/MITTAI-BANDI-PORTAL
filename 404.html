@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found — MITTAI BANDI</title>
+  <meta name="description" content="The page you're looking for doesn't exist. Return to MITTAI BANDI." />
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --color-magenta: #C9003D;
+      --color-magenta-dark: #A5002F;
+      --color-green: #168B32;
+      --color-cream: #FFF9F3;
+      --color-dark: #14020B;
+      --color-white: #FFFFFF;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+      background: var(--color-dark);
+      color: var(--color-cream);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .error-container {
+      position: relative;
+      z-index: 1;
+      padding: 2rem;
+      max-width: 600px;
+    }
+    .error-logo {
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      object-fit: contain;
+      background: #FFFFFF;
+      padding: 4px;
+      margin: 0 auto 2rem;
+      border: 3px solid var(--color-magenta);
+      box-shadow: 0 4px 20px rgba(201, 0, 61, 0.3);
+    }
+    .error-code {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: clamp(5.5rem, 18vw, 10rem);
+      font-weight: 800;
+      color: var(--color-magenta);
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+    .error-title {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: clamp(1.5rem, 4vw, 2.25rem);
+      font-weight: 700;
+      margin: 0.5rem 0 1.25rem;
+      color: var(--color-white);
+    }
+    .error-title em { color: var(--color-green); font-style: normal; }
+    .error-desc {
+      font-size: 1.05rem;
+      color: rgba(255, 249, 243, 0.75);
+      line-height: 1.7;
+      max-width: 440px;
+      margin: 0 auto 2.5rem;
+    }
+    .error-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .error-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 2rem;
+      border-radius: 8px;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .error-btn-primary {
+      background: var(--color-magenta);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(201, 0, 61, 0.35);
+    }
+    .error-btn-primary:hover {
+      background: var(--color-magenta-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(201, 0, 61, 0.5);
+    }
+    .error-btn-secondary {
+      background: transparent;
+      color: var(--color-cream);
+      border: 1.5px solid rgba(255, 249, 243, 0.3);
+    }
+    .error-btn-secondary:hover {
+      background: rgba(255, 249, 243, 0.1);
+      border-color: var(--color-cream);
+      transform: translateY(-2px);
+    }
+    .error-footer {
+      margin-top: 4rem;
+      font-size: 0.8rem;
+      color: rgba(255, 249, 243, 0.4);
+      letter-spacing: 0.04em;
+    }
+    /* Decorative ring */
+    .deco-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(201, 0, 61, 0.12);
+      pointer-events: none;
+    }
+    .deco-ring-1 { width: 440px; height: 440px; top: -120px; right: -120px; }
+    .deco-ring-2 { width: 320px; height: 320px; bottom: -80px; left: -80px; }
+  </style>
+</head>
+<body>
+  <div class="deco-ring deco-ring-1"></div>
+  <div class="deco-ring deco-ring-2"></div>
+
+  <div class="error-container">
+    <img src="assets/images/logo.png" alt="Mittai Bandi" class="error-logo" />
+    <div class="error-code">404</div>
+    <h1 class="error-title">This Sweet Isn't <em>on the Menu.</em></h1>
+    <p class="error-desc">
+      The page you're looking for seems to have wandered off. Let's get you back to the authentic flavours you love.
+    </p>
+    <div class="error-actions">
+      <a href="index.html" class="error-btn error-btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1"/></svg>
+        Back to Home
+      </a>
+      <a href="index.html#categories" class="error-btn error-btn-secondary">
+        Explore Sweets
+      </a>
+    </div>
+    <p class="error-footer">
+      MITTAI BANDI — Traditional Taste. Digital Convenience.<br />
+      <span style="display:inline-flex; gap:1rem; margin-top:0.75rem; font-size:0.8rem; opacity:0.8;">
+        <a href="privacy-policy.html" style="color:#FFFFFF; text-decoration:none;">Privacy Policy</a> &bull;
+        <a href="terms-of-service.html" style="color:#FFFFFF; text-decoration:none;">Terms of Service</a> &bull;
+        <a href="cancellation-refund.html" style="color:#FFFFFF; text-decoration:none;">Cancellation &amp; Refund</a> &bull;
+        <a href="contact.html" style="color:#FFFFFF; text-decoration:none;">Contact</a>
+      </span>
+    </p>
+  </div>
+</body>
+</html>
