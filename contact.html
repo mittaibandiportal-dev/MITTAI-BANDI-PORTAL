@@ -15,6 +15,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/design-system.css" />
   <link rel="stylesheet" href="assets/css/contact.css" />
+
+  <!-- CMS Engine -->
+  <script src="assets/js/cms-default-data.js"></script>
+  <script src="assets/js/cms-client.js"></script>
 </head>
 <body class="contact-page">
 
@@ -38,7 +42,7 @@
     </ul>
     <div class="nav-actions">
       <div class="nav-store-badges">
-        <a href="https://play.google.com/store/apps/details?id=com.gurmitraa.mittaibandi" class="store-badge store-badge--nav" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
+        <a href="https://play.google.com/store/apps/details?id=com.gurmitraa.mittaibandi" class="store-badge store-badge--nav" data-action="download-play" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
           <svg class="store-badge-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M3.609 1.813C3.393 2.052 3.25 2.42 3.25 2.915V21.085C3.25 21.58 3.393 21.948 3.609 22.187L3.684 22.257L13.844 12.097V11.903L3.684 1.743L3.609 1.813Z" fill="#2196F3"/>
             <path d="M17.228 15.483L13.844 12.099V11.901L17.228 8.517L17.311 8.565L21.321 10.844C22.467 11.494 22.467 12.506 21.321 13.156L17.311 15.435L17.228 15.483Z" fill="#FFC107"/>
@@ -50,7 +54,7 @@
             <span class="store-badge-main">Google Play</span>
           </div>
         </a>
-        <a href="https://apps.apple.com/app/mittai-bandi/id6470000000" class="store-badge store-badge--nav" target="_blank" rel="noopener noreferrer" aria-label="Download on App Store">
+        <a href="https://apps.apple.com/app/mittai-bandi/id6470000000" class="store-badge store-badge--nav" data-action="download-apple" target="_blank" rel="noopener noreferrer" aria-label="Download on App Store">
           <svg class="store-badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
           </svg>
@@ -72,7 +76,7 @@
   <a href="contact.html" class="nav-mobile-link active">Contact</a>
   <div class="nav-mobile-actions">
     <div style="display:flex; flex-direction:column; gap:0.65rem; width:100%;">
-      <a href="https://play.google.com/store/apps/details?id=com.gurmitraa.mittaibandi" class="store-badge store-badge--nav" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
+      <a href="https://play.google.com/store/apps/details?id=com.gurmitraa.mittaibandi" class="store-badge store-badge--nav" data-action="download-play" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
         <svg class="store-badge-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M3.609 1.813C3.393 2.052 3.25 2.42 3.25 2.915V21.085C3.25 21.58 3.393 21.948 3.609 22.187L3.684 22.257L13.844 12.097V11.903L3.684 1.743L3.609 1.813Z" fill="#2196F3"/>
           <path d="M17.228 15.483L13.844 12.099V11.901L17.228 8.517L17.311 8.565L21.321 10.844C22.467 11.494 22.467 12.506 21.321 13.156L17.311 15.435L17.228 15.483Z" fill="#FFC107"/>
@@ -84,7 +88,7 @@
           <span class="store-badge-main">Google Play</span>
         </div>
       </a>
-      <a href="https://apps.apple.com/app/mittai-bandi/id6470000000" class="store-badge store-badge--nav" target="_blank" rel="noopener noreferrer" aria-label="Download on App Store">
+      <a href="https://apps.apple.com/app/mittai-bandi/id6470000000" class="store-badge store-badge--nav" data-action="download-apple" target="_blank" rel="noopener noreferrer" aria-label="Download on App Store">
         <svg class="store-badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
         </svg>
@@ -133,7 +137,7 @@
   <div class="container">
 
     <!-- 1. Dedicated Contact Cards -->
-    <div class="contact-section-head">
+    <div class="contact-section-head" id="channels">
       <p class="eyebrow">Direct Assistance</p>
       <h2>Get in Touch Directly</h2>
       <p>Select the specific team best suited to assist with your inquiry for prompt resolution.</p>
@@ -258,13 +262,13 @@
           </div>
         </div>
         <p>
-          If you own a sweet shop, bakery, or confectionery and want to expand your reach with MITTAI BANDI, email us at <a href="mailto:info@mittaibandi.com" style="color:#D5004C; font-weight:700;">info@mittaibandi.com</a> with your shop name, location, contact number, and FSSAI license number.
+          If you own a sweet shop, bakery, or confectionery and want to expand your reach with MITTAI BANDI, email us at <a href="mailto:info@mittaibandi.com" style="color:var(--color-magenta); font-weight:700;">info@mittaibandi.com</a> with your shop name, location, contact number, and FSSAI license number.
         </p>
         <p>
           Our vendor onboarding team will review your details and guide you through storefront setup, packaging standards, and digital order management.
         </p>
         <div class="support-panel-cta">
-          <a href="partner.html" class="btn btn-primary" style="display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none; padding:0.75rem 1.5rem; border-radius:9999px; background:#D5004C; color:#FFFFFF; font-weight:700; box-shadow:0 4px 14px rgba(213,0,76,0.25);">
+          <a href="partner.html" class="btn btn-primary" style="display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none; padding:0.75rem 1.5rem; border-radius:9999px; background:var(--color-magenta); color:#FFFFFF; font-weight:700; box-shadow:0 4px 14px rgba(230,0,70,0.25);">
             Partner With Us Page
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
@@ -328,7 +332,7 @@
     <div class="info-dual-grid">
 
       <!-- Card A: Grievance Officer -->
-      <div class="info-card">
+      <div class="info-card" id="grievance">
         <h3>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           Grievance Officer (India)
@@ -382,7 +386,11 @@
           </div>
           <div class="info-row">
             <span class="info-label">CIN</span>
-            <span class="info-value"><code>U72900AP2020PTC114398</code></span>
+            <span class="info-value"><code id="corporate-cin-val">U72900AP2020PTC114398</code></span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">FSSAI Number</span>
+            <span class="info-value"><code id="corporate-fssai-val">10125018000861</code></span>
           </div>
           <div class="info-row">
             <span class="info-label">Address</span>
@@ -467,7 +475,7 @@
       <div>
         <h3 class="footer-col-title">Download</h3>
         <div class="footer-store-badges">
-          <a href="https://play.google.com/store/apps/details?id=com.gurmitraa.mittaibandi" class="store-badge store-badge--nav" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
+          <a href="https://play.google.com/store/apps/details?id=com.gurmitraa.mittaibandi" class="store-badge store-badge--footer" data-action="download-play" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
             <svg class="store-badge-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M3.609 1.813C3.393 2.052 3.25 2.42 3.25 2.915V21.085C3.25 21.58 3.393 21.948 3.609 22.187L3.684 22.257L13.844 12.097V11.903L3.684 1.743L3.609 1.813Z" fill="#2196F3"/>
               <path d="M17.228 15.483L13.844 12.099V11.901L17.228 8.517L17.311 8.565L21.321 10.844C22.467 11.494 22.467 12.506 21.321 13.156L17.311 15.435L17.228 15.483Z" fill="#FFC107"/>
@@ -479,7 +487,7 @@
               <span class="store-badge-main">Google Play</span>
             </div>
           </a>
-          <a href="https://apps.apple.com/app/mittai-bandi/id6470000000" class="store-badge store-badge--nav" target="_blank" rel="noopener noreferrer" aria-label="Download on App Store">
+          <a href="https://apps.apple.com/app/mittai-bandi/id6470000000" class="store-badge store-badge--footer" data-action="download-apple" target="_blank" rel="noopener noreferrer" aria-label="Download on App Store">
             <svg class="store-badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
             </svg>
@@ -503,6 +511,7 @@
         <a href="cancellation-refund.html" class="footer-bottom-link">Cancellation &amp; Refund</a>
         <a href="api-policy.html" class="footer-bottom-link">API Policy</a>
         <a href="contact.html" class="footer-bottom-link">Contact</a>
+        <a href="admin/login.html" class="footer-bottom-link" style="opacity: 0.7;">Admin CMS</a>
       </div>
     </div>
   </div>

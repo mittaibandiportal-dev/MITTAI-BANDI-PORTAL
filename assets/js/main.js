@@ -351,7 +351,7 @@ function initForms() {
             <div style="width:54px; height:54px; border-radius:50%; background:rgba(22,139,50,0.12); color:#168B32; display:inline-flex; align-items:center; justify-content:center; margin-bottom:1rem;">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
             </div>
-            <h3 class="display-sm" style="margin-bottom:0.5rem; color:var(--color-dark,#14020B);">Ready to Send via WhatsApp</h3>
+            <h3 class="display-sm" style="margin-bottom:0.5rem; color:var(--color-text-primary,#111827);">Ready to Send via WhatsApp</h3>
             <p class="body-base" style="max-width:440px; margin:0 auto 1.25rem; color:#4A3B43;">Your details have been prefilled. If WhatsApp did not open automatically, click the button below to send your message to <strong>+91 94905 32121</strong>.</p>
             <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.04 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
@@ -384,7 +384,7 @@ function initForms() {
    TOAST
 ═══════════════════════════════════════════════ */
 function showToast(message, type = 'info') {
-  const colors = { success: '#168B32', error: '#C9003D', info: '#14020B' };
+  const colors = { success: '#16A34A', error: '#C9003D', info: '#111827' };
   const toast = Object.assign(document.createElement('div'), { textContent: message });
   toast.style.cssText = `
     position:fixed; bottom:2rem; left:50%; transform:translateX(-50%) translateY(12px);

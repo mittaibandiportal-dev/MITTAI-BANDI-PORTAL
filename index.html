@@ -33,6 +33,10 @@
   <!-- Styles -->
   <link rel="stylesheet" href="assets/css/design-system.css" />
   <link rel="stylesheet" href="assets/css/home.css" />
+
+  <!-- CMS Engine (Early Execution in Head) -->
+  <script src="assets/js/cms-default-data.js"></script>
+  <script src="assets/js/cms-client.js"></script>
 </head>
 
 <body>
@@ -63,8 +67,8 @@
 
       <div class="nav-actions">
         <div class="nav-store-badges">
-          <a href="#" class="store-badge store-badge--nav" data-action="download-play"
-            aria-label="Get it on Google Play">
+          <a href="https://play.google.com/store/apps/details?id=com.gurmitraa.mittaibandi" class="store-badge store-badge--nav" data-action="download-play"
+            target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
             <svg class="store-badge-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path
                 d="M3.609 1.813C3.393 2.052 3.25 2.42 3.25 2.915V21.085C3.25 21.58 3.393 21.948 3.609 22.187L3.684 22.257L13.844 12.097V11.903L3.684 1.743L3.609 1.813Z"
@@ -82,8 +86,8 @@
               <span class="store-badge-main">Google Play</span>
             </div>
           </a>
-          <a href="#" class="store-badge store-badge--nav" data-action="download-apple"
-            aria-label="Download on App Store">
+          <a href="https://apps.apple.com/app/mittai-bandi/id6470000000" class="store-badge store-badge--nav" data-action="download-apple"
+            target="_blank" rel="noopener noreferrer" aria-label="Download on App Store">
             <svg class="store-badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path
                 d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
@@ -109,7 +113,7 @@
     <a href="partner.html" class="nav-mobile-link">Partner With Us</a>
     <a href="#contact" class="nav-mobile-link">Contact</a>
     <div class="nav-mobile-actions">
-      <a href="#" class="store-badge store-badge--nav" data-action="download-play" aria-label="Get it on Google Play">
+      <a href="https://play.google.com/store/apps/details?id=com.gurmitraa.mittaibandi" class="store-badge store-badge--nav" data-action="download-play" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
         <svg class="store-badge-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path
             d="M3.609 1.813C3.393 2.052 3.25 2.42 3.25 2.915V21.085C3.25 21.58 3.393 21.948 3.609 22.187L3.684 22.257L13.844 12.097V11.903L3.684 1.743L3.609 1.813Z"
@@ -127,7 +131,7 @@
           <span class="store-badge-main">Google Play</span>
         </div>
       </a>
-      <a href="#" class="store-badge store-badge--nav" data-action="download-apple" aria-label="Download on App Store">
+      <a href="https://apps.apple.com/app/mittai-bandi/id6470000000" class="store-badge store-badge--nav" data-action="download-apple" target="_blank" rel="noopener noreferrer" aria-label="Download on App Store">
         <svg class="store-badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path
             d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
@@ -144,36 +148,42 @@
      1. HERO
 ══════════════════════════════════════════ -->
   <section class="hero" id="hero" aria-label="Hero section">
-    <div class="hero-media">
-      <!-- Background Video -->
-      <video class="hero-video" autoplay loop muted playsinline aria-hidden="true">
-        <source src="assets/videos/new-video.mp4" type="video/mp4" />
-        <source src="assets/videos/hero-bg.mp4" type="video/mp4" />
-        <source src="new%20video.mp4" type="video/mp4" />
-      </video>
+    <div class="hero-media" id="hero-media">
+      <!-- Fallback / Poster Responsive Images (Desktop 16:9 & Mobile 9:16) -->
+      <picture class="hero-picture" id="hero-picture">
+        <source id="hero-source-mobile" media="(max-width: 768px)" srcset="assets/images/artisan_making_sweets.png" />
+        <source id="hero-source-desktop" media="(min-width: 769px)" srcset="assets/images/artisan_making_sweets.png" />
+        <img src="assets/images/artisan_making_sweets.png" alt="MITTAI BANDI Hero" class="hero-bg-img" id="hero-bg-img" loading="eager" />
+      </picture>
+      <!-- YouTube Hero Video Background Container -->
+      <div class="hero-yt-wrap" id="hero-yt-wrap" aria-hidden="true">
+        <div id="hero-yt-player"></div>
+      </div>
       <div class="hero-overlay" aria-hidden="true"></div>
     </div>
 
-    <div class="container hero-content">
-      <div class="hero-eyebrow reveal">
-        <span>Authentic Indian Confectionery</span>
-      </div>
-      <h1 class="display-hero hero-heading reveal delay-1">MITTAI BANDI</h1>
-      <p class="hero-tagline reveal delay-2">Traditional Taste. Digital Convenience.</p>
-      <p class="hero-subheading reveal delay-2">
-        Authentic sweets, traditional savouries and handcrafted festive collections from trusted local confectioners —
-        now just a tap away.
-      </p>
-      <div class="hero-actions reveal delay-3">
-        <a href="#categories" class="btn btn-primary btn-lg">
-          Explore Categories
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </a>
-        <a href="#app" class="btn btn-secondary btn-lg" data-action="download-app">
-          Download the App
-        </a>
+    <div class="container">
+      <div class="hero-content" id="hero-content-box">
+        <div class="hero-eyebrow reveal">
+          <span>Authentic Indian Confectionery</span>
+        </div>
+        <h1 class="display-hero hero-heading reveal delay-1">MITTAI BANDI</h1>
+        <p class="hero-tagline reveal delay-2">Traditional Taste. Digital Convenience.</p>
+        <p class="hero-subheading reveal delay-2">
+          Authentic sweets, traditional savouries and handcrafted festive collections from trusted local confectioners —
+          now just a tap away.
+        </p>
+        <div class="hero-actions reveal delay-3">
+          <a href="#categories" class="btn btn-primary btn-lg" id="hero-btn-primary">
+            <span class="btn-label">Explore Categories</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a href="#app" class="btn btn-secondary btn-lg" id="hero-btn-secondary" data-action="download-app">
+            <span class="btn-label">Download the App</span>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -206,6 +216,56 @@
       <span class="marquee-item"><span class="marquee-dot"></span> Artisan Confectioners</span>
     </div>
   </div>
+
+  <!-- ══════════════════════════════════════════
+       1.5 PROMOTIONAL BANNER CAROUSEL
+  ══════════════════════════════════════════ -->
+  <section class="section-promo-banners" id="promo-carousel-section" aria-label="Promotional Campaigns">
+    <div class="container promo-carousel-container">
+      <div class="promo-carousel-wrapper" id="promo-carousel-wrapper">
+        <!-- Navigation Arrows -->
+        <button class="promo-carousel-arrow prev" id="promo-carousel-prev" aria-label="Previous promotional banner">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button class="promo-carousel-arrow next" id="promo-carousel-next" aria-label="Next promotional banner">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+
+        <!-- Viewport & Track -->
+        <div class="promo-carousel-viewport" id="promo-carousel-viewport" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Featured promotions">
+          <div class="promo-carousel-track" id="promo-carousel-track">
+            <!-- Initial fallback slide rendered before JS hydration -->
+            <article class="promo-banner-slide active" data-banner-id="banner-festive-offers">
+              <div class="promo-banner-card">
+                <div class="promo-banner-content">
+                  <div class="promo-banner-badge-wrap">
+                    <span class="promo-banner-badge">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
+                      FESTIVE OFFERS
+                    </span>
+                  </div>
+                  <h2 class="promo-banner-title">Celebrate Every Occasion with Traditional Mithai.</h2>
+                  <p class="promo-banner-description">Handcrafted authentic pure ghee sweets, bespoke celebration gift boxes and festive delicacies prepared fresh daily by trusted heritage confectioners.</p>
+                  <div class="promo-banner-actions">
+                    <a href="index.html#categories" class="btn btn-primary promo-btn-primary">Explore Festive Collection</a>
+                    <a href="index.html#app" class="btn btn-outline promo-btn-secondary">Order On App</a>
+                  </div>
+                </div>
+                <div class="promo-banner-media">
+                  <div class="promo-banner-img-wrap">
+                    <img src="assets/images/wedding_sweets.png" alt="Diwali &amp; Festive Delights" class="promo-banner-img" loading="eager" />
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Pagination Dots -->
+        <div class="promo-carousel-dots" id="promo-carousel-dots" role="tablist" aria-label="Promotional banner slides"></div>
+      </div>
+    </div>
+  </section>
 
   <!-- ══════════════════════════════════════════
      2. BRAND INTRODUCTION
@@ -258,7 +318,7 @@
 
         <a href="#app" class="category-card reveal" data-action="download-app">
           <div class="category-card-img">
-            <img src="assets\sweets\cat-bengali.jpg" alt="Traditional Indian Sweets"
+            <img src="assets/sweets/cat-traditional.jpg" alt="Traditional Indian Sweets"
               loading="lazy" />
             <div class="category-overlay"></div>
           </div>
@@ -270,7 +330,7 @@
 
         <a href="#app" class="category-card reveal delay-1" data-action="download-app">
           <div class="category-card-img">
-            <img src="assets\sweets\cat-hot-snacks.jpg" alt="Pure Ghee Sweets"
+            <img src="assets/sweets/cat-pure-ghee.jpg" alt="Pure Ghee Sweets"
               loading="lazy" />
             <div class="category-overlay"></div>
           </div>
@@ -282,7 +342,7 @@
 
         <a href="#app" class="category-card reveal delay-2" data-action="download-app">
           <div class="category-card-img">
-            <img src="assets\sweets\cat-pure-ghee.jpg" alt="Bengali Sweets" loading="lazy" />
+            <img src="assets/sweets/cat-bengali.jpg" alt="Bengali Sweets" loading="lazy" />
             <div class="category-overlay"></div>
           </div>
           <div class="category-card-body">
@@ -293,7 +353,7 @@
 
         <a href="#app" class="category-card reveal delay-1" data-action="download-app">
           <div class="category-card-img">
-            <img src="assets\sweets\cat-traditional.jpg" alt="Hot Snacks and Savouries"
+            <img src="assets/sweets/cat-hot-snacks.jpg" alt="Hot Snacks and Savouries"
               loading="lazy" />
             <div class="category-overlay"></div>
           </div>
@@ -305,19 +365,19 @@
 
         <a href="#app" class="category-card reveal delay-2" data-action="download-app">
           <div class="category-card-img">
-            <img src="assets\sweets\cat-wedding-gifting.jpg" alt="Wedding Sweets and Gifting"
+            <img src="assets/sweets/cat-wedding-gifting.jpg" alt="Wedding Sweets and Gifting"
               loading="lazy" />
             <div class="category-overlay"></div>
           </div>
           <div class="category-card-body">
             <h3 class="category-card-title">Wedding Sweets &amp; Gifting</h3>
-            <p class="category-card-desc">Curated gift boxes for weddings & celebrations.</p>
+            <p class="category-card-desc">Curated gift boxes for weddings &amp; celebrations.</p>
           </div>
         </a>
 
         <a href="#app" class="category-card reveal delay-3" data-action="download-app">
           <div class="category-card-img">
-            <img src="assets\sweets\step3-fulfilment.jpg" alt="Birthday and Celebration Combos" loading="lazy" />
+            <img src="assets/sweets/step3-fulfilment.jpg" alt="Birthday and Celebration Combos" loading="lazy" />
             <div class="category-overlay"></div>
           </div>
           <div class="category-card-body">
@@ -336,9 +396,9 @@
   <section class="section regional-section" id="regional" aria-label="Regional Heritage">
     <div class="container">
       <div class="section-header-center">
-        <span class="eyebrow reveal" style="color: var(--color-green-light);">Regional Heritage</span>
-        <h2 class="display-xl reveal delay-1" style="color: var(--color-white);">India's Sweet Geography.</h2>
-        <p class="body-lg reveal delay-2" style="color: rgba(255, 255, 255, 0.75);">From the ghee-soaked sweets of
+        <span class="eyebrow reveal" style="color: var(--color-green);">Regional Heritage</span>
+        <h2 class="display-xl reveal delay-1" style="color: var(--color-text-primary);">India's Sweet Geography.</h2>
+        <p class="body-lg reveal delay-2" style="color: var(--color-text-secondary);">From the ghee-soaked sweets of
           Andhra Pradesh to the chhena delicacies of Bengal — India's confectionery tradition is as diverse as its
           culture.</p>
       </div>
@@ -618,8 +678,8 @@
           </p>
 
           <div class="store-badges">
-            <a href="#" class="store-badge store-badge--hero" data-action="download-play"
-              aria-label="Download on Google Play">
+            <a href="https://play.google.com/store/apps/details?id=com.gurmitraa.mittaibandi" class="store-badge store-badge--hero" data-action="download-play"
+              target="_blank" rel="noopener noreferrer" aria-label="Download on Google Play">
               <svg class="store-badge-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path
                   d="M3.609 1.813C3.393 2.052 3.25 2.42 3.25 2.915V21.085C3.25 21.58 3.393 21.948 3.609 22.187L3.684 22.257L13.844 12.097V11.903L3.684 1.743L3.609 1.813Z"
@@ -637,8 +697,8 @@
                 <span class="store-badge-main">Google Play</span>
               </div>
             </a>
-            <a href="#" class="store-badge store-badge--hero" data-action="download-apple"
-              aria-label="Download on the App Store">
+            <a href="https://apps.apple.com/app/mittai-bandi/id6470000000" class="store-badge store-badge--hero" data-action="download-apple"
+              target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store">
               <svg class="store-badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path
                   d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
@@ -1112,8 +1172,8 @@
         <div>
           <h3 class="footer-col-title">Download</h3>
           <div class="footer-store-badges">
-            <a href="#" class="store-badge store-badge--footer" data-action="download-play"
-              aria-label="Get it on Google Play">
+            <a href="https://play.google.com/store/apps/details?id=com.gurmitraa.mittaibandi" class="store-badge store-badge--footer" data-action="download-play"
+              target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
               <svg class="store-badge-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path
                   d="M3.609 1.813C3.393 2.052 3.25 2.42 3.25 2.915V21.085C3.25 21.58 3.393 21.948 3.609 22.187L3.684 22.257L13.844 12.097V11.903L3.684 1.743L3.609 1.813Z"
@@ -1131,8 +1191,8 @@
                 <span class="store-badge-main">Google Play</span>
               </div>
             </a>
-            <a href="#" class="store-badge store-badge--footer" data-action="download-apple"
-              aria-label="Download on App Store">
+            <a href="https://apps.apple.com/app/mittai-bandi/id6470000000" class="store-badge store-badge--footer" data-action="download-apple"
+              target="_blank" rel="noopener noreferrer" aria-label="Download on App Store">
               <svg class="store-badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path
                   d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
@@ -1160,6 +1220,7 @@
           <a href="cancellation-refund.html" class="footer-bottom-link">Cancellation &amp; Refund</a>
           <a href="api-policy.html" class="footer-bottom-link">API Policy</a>
           <a href="contact.html" class="footer-bottom-link">Contact</a>
+          <a href="admin/login.html" class="footer-bottom-link" style="opacity: 0.7;">Admin CMS</a>
         </div>
       </div>
     </div>
@@ -1193,59 +1254,6 @@
     });
   </script>
 
-  <!-- YouTube IFrame API for Hero Video Background -->
-  <script>
-    /* ── YouTube Hero Background ─────────────────────────── */
-    (function () {
-      // Only load on non-touch / desktop for performance
-      var isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-      if (isMobile) return;
-
-      var tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      tag.async = true;
-      var firstScript = document.getElementsByTagName('script')[0];
-      firstScript.parentNode.insertBefore(tag, firstScript);
-
-      var ytPlayer;
-      window.onYouTubeIframeAPIReady = function () {
-        ytPlayer = new YT.Player('yt-hero-player', {
-          videoId: 'ZU5BKMTEI9E',
-          playerVars: {
-            autoplay: 1,
-            mute: 1,
-            loop: 1,
-            playlist: 'ZU5BKMTEI9E',  // required for loop
-            controls: 0,
-            showinfo: 0,
-            rel: 0,
-            iv_load_policy: 3,
-            modestbranding: 1,
-            disablekb: 1,
-            fs: 0,
-            playsinline: 1,
-            origin: window.location.origin
-          },
-          events: {
-            onReady: function (e) {
-              e.target.mute();
-              e.target.playVideo();
-            },
-            onStateChange: function (e) {
-              if (e.data === YT.PlayerState.PLAYING) {
-                var fallback = document.getElementById('hero-bg-fallback');
-                if (fallback) fallback.classList.add('yt-loaded');
-              }
-              // Ensure looping (some browsers need this)
-              if (e.data === YT.PlayerState.ENDED) {
-                e.target.playVideo();
-              }
-            }
-          }
-        });
-      };
-    })();
-  </script>
 </body>
 
 </html>

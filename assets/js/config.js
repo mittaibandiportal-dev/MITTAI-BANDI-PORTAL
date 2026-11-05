@@ -113,8 +113,11 @@ function showAppComingSoon(platformName) {
  */
 function handlePlayStoreDownload(event) {
   event.preventDefault();
-  if (MITTAI_CONFIG.playStoreUrl) {
-    window.open(MITTAI_CONFIG.playStoreUrl, '_blank', 'noopener,noreferrer');
+  const btn = event.currentTarget;
+  const customUrl = btn?.getAttribute('data-custom-url') || (btn?.getAttribute('href') && btn.getAttribute('href') !== '#' ? btn.getAttribute('href') : null);
+  const targetUrl = customUrl || MITTAI_CONFIG.playStoreUrl;
+  if (targetUrl && targetUrl !== '#') {
+    window.open(targetUrl, '_blank', 'noopener,noreferrer');
   } else {
     showAppComingSoon('Google Play');
   }
@@ -125,8 +128,11 @@ function handlePlayStoreDownload(event) {
  */
 function handleAppStoreDownload(event) {
   event.preventDefault();
-  if (MITTAI_CONFIG.appStoreUrl) {
-    window.open(MITTAI_CONFIG.appStoreUrl, '_blank', 'noopener,noreferrer');
+  const btn = event.currentTarget;
+  const customUrl = btn?.getAttribute('data-custom-url') || (btn?.getAttribute('href') && btn.getAttribute('href') !== '#' ? btn.getAttribute('href') : null);
+  const targetUrl = customUrl || MITTAI_CONFIG.appStoreUrl;
+  if (targetUrl && targetUrl !== '#') {
+    window.open(targetUrl, '_blank', 'noopener,noreferrer');
   } else {
     showAppComingSoon('the App Store');
   }
@@ -144,6 +150,25 @@ function initAppDownloadButtons() {
   });
   document.querySelectorAll('[data-action="download-apple"]').forEach(btn => {
     btn.addEventListener('click', handleAppStoreDownload);
+  });
+  document.querySelectorAll('[data-select-partner]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const role = btn.getAttribute('data-select-partner');
+      const selectEl = document.getElementById('category');
+      if (selectEl && role) {
+        selectEl.value = role;
+      }
+      const href = btn.getAttribute('href') || '';
+      if (href.startsWith('#')) {
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 76;
+          const targetTop = target.getBoundingClientRect().top + window.scrollY - navHeight;
+          window.scrollTo({ top: targetTop, behavior: 'smooth' });
+        }
+      }
+    });
   });
 }
 

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Sign In  -  MITTAI BANDI CMS</title>
+  
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/admin/css/admin.css" />
+
+  <style>
+    :root {
+      --primary: #C9003D;
+      --primary-hover: #A5002F;
+      --gold: #C99D3D;
+      --dark: #14020B;
+      --cream: #FFFDF9;
+      --bg-gradient: radial-gradient(circle at 50% 10%, #FFF5EB 0%, #FAF0E6 40%, #F5EBE1 100%);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-gradient);
+      padding: 1.5rem;
+      font-family: 'Inter', -apple-system, sans-serif;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Decorative Rings */
+    .bg-deco-circle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      border: 1.5px solid rgba(201, 0, 61, 0.08);
+    }
+    .bg-circle-1 { width: 580px; height: 580px; top: -140px; right: -140px; }
+    .bg-circle-2 { width: 420px; height: 420px; bottom: -100px; left: -100px; }
+
+    .login-wrapper {
+      width: 100%;
+      max-width: 440px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .login-card {
+      background: #FFFFFF;
+      border: 1px solid rgba(201, 0, 61, 0.12);
+      border-radius: 18px;
+      padding: 2.75rem 2.25rem;
+      box-shadow: 0 20px 48px -10px rgba(20, 2, 11, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--gold));
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      background: rgba(201, 0, 61, 0.08);
+      color: var(--primary);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.85rem;
+    }
+
+    .logo-container {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .login-logo {
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      padding: 4px;
+      border: 2px solid var(--gold);
+      box-shadow: 0 8px 24px rgba(201, 0, 61, 0.15);
+      margin: 0 auto 1.15rem;
+      object-fit: contain;
+      display: block;
+    }
+
+    .logo-container h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--dark);
+      letter-spacing: -0.01em;
+      margin-bottom: 0.25rem;
+      font-family: 'Manrope', 'Inter', sans-serif;
+    }
+
+    .logo-container p {
+      font-size: 0.84rem;
+      color: #6B7280;
+      font-weight: 500;
+    }
+
+    .input-field-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .field-icon {
+      position: absolute;
+      left: 0.95rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9CA3AF;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .field-icon svg {
+      width: 17px;
+      height: 17px;
+      stroke-width: 1.85px;
+    }
+
+    .login-input {
+      width: 100%;
+      background: #FAFAFB;
+      border: 1.5px solid #E5E7EB;
+      border-radius: 10px;
+      padding: 0.75rem 1rem 0.75rem 2.6rem;
+      font-size: 0.9rem;
+      color: #1F2937;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .login-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(201, 0, 61, 0.1);
+    }
+
+    .password-toggle-btn {
+      position: absolute;
+      right: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #6B7280;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0.25rem 0.4rem;
+      border-radius: 4px;
+    }
+    .password-toggle-btn:hover {
+      color: var(--primary);
+    }
+
+    .login-alert {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      margin-bottom: 1.25rem;
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .login-alert.error {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      color: #B91C1C;
+    }
+
+    .login-alert.success {
+      background: #ECFDF5;
+      border: 1px solid #A7F3D0;
+      color: #065F46;
+    }
+
+    .btn-submit-login {
+      width: 100%;
+      background: var(--primary);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 10px;
+      padding: 0.85rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(201, 0, 61, 0.25);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-submit-login:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 6px 20px rgba(201, 0, 61, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .btn-submit-login:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .login-footer-meta {
+      text-align: center;
+      margin-top: 1.75rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid #F3F4F6;
+      font-size: 0.75rem;
+      color: #9CA3AF;
+      line-height: 1.5;
+    }
+
+    /* Modal Backdrop */
+    .forgot-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 2, 11, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .forgot-modal.active {
+      display: flex;
+    }
+    .forgot-box {
+      background: #FFFFFF;
+      border-radius: 16px;
+      max-width: 420px;
+      width: 100%;
+      padding: 2rem;
+      box-shadow: 0 20px 48px rgba(0,0,0,0.25);
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .spin-icon {
+      animation: spin 1s linear infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient background elements -->
+  <div class="bg-deco-circle bg-circle-1"></div>
+  <div class="bg-deco-circle bg-circle-2"></div>
+
+  <div class="login-wrapper">
+    <div class="login-card">
+      <div class="logo-container">
+        <img src="/assets/images/logo.png" alt="MITTAI BANDI" class="login-logo" />
+        <span class="brand-badge">
+          <i data-lucide="shield-check" style="width:13px; height:13px;"></i>
+          <span>Administrative Portal</span>
+        </span>
+        <h1>MITTAI BANDI</h1>
+        <p>Traditional Taste. Digital Convenience.</p>
+      </div>
+
+      <div id="login-alert" class="login-alert"></div>
+
+      <form id="admin-login-form" autocomplete="on">
+        <!-- Email -->
+        <div class="form-group" style="margin-bottom: 1.15rem;">
+          <label class="form-label" for="login-email" style="font-weight:600; margin-bottom:0.35rem; display:block;">Admin Email</label>
+          <div class="input-field-wrap">
+            <span class="field-icon"><i data-lucide="mail"></i></span>
+            <input 
+              type="email" 
+              id="login-email" 
+              name="email" 
+              class="login-input" 
+              placeholder="you@example.com" 
+              required 
+              autocomplete="username" 
+              autofocus 
+            />
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.35rem;">
+            <label class="form-label" for="login-password" style="font-weight:600;">Password</label>
+            <button type="button" id="trigger-forgot-modal" style="background:none; border:none; color:var(--primary); font-size:0.78rem; font-weight:600; cursor:pointer;">Forgot Password?</button>
+          </div>
+          <div class="input-field-wrap">
+            <span class="field-icon"><i data-lucide="lock"></i></span>
+            <input 
+              type="password" 
+              id="login-password" 
+              name="password" 
+              class="login-input" 
+              placeholder="Enter admin password" 
+              required 
+              autocomplete="current-password" 
+            />
+            <button type="button" class="password-toggle-btn" id="toggle-pwd-btn">Show</button>
+          </div>
+        </div>
+
+        <!-- Remember Me & Public Site link -->
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+          <label class="toggle-wrap">
+            <input type="checkbox" id="remember-me-check" class="toggle-hidden" checked />
+            <span class="toggle-switch"></span>
+            <span style="font-size: 0.8125rem; color: #4B5563; font-weight: 500;">Remember me</span>
+          </label>
+          <a href="/index.html" target="_blank" style="font-size: 0.8125rem; font-weight: 600; color: var(--gold); display: inline-flex; align-items: center; gap: 0.35rem;">
+            <span>Live Website</span>
+            <i data-lucide="external-link" style="width:13px; height:13px;"></i>
+          </a>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" id="btn-login-submit" class="btn-submit-login">
+          <span>Sign In to Dashboard</span>
+          <i data-lucide="arrow-right" id="login-arrow-icon" style="width:17px; height:17px;"></i>
+          <i data-lucide="loader-2" class="spin-icon" id="login-spinner" style="display:none; width:17px; height:17px;"></i>
+        </button>
+      </form>
+
+      <div class="login-footer-meta">
+        GURMITRAA Technologies Pvt. Ltd. &bull; Rajahmundry<br />
+        Protected by Firebase Authentication
+      </div>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div class="forgot-modal" id="forgot-modal">
+    <div class="forgot-box">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <h3 style="font-size:1.15rem; font-weight:700; color:#111827;">Reset Admin Password</h3>
+        <button type="button" id="close-forgot-modal" style="background:none; border:none; display:flex; align-items:center; justify-content:center; color:#9CA3AF; cursor:pointer;" aria-label="Close">
+          <i data-lucide="x" style="width:20px; height:20px;"></i>
+        </button>
+      </div>
+      <p style="font-size:0.84rem; color:#6B7280; margin-bottom:1.25rem;">
+        Enter your administrator email address. Firebase will send you a secure link to reset your password.
+      </p>
+      <div id="forgot-alert" class="login-alert"></div>
+      <form id="forgot-form">
+        <div class="form-group" style="margin-bottom:1.25rem;">
+          <label class="form-label" for="forgot-email" style="font-weight:600; margin-bottom:0.35rem; display:block;">Admin Email</label>
+          <input type="email" id="forgot-email" class="form-input" placeholder="you@example.com" required autocomplete="email" />
+        </div>
+        <button type="submit" id="btn-forgot-submit" class="btn btn-primary" style="width:100%; padding:0.75rem;">Send Password Reset Link</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Firebase App & Auth SDK (v10 compat) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <!-- Lucide Icons and Auth Scripts -->
+  <script src="/admin/js/lucide.min.js"></script>
+  <script src="/admin/js/admin-auth.js"></script>
+  <script src="/admin/js/login-page.js"></script>
+</body>
+</html>

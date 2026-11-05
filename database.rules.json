@@ -1,0 +1,45 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+
+    "cms": {
+      "live": {
+        ".read": true,
+        ".write": "auth != null && (auth.token.admin === true || auth.token.email === 'mittaibandiportal@gmail.com')"
+      },
+      "draft": {
+        ".read": "auth != null && (auth.token.admin === true || auth.token.email === 'mittaibandiportal@gmail.com')",
+        ".write": "auth != null && (auth.token.admin === true || auth.token.email === 'mittaibandiportal@gmail.com')"
+      },
+      "media": {
+        ".read": "auth != null && (auth.token.admin === true || auth.token.email === 'mittaibandiportal@gmail.com')",
+        ".write": "auth != null && (auth.token.admin === true || auth.token.email === 'mittaibandiportal@gmail.com')"
+      },
+      "history": {
+        ".read": "auth != null && (auth.token.admin === true || auth.token.email === 'mittaibandiportal@gmail.com')",
+        ".write": "auth != null && (auth.token.admin === true || auth.token.email === 'mittaibandiportal@gmail.com')"
+      },
+      "auth": {
+        ".read": false,
+        ".write": false
+      }
+    },
+
+    "contact_submissions": {
+      ".read": "auth != null && (auth.token.admin === true || auth.token.email === 'mittaibandiportal@gmail.com')",
+      "$submissionId": {
+        ".write": "(auth != null && (auth.token.admin === true || auth.token.email === 'mittaibandiportal@gmail.com')) || (!data.exists() && newData.exists())",
+        ".validate": "newData.hasChildren(['source', 'createdAt', 'name', 'phone', 'email', 'message']) && newData.child('source').val() === 'mittaibandi-web-contact' && newData.child('createdAt').isString() && newData.child('createdAt').val().length <= 40 && newData.child('name').isString() && newData.child('name').val().length <= 150 && newData.child('email').isString() && newData.child('email').val().length <= 150 && newData.child('phone').isString() && newData.child('phone').val().length <= 30 && newData.child('message').isString() && newData.child('message').val().length <= 3000"
+      }
+    },
+
+    "partner_registrations": {
+      ".read": "auth != null && (auth.token.admin === true || auth.token.email === 'mittaibandiportal@gmail.com')",
+      "$registrationId": {
+        ".write": "(auth != null && (auth.token.admin === true || auth.token.email === 'mittaibandiportal@gmail.com')) || (!data.exists() && newData.exists())",
+        ".validate": "newData.hasChildren(['source', 'createdAt', 'businessName', 'ownerName', 'phone', 'email', 'location']) && newData.child('source').val() === 'mittaibandi-web-partner' && newData.child('createdAt').isString() && newData.child('createdAt').val().length <= 40 && newData.child('businessName').isString() && newData.child('businessName').val().length <= 200 && newData.child('ownerName').isString() && newData.child('ownerName').val().length <= 150 && newData.child('phone').isString() && newData.child('phone').val().length <= 30 && newData.child('email').isString() && newData.child('email').val().length <= 150 && newData.child('location').isString() && newData.child('location').val().length <= 200"
+      }
+    }
+  }
+}

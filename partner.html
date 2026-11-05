@@ -15,6 +15,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/design-system.css" />
   <link rel="stylesheet" href="assets/css/partner.css" />
+
+  <!-- CMS Engine -->
+  <script src="assets/js/cms-default-data.js"></script>
+  <script src="assets/js/cms-client.js"></script>
 </head>
 <body class="partner-page">
 
@@ -38,7 +42,7 @@
     </ul>
     <div class="nav-actions">
       <div class="nav-store-badges">
-        <a href="https://play.google.com/store/apps/details?id=com.gurmitraa.mittaibandi" class="store-badge store-badge--nav" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
+        <a href="https://play.google.com/store/apps/details?id=com.gurmitraa.mittaibandi" class="store-badge store-badge--nav" data-action="download-play" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
           <svg class="store-badge-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M3.609 1.813C3.393 2.052 3.25 2.42 3.25 2.915V21.085C3.25 21.58 3.393 21.948 3.609 22.187L3.684 22.257L13.844 12.097V11.903L3.684 1.743L3.609 1.813Z" fill="#2196F3"/>
             <path d="M17.228 15.483L13.844 12.099V11.901L17.228 8.517L17.311 8.565L21.321 10.844C22.467 11.494 22.467 12.506 21.321 13.156L17.311 15.435L17.228 15.483Z" fill="#FFC107"/>
@@ -50,7 +54,7 @@
             <span class="store-badge-main">Google Play</span>
           </div>
         </a>
-        <a href="https://apps.apple.com/app/mittai-bandi/id6470000000" class="store-badge store-badge--nav" target="_blank" rel="noopener noreferrer" aria-label="Download on App Store">
+        <a href="https://apps.apple.com/app/mittai-bandi/id6470000000" class="store-badge store-badge--nav" data-action="download-apple" target="_blank" rel="noopener noreferrer" aria-label="Download on App Store">
           <svg class="store-badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
           </svg>
@@ -71,7 +75,7 @@
   <a href="partner.html" class="nav-mobile-link">Partner With Us</a>
   <a href="contact.html" class="nav-mobile-link">Contact</a>
   <div class="nav-mobile-actions">
-    <a href="https://play.google.com/store/apps/details?id=com.gurmitraa.mittaibandi" class="store-badge store-badge--nav" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
+    <a href="https://play.google.com/store/apps/details?id=com.gurmitraa.mittaibandi" class="store-badge store-badge--nav" data-action="download-play" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
       <svg class="store-badge-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <path d="M3.609 1.813C3.393 2.052 3.25 2.42 3.25 2.915V21.085C3.25 21.58 3.393 21.948 3.609 22.187L3.684 22.257L13.844 12.097V11.903L3.684 1.743L3.609 1.813Z" fill="#2196F3"/>
         <path d="M17.228 15.483L13.844 12.099V11.901L17.228 8.517L17.311 8.565L21.321 10.844C22.467 11.494 22.467 12.506 21.321 13.156L17.311 15.435L17.228 15.483Z" fill="#FFC107"/>
@@ -83,7 +87,7 @@
         <span class="store-badge-main">Google Play</span>
       </div>
     </a>
-    <a href="https://apps.apple.com/app/mittai-bandi/id6470000000" class="store-badge store-badge--nav" target="_blank" rel="noopener noreferrer" aria-label="Download on App Store">
+    <a href="https://apps.apple.com/app/mittai-bandi/id6470000000" class="store-badge store-badge--nav" data-action="download-apple" target="_blank" rel="noopener noreferrer" aria-label="Download on App Store">
       <svg class="store-badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
       </svg>
@@ -98,25 +102,26 @@
 <!-- ══════════════════════════════════════════
      PARTNER HERO
 ══════════════════════════════════════════ -->
-<section class="partner-hero">
+<section class="partner-hero" id="partner-hero">
   <div class="partner-hero-bg">
     <img src="assets/images/hero_sweets_bg.png" alt="MITTAI BANDI artisan sweets collection" />
     <div class="partner-hero-overlay"></div>
   </div>
   <div class="container partner-hero-content">
     <div class="partner-hero-text">
+      <p class="eyebrow reveal">Partner Ecosystem</p>
       <h1 class="display-xl reveal delay-1">
         Let's taste<em>it.</em>
       </h1>
-      <p class="body-lg reveal delay-2">
+      <p class="body-lg partner-hero-sub reveal delay-2">
         Take your traditional sweets business into the digital world with MITTAI BANDI. Reach more customers, showcase your products and grow your business with technology.
       </p>
       <div class="partner-hero-actions reveal delay-3">
-        <a href="#partner-form" class="btn btn-primary btn-lg" data-magnetic>
-          Become a Partner
+        <a href="#vendor-partnership" class="btn btn-primary btn-lg" id="partner-hero-btn-primary" data-magnetic>
+          <span class="btn-label">Become a Partner</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
         </a>
-        <a href="#why-partner" class="btn btn-secondary btn-lg" data-magnetic>Learn More</a>
+        <a href="#delivery-partnership" class="btn btn-secondary btn-lg" id="partner-hero-btn-secondary" data-magnetic>Delivery Partner</a>
       </div>
     </div>
   </div>
@@ -154,6 +159,173 @@
             <strong>Order Management</strong>
             <span>Convenient digital tools</span>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 1: VENDOR / SWEET MAKER PARTNERSHIP
+══════════════════════════════════════════ -->
+<section class="section partner-role-section partner-role-vendor bg-white" id="vendor-partnership" aria-label="Vendor Partnership">
+  <div class="container">
+    <div class="partner-role-card">
+      <div class="partner-role-content reveal-left">
+        <div class="partner-role-badge-row">
+          <span class="partner-role-badge partner-role-badge--vendor">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Vendor / Sweet Maker Partnership
+          </span>
+        </div>
+        <h2 class="partner-role-heading" id="vendor-partnership-title">Become a MITTAI BANDI Vendor</h2>
+        <p class="partner-role-desc" id="vendor-partnership-desc">
+          Bring your traditional sweets and authentic flavours to more customers. Join MITTAI BANDI and grow your confectionery business digitally.
+        </p>
+
+        <ul class="partner-role-features" id="vendor-partnership-features">
+          <li>
+            <span class="partner-feature-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Expand your customer reach.</span>
+          </li>
+          <li>
+            <span class="partner-feature-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Digital storefront for your business.</span>
+          </li>
+          <li>
+            <span class="partner-feature-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Manage products and orders.</span>
+          </li>
+          <li>
+            <span class="partner-feature-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Reach customers beyond your local area.</span>
+          </li>
+          <li>
+            <span class="partner-feature-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Dedicated vendor support.</span>
+          </li>
+        </ul>
+
+        <div class="partner-role-downloads">
+          <span class="partner-downloads-label">Download the MITTAI BANDI Vendor App (Android &amp; iOS):</span>
+          <div class="partner-app-buttons" id="vendor-app-downloads">
+            <a href="https://play.google.com/store/apps/details?id=com.gurmitraa.mittaibandi" target="_blank" rel="noopener noreferrer" class="partner-store-btn partner-store-btn--play" id="vendor-play-btn" data-custom-app="vendor-play">
+              <svg class="partner-store-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M3.609 1.813C3.393 2.052 3.25 2.42 3.25 2.915V21.085C3.25 21.58 3.393 21.948 3.609 22.187L3.684 22.257L13.844 12.097V11.903L3.684 1.743L3.609 1.813Z" fill="#2196F3"/>
+                <path d="M17.228 15.483L13.844 12.099V11.901L17.228 8.517L17.311 8.565L21.321 10.844C22.467 11.494 22.467 12.506 21.321 13.156L17.311 15.435L17.228 15.483Z" fill="#FFC107"/>
+                <path d="M17.311 15.435L13.844 12L3.609 22.187C3.987 22.587 4.62 22.64 5.334 22.234L17.311 15.435Z" fill="#4CAF50"/>
+                <path d="M17.311 8.565L5.334 1.766C4.62 1.36 3.987 1.413 3.609 1.813L13.844 12L17.311 8.565Z" fill="#F44336"/>
+              </svg>
+              <div class="partner-store-text">
+                <small>GET IT ON</small>
+                <strong id="vendor-play-label">Download on Google Play</strong>
+              </div>
+            </a>
+
+            <a href="https://apps.apple.com/app/mittai-bandi/id6470000000" target="_blank" rel="noopener noreferrer" class="partner-store-btn partner-store-btn--apple" id="vendor-apple-btn" data-custom-app="vendor-apple">
+              <svg class="partner-store-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+              </svg>
+              <div class="partner-store-text">
+                <small>AVAILABLE ON</small>
+                <strong id="vendor-apple-label">Download on App Store</strong>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="partner-role-cta-wrap">
+          <a href="#partner-form" class="btn btn-primary btn-lg partner-role-cta" id="vendor-register-btn" data-select-partner="traditional-sweets">
+            <span class="btn-label" id="vendor-register-label">Register as a Vendor</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="partner-role-visual reveal-right">
+        <div class="partner-role-img-wrap">
+          <img src="assets/images/traditional_sweets.png" alt="Become a MITTAI BANDI Vendor" id="vendor-partnership-img" loading="lazy" />
+          <div class="partner-role-floating-tag">
+            <span class="floating-dot"></span>
+            <span>Trusted by Local Sweet Makers &amp; Confectioners</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2: DELIVERY PARTNER (ANDROID ONLY)
+══════════════════════════════════════════ -->
+<section class="section partner-role-section partner-role-delivery bg-cream" id="delivery-partnership" aria-label="Delivery Partner">
+  <div class="container">
+    <div class="partner-role-card partner-role-card--reverse">
+      <div class="partner-role-visual reveal-left">
+        <div class="partner-role-img-wrap">
+          <img src="assets/sweets/step3-fulfilment.jpg" alt="Deliver Happiness with MITTAI BANDI" id="delivery-partnership-img" loading="lazy" />
+          <div class="partner-role-floating-tag partner-role-floating-tag--green">
+            <span class="floating-dot floating-dot--green"></span>
+            <span>Dedicated Android Delivery Partner App</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="partner-role-content reveal-right">
+        <div class="partner-role-badge-row">
+          <span class="partner-role-badge partner-role-badge--delivery">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            Delivery Fleet Network
+          </span>
+          <span class="partner-platform-pill">Android App Only</span>
+        </div>
+        <h2 class="partner-role-heading" id="delivery-partnership-title">Deliver Happiness with MITTAI BANDI</h2>
+        <p class="partner-role-desc" id="delivery-partnership-desc">
+          Join our delivery network and help bring authentic traditional sweets to customers.
+        </p>
+
+        <ul class="partner-role-features" id="delivery-partnership-features">
+          <li>
+            <span class="partner-feature-check partner-feature-check--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Flexible delivery opportunities.</span>
+          </li>
+          <li>
+            <span class="partner-feature-check partner-feature-check--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Simple delivery management.</span>
+          </li>
+          <li>
+            <span class="partner-feature-check partner-feature-check--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Order tracking.</span>
+          </li>
+          <li>
+            <span class="partner-feature-check partner-feature-check--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Dedicated delivery partner application.</span>
+          </li>
+        </ul>
+
+        <div class="partner-role-downloads">
+          <span class="partner-downloads-label">Delivery Partner Application (Android Only):</span>
+          <div class="partner-app-buttons" id="delivery-app-downloads">
+            <a href="https://play.google.com/store/apps/details?id=com.gurmitraa.mittaibandi" target="_blank" rel="noopener noreferrer" class="partner-store-btn partner-store-btn--play" id="delivery-play-btn" data-custom-app="delivery-play">
+              <svg class="partner-store-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M3.609 1.813C3.393 2.052 3.25 2.42 3.25 2.915V21.085C3.25 21.58 3.393 21.948 3.609 22.187L3.684 22.257L13.844 12.097V11.903L3.684 1.743L3.609 1.813Z" fill="#2196F3"/>
+                <path d="M17.228 15.483L13.844 12.099V11.901L17.228 8.517L17.311 8.565L21.321 10.844C22.467 11.494 22.467 12.506 21.321 13.156L17.311 15.435L17.228 15.483Z" fill="#FFC107"/>
+                <path d="M17.311 15.435L13.844 12L3.609 22.187C3.987 22.587 4.62 22.64 5.334 22.234L17.311 15.435Z" fill="#4CAF50"/>
+                <path d="M17.311 8.565L5.334 1.766C4.62 1.36 3.987 1.413 3.609 1.813L13.844 12L17.311 8.565Z" fill="#F44336"/>
+              </svg>
+              <div class="partner-store-text">
+                <small>ANDROID EXCLUSIVE</small>
+                <strong id="delivery-play-label">Download Android App (Google Play)</strong>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="partner-role-cta-wrap">
+          <a href="#partner-form" class="btn btn-primary btn-lg partner-role-cta partner-role-cta--delivery" id="delivery-register-btn" data-select-partner="delivery-partner">
+            <span class="btn-label" id="delivery-register-label">Become a Delivery Partner</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
     </div>
@@ -280,7 +452,7 @@
 <!-- ══════════════════════════════════════════
      WHO CAN PARTNER
 ══════════════════════════════════════════ -->
-<section class="section who-can-section bg-ivory">
+<section class="section who-can-section bg-ivory" id="who-can">
   <div class="container">
     <div class="section-header">
       <p class="eyebrow reveal">Who Can Join</p>
@@ -406,14 +578,15 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="category">Business Category</label>
+            <label class="form-label" for="category">Partnership / Business Category</label>
             <select class="form-select" id="category" name="category">
               <option value="" disabled selected>Select a category</option>
-              <option value="traditional-sweets">Traditional Sweet Shop</option>
-              <option value="confectioner">Local Confectioner</option>
-              <option value="regional-maker">Regional Sweet Maker</option>
-              <option value="artisan-food">Artisan Food Business</option>
-              <option value="gifting-bulk">Gifting & Bulk Orders Specialist</option>
+              <option value="traditional-sweets">Vendor — Traditional Sweet Shop</option>
+              <option value="confectioner">Vendor — Local Confectioner</option>
+              <option value="regional-maker">Vendor — Regional Sweet Maker</option>
+              <option value="artisan-food">Vendor — Artisan Food Business</option>
+              <option value="gifting-bulk">Vendor — Gifting &amp; Bulk Orders Specialist</option>
+              <option value="delivery-partner">Delivery Partner — Fleet &amp; Order Delivery</option>
               <option value="other">Other</option>
             </select>
           </div>
@@ -445,7 +618,7 @@
 <!-- ══════════════════════════════════════════
      FINAL CTA
 ══════════════════════════════════════════ -->
-<section class="partner-final-cta">
+<section class="partner-final-cta" id="partner-final-cta">
   <div class="container">
     <div class="partner-final-content reveal">
       <h2 class="display-lg">
@@ -506,7 +679,7 @@
       <div>
         <h3 class="footer-col-title">Download</h3>
         <div class="footer-store-badges">
-          <a href="https://play.google.com/store/apps/details?id=com.gurmitraa.mittaibandi" class="store-badge store-badge--nav" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
+          <a href="https://play.google.com/store/apps/details?id=com.gurmitraa.mittaibandi" class="store-badge store-badge--footer" data-action="download-play" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
             <svg class="store-badge-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M3.609 1.813C3.393 2.052 3.25 2.42 3.25 2.915V21.085C3.25 21.58 3.393 21.948 3.609 22.187L3.684 22.257L13.844 12.097V11.903L3.684 1.743L3.609 1.813Z" fill="#2196F3"/>
               <path d="M17.228 15.483L13.844 12.099V11.901L17.228 8.517L17.311 8.565L21.321 10.844C22.467 11.494 22.467 12.506 21.321 13.156L17.311 15.435L17.228 15.483Z" fill="#FFC107"/>
@@ -518,7 +691,7 @@
               <span class="store-badge-main">Google Play</span>
             </div>
           </a>
-          <a href="https://apps.apple.com/app/mittai-bandi/id6470000000" class="store-badge store-badge--nav" target="_blank" rel="noopener noreferrer" aria-label="Download on App Store">
+          <a href="https://apps.apple.com/app/mittai-bandi/id6470000000" class="store-badge store-badge--footer" data-action="download-apple" target="_blank" rel="noopener noreferrer" aria-label="Download on App Store">
             <svg class="store-badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
             </svg>
@@ -542,6 +715,7 @@
         <a href="cancellation-refund.html" class="footer-bottom-link">Cancellation &amp; Refund</a>
         <a href="api-policy.html" class="footer-bottom-link">API Policy</a>
         <a href="contact.html" class="footer-bottom-link">Contact</a>
+        <a href="admin/login.html" class="footer-bottom-link" style="opacity: 0.7;">Admin CMS</a>
       </div>
     </div>
   </div>

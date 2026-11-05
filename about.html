@@ -20,6 +20,10 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/design-system.css" />
   <link rel="stylesheet" href="assets/css/about.css" />
+
+  <!-- CMS Engine -->
+  <script src="assets/js/cms-default-data.js"></script>
+  <script src="assets/js/cms-client.js"></script>
 </head>
 
 <body>
@@ -125,18 +129,18 @@
   <!-- ══════════════════════════════════════════
      ABOUT HERO
 ══════════════════════════════════════════ -->
-  <section class="about-hero">
+  <section class="about-hero" id="about-hero">
     <div class="about-hero-bg">
-      <img src="assets/images/artisan_making_sweets.png" alt="Authentic Sweets Heritage Artisans"
+      <img src="assets/images/indian_festive_celebration.png" alt="Authentic Sweets Heritage Artisans"
         aria-hidden="true" />
       <div class="about-hero-overlay"></div>
     </div>
     <div class="container about-hero-content">
-      <span class="eyebrow reveal" style="color: var(--color-gold);">Our Identity</span>
-      <h1 class="display-xl reveal delay-1" style="color: var(--color-white); margin-top: 0.5rem;">
+      <span class="eyebrow reveal">Our Identity</span>
+      <h1 class="display-xl reveal delay-1" style="margin-top: 0.5rem;">
         Rooted in Tradition.<br /><em>Built for Tomorrow.</em>
       </h1>
-      <p class="body-xl reveal delay-2" style="color: rgba(255, 249, 243, 0.9); max-width: 600px; margin-top: 1.5rem; line-height: 1.75;">
+      <p class="body-xl reveal delay-2" style="max-width: 600px; margin-top: 1.5rem; line-height: 1.75;">
         MITTAI BANDI is a digital commerce initiative dedicated to making authentic Indian sweets and savouries more
         accessible while empowering traditional confectioners through technology.
       </p>
@@ -151,12 +155,12 @@
       <div class="story-grid">
         <div class="story-visual reveal-left">
           <div class="story-img-wrap">
-            <img src="https://images.unsplash.com/photo-1509358271058-acd22cc93898?auto=format&fit=crop&w=1200&q=80"
+            <img src="assets/images/artisan_making_sweets.png" class="story-img"
               alt="Traditional Indian Sweets Craftsmanship" loading="lazy" />
           </div>
           <div class="story-quote-card">
-            <blockquote>"Preserving Tradition<br />Through Technology."</blockquote>
-            <cite>— MITTAI BANDI</cite>
+            <blockquote class="story-quote-text">"Preserving Tradition<br />Through Technology."</blockquote>
+            <cite class="story-quote-cite">— MITTAI BANDI</cite>
           </div>
         </div>
 
@@ -167,13 +171,13 @@
             Bridging Tradition<br /><em>and Technology.</em>
           </h2>
           <div class="story-text">
-            <p class="body-lg">Food is more than sustenance. It is memory, celebration and culture.</p>
-            <p class="body-base">Across India, traditional sweets and snacks hold a special place in every home,
+            <p class="body-lg story-lead">Food is more than sustenance. It is memory, celebration and culture.</p>
+            <p class="body-base story-p1">Across India, traditional sweets and snacks hold a special place in every home,
               festival and milestone. Yet accessing authentic, high-quality delicacies from trusted local confectioners
               is not always simple.</p>
-            <p class="body-base">MITTAI BANDI was conceptualized to address this gap — bringing together local vendors,
+            <p class="body-base story-p2">MITTAI BANDI was conceptualized to address this gap — bringing together local vendors,
               traditional artisans and consumers under one unified digital storefront.</p>
-            <p class="body-base">From regional specialties and ghee-based sweets to crunchy savouries and festive gift
+            <p class="body-base story-p3">From regional specialties and ghee-based sweets to crunchy savouries and festive gift
               boxes, MITTAI BANDI makes traditional culinary experiences accessible through technology.</p>
           </div>
         </div>
@@ -182,29 +186,42 @@
   </section>
 
   <!-- ══════════════════════════════════════════
-     VISION
+     VISION (Premium Split-Card Layout)
 ══════════════════════════════════════════ -->
   <section class="vision-section" id="vision">
-    <div class="vision-bg">
-      <img src="assets/images/traditional_sweets.png"
-        alt="Celebration of Indian Culinary Heritage" aria-hidden="true" loading="lazy" />
-      <div class="vision-overlay"></div>
-    </div>
-    <div class="container vision-content">
-      <span class="eyebrow reveal" style="color: var(--color-gold);">Our Vision</span>
-      <h2 class="display-xl reveal delay-1" style="color: var(--color-white); margin: 0.75rem 0 1.5rem;">
-        Preserving Tradition<br /><em>Through Technology.</em>
-      </h2>
-      <div class="vision-columns">
-        <p class="body-lg reveal delay-2" style="color: rgba(255, 249, 243, 0.9);">
-          India's confectionery tradition is vast, diverse and deeply personal. Behind every sweet shop is a story of
-          craftsmanship, recipes passed down across generations and dedication to taste.
-        </p>
-        <p class="body-base reveal delay-3" style="color: rgba(255, 249, 243, 0.75);">
-          MITTAI BANDI believes modern technology should not replace tradition — it should preserve and elevate it. By
-          providing traditional confectioners with digital infrastructure, we aim to help keep cherished recipes alive
-          and thriving for future generations.
-        </p>
+    <div class="container">
+      <div class="vision-card">
+        <div class="vision-media-col reveal-left">
+          <div class="vision-image-wrapper">
+            <img src="assets/images/traditional_sweets.png"
+              alt="Celebration of Indian Culinary Heritage" class="vision-img" loading="lazy" />
+            <div class="vision-badge">
+              <span class="vision-badge-icon">🌿</span>
+              <span class="vision-badge-text">Authentic Culinary Heritage</span>
+            </div>
+          </div>
+        </div>
+        <div class="vision-content-col reveal-right">
+          <span class="eyebrow vision-eyebrow">Our Vision</span>
+          <h2 class="display-lg vision-heading" style="margin: 0.75rem 0 1.25rem;">
+            Preserving Tradition<br /><span class="text-accent" style="color:#E60046;">Through Technology.</span>
+          </h2>
+          <div class="vision-paragraphs">
+            <p class="body-lg vision-p1">
+              India's confectionery tradition is vast, diverse and deeply personal. Behind every sweet shop is a story of
+              craftsmanship, recipes passed down across generations and dedication to taste.
+            </p>
+            <p class="body-base vision-p2">
+              MITTAI BANDI believes modern technology should not replace tradition — it should preserve and elevate it. By
+              providing traditional confectioners with digital infrastructure, we aim to help keep cherished recipes alive
+              and thriving for future generations.
+            </p>
+          </div>
+          <div class="vision-quote-card">
+            <p class="vision-quote-text">&ldquo;Bridging timeless artisanal flavours with modern digital access across India.&rdquo;</p>
+            <span class="vision-quote-cite">&mdash; MITTAI BANDI Core Philosophy</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -484,7 +501,7 @@
   <!-- ══════════════════════════════════════════
      FINAL CTA
 ══════════════════════════════════════════ -->
-  <section class="section about-final-cta bg-cream">
+  <section class="section about-final-cta bg-cream" id="about-final-cta">
     <div class="container">
       <div class="reveal">
         <h2 class="display-lg">
@@ -640,6 +657,7 @@
           <a href="cancellation-refund.html" class="footer-bottom-link">Cancellation &amp; Refund</a>
           <a href="api-policy.html" class="footer-bottom-link">API Policy</a>
           <a href="contact.html" class="footer-bottom-link">Contact</a>
+          <a href="admin/login.html" class="footer-bottom-link" style="opacity: 0.7;">Admin CMS</a>
         </div>
       </div>
     </div>

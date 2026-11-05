@@ -1,0 +1,16 @@
+{
+  "name": "mittai-bandi-admin-claims",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Trusted-environment tool to grant/revoke the Firebase `admin` custom claim. Not part of the website.",
+  "type": "module",
+  "scripts": {
+    "grant": "node set-admin-claim.mjs grant",
+    "revoke": "node set-admin-claim.mjs revoke",
+    "show": "node set-admin-claim.mjs show"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.7.0"
+  }
+}
+

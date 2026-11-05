@@ -1,0 +1,11 @@
+# Firebase / Google service account keys — never commit
+*service-account*.json
+*serviceAccount*.json
+*-firebase-adminsdk-*.json
+credentials*.json
+
+node_modules/
+tools/admin-claims/node_modules/
+.firebase/
+*.log
+

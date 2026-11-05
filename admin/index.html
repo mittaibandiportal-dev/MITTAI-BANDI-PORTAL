@@ -1,0 +1,3057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CMS Admin Dashboard  -  MITTAI BANDI</title>
+
+  <!-- Auth gate: dashboard stays hidden until Firebase confirms an admin session -->
+  <script>document.documentElement.classList.add('mb-auth-pending');</script>
+  <style>html.mb-auth-pending body { visibility: hidden; }</style>
+
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/admin/css/admin.css" />
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- ══════════════════════════════════════════
+         SIDEBAR NAVIGATION
+    ══════════════════════════════════════════ -->
+    <aside class="sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <img src="/assets/images/logo.png" alt="MITTAI BANDI" class="sidebar-brand-logo" />
+        <div class="sidebar-brand-text">
+          <h1>MITTAI BANDI <span class="sidebar-badge">CMS</span></h1>
+          <p>GURMITRAA Technologies</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">1. Core &amp; Content</div>
+        <div class="nav-item active" data-module="dashboard" onclick="MB_CMS_ADMIN.switchModule('dashboard')">
+          <span class="nav-icon"><i data-lucide="layout-dashboard"></i></span>
+          <span>Dashboard</span>
+        </div>
+        <div class="nav-item" data-module="pages" onclick="MB_CMS_ADMIN.switchModule('pages')">
+          <span class="nav-icon"><i data-lucide="file-text"></i></span>
+          <span>Page Management</span>
+        </div>
+        <div class="nav-item" data-module="hero" onclick="MB_CMS_ADMIN.switchModule('hero')">
+          <span class="nav-icon"><i data-lucide="sparkles"></i></span>
+          <span>Hero Management</span>
+        </div>
+        <div class="nav-item" data-module="banners" onclick="MB_CMS_ADMIN.switchModule('banners')">
+          <span class="nav-icon"><i data-lucide="megaphone"></i></span>
+          <span>Banner Management</span>
+          <span class="badge" id="badge-banners-count" style="margin-left: auto; font-size: 0.72rem; padding: 2px 7px; border-radius: 12px; background: rgba(230,0,70,0.18); color: #FF8DA1; font-weight: 700;">4</span>
+        </div>
+        <div class="nav-item" data-module="images" onclick="MB_CMS_ADMIN.switchModule('images')">
+          <span class="nav-icon"><i data-lucide="images"></i></span>
+          <span>Image Library</span>
+        </div>
+
+        <div class="nav-section-title">2. Page Modules</div>
+        <div class="nav-item" data-module="about-cms" onclick="MB_CMS_ADMIN.openPageShortcut('about')">
+          <span class="nav-icon"><i data-lucide="book-open"></i></span>
+          <span>About Us Management</span>
+        </div>
+        <div class="nav-item" data-module="partner-cms" onclick="MB_CMS_ADMIN.switchModule('partner-cms')">
+          <span class="nav-icon"><i data-lucide="handshake"></i></span>
+          <span>Partner Management</span>
+        </div>
+        <div class="nav-item" data-module="contact-cms" onclick="MB_CMS_ADMIN.switchModule('contact-cms')">
+          <span class="nav-icon"><i data-lucide="phone-call"></i></span>
+          <span>Contact Management</span>
+        </div>
+
+        <div class="nav-section-title">3. Footer, Legal &amp; Apps</div>
+        <div class="nav-item" data-module="footer" onclick="MB_CMS_ADMIN.switchModule('footer')">
+          <span class="nav-icon"><i data-lucide="layout-template"></i></span>
+          <span>Footer Management</span>
+        </div>
+        <div class="nav-item" data-module="legal-docs" onclick="MB_CMS_ADMIN.switchModule('legal-docs')">
+          <span class="nav-icon"><i data-lucide="scale"></i></span>
+          <span>Legal Documents</span>
+        </div>
+        <div class="nav-item" data-module="app-links" onclick="MB_CMS_ADMIN.switchModule('app-links')">
+          <span class="nav-icon"><i data-lucide="smartphone"></i></span>
+          <span>App Links Management</span>
+        </div>
+        <div class="nav-item" data-module="media" onclick="MB_CMS_ADMIN.switchModule('media')">
+          <span class="nav-icon"><i data-lucide="folder-kanban"></i></span>
+          <span>Media Library</span>
+        </div>
+
+        <div class="nav-section-title">4. Brand &amp; Settings</div>
+        <div class="nav-item" data-module="header" onclick="MB_CMS_ADMIN.switchModule('header')">
+          <span class="nav-icon"><i data-lucide="compass"></i></span>
+          <span>Header &amp; Nav</span>
+        </div>
+        <div class="nav-item" data-module="branding" onclick="MB_CMS_ADMIN.switchModule('branding')">
+          <span class="nav-icon"><i data-lucide="globe"></i></span>
+          <span>Global Branding</span>
+        </div>
+        <div class="nav-item" data-module="preloader" onclick="MB_CMS_ADMIN.switchModule('preloader')">
+          <span class="nav-icon"><i data-lucide="loader-2"></i></span>
+          <span>Preloader Screen</span>
+        </div>
+        <div class="nav-item" data-module="design" onclick="MB_CMS_ADMIN.switchModule('design')">
+          <span class="nav-icon"><i data-lucide="palette"></i></span>
+          <span>Theme &amp; Styling</span>
+        </div>
+        <div class="nav-item" data-module="submissions" onclick="MB_CMS_ADMIN.switchModule('submissions')">
+          <span class="nav-icon"><i data-lucide="inbox"></i></span>
+          <span>Form Enquiries</span>
+        </div>
+        <div class="nav-item" data-module="history" onclick="MB_CMS_ADMIN.switchModule('history')">
+          <span class="nav-icon"><i data-lucide="history"></i></span>
+          <span>Activity Audit Logs</span>
+        </div>
+        <div class="nav-item" data-module="settings" onclick="MB_CMS_ADMIN.switchModule('settings')">
+          <span class="nav-icon"><i data-lucide="settings"></i></span>
+          <span>Settings</span>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="user-avatar">A</div>
+          <div class="user-info">
+            <div class="user-name">Administrator</div>
+            <div class="user-role">Super Admin</div>
+          </div>
+        </div>
+
+        <button class="btn-logout" onclick="MB_AUTH.logout()" title="Sign Out" aria-label="Sign Out">
+          <i data-lucide="log-out"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ══════════════════════════════════════════
+         MAIN CONTENT AREA
+    ══════════════════════════════════════════ -->
+    <main class="main-layout" id="app-main-layout">
+      <!-- Clean Modern SaaS Topbar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-toggle" id="btn-sidebar-toggle" aria-label="Toggle Sidebar">
+            <i data-lucide="menu"></i>
+          </button>
+          <div class="status-pill" id="live-status-pill">
+            <span class="status-dot" id="live-status-dot"></span>
+            <span id="live-status-text">Live Synced</span>
+          </div>
+        </div>
+
+
+        <div class="topbar-right">
+          <a href="/index.html" target="_blank" class="btn btn-outline btn-sm">
+            <i data-lucide="external-link"></i>
+            <span>View Public Site</span>
+          </a>
+          <button class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.openLivePreview()">
+            <i data-lucide="eye"></i>
+            <span>Live Preview</span>
+          </button>
+          <button class="btn btn-outline btn-sm" id="btn-save-draft" onclick="MB_CMS_ADMIN.saveDraft()">
+            <i data-lucide="save"></i>
+            <span>Save Draft</span>
+          </button>
+          <button class="btn btn-primary btn-sm" id="btn-publish" onclick="MB_CMS_ADMIN.publishToLive()">
+            <i data-lucide="send"></i>
+            <span>Publish Changes</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Content Views -->
+      <div class="content-body">
+
+        <!-- ══════════════════════════════════════
+             1. DASHBOARD VIEW
+        ══════════════════════════════════════ -->
+        <div class="module-view active" id="view-dashboard">
+          <div class="module-header">
+            <div class="module-title">
+              <h2>Dashboard Overview</h2>
+              <p>Centralized content and design management for the MITTAI BANDI web portal.</p>
+            </div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button class="btn btn-primary btn-sm" onclick="MB_CMS_ADMIN.publishToLive()">
+                <i data-lucide="send"></i>
+                <span>Publish All to Live</span>
+              </button>
+              <button class="btn btn-gold btn-sm" onclick="MB_CMS_ADMIN.openLivePreview()">
+                <i data-lucide="eye"></i>
+                <span>Test in Live Preview</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Stats Grid -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-wrap" style="background:#FDF2F4; color:#C9003D; border-color:rgba(201,0,61,0.15);">
+                <i data-lucide="files"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-val" id="stat-total-pages">9</div>
+                <div class="stat-lbl">Managed Pages</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-wrap" style="background:#F0FDF4; color:#10B981; border-color:rgba(16,185,129,0.15);">
+                <i data-lucide="images"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-val" id="stat-total-media">16</div>
+                <div class="stat-lbl">Media Library Assets</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-wrap" style="background:#EFF6FF; color:#3B82F6; border-color:rgba(59,130,246,0.15);">
+                <i data-lucide="message-square"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-val" id="stat-total-submissions">0</div>
+                <div class="stat-lbl">Customer Enquiries</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-wrap" style="background:#FFFBEB; color:#D97706; border-color:rgba(217,119,6,0.15);">
+                <i data-lucide="tag"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-val" id="stat-version">v1.0.1</div>
+                <div class="stat-lbl">Published Version</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions & Status -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+            <div class="card">
+              <div class="card-header">
+                <h3>
+                  <i data-lucide="zap" style="color:var(--gold);"></i>
+                  <span>Quick Management Shortcuts</span>
+                </h3>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <button class="btn btn-secondary" style="justify-content: flex-start;" onclick="MB_CMS_ADMIN.switchModule('pages')">
+                  <i data-lucide="file-text"></i>
+                  <span>Edit Page Content &amp; Reorder Sections</span>
+                </button>
+                <button class="btn btn-secondary" style="justify-content: flex-start;" onclick="MB_CMS_ADMIN.switchModule('branding')">
+                  <i data-lucide="globe"></i>
+                  <span>Update Logo, Favicon &amp; Brand Settings</span>
+                </button>
+                <button class="btn btn-secondary" style="justify-content: flex-start;" onclick="MB_CMS_ADMIN.switchModule('media')">
+                  <i data-lucide="image"></i>
+                  <span>Upload Images &amp; Banners</span>
+                </button>
+                <button class="btn btn-secondary" style="justify-content: flex-start;" onclick="MB_CMS_ADMIN.switchModule('submissions')">
+                  <i data-lucide="inbox"></i>
+                  <span>View WhatsApp &amp; Contact Enquiries</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>
+                  <i data-lucide="activity" style="color:var(--success);"></i>
+                  <span>Deployment &amp; Database Health</span>
+                </h3>
+              </div>
+              <div style="font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.85rem;">
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-light); padding-bottom: 0.6rem;">
+                  <span style="color:var(--text-muted);">Database:</span>
+                  <span class="badge badge-success">Firebase Realtime DB (Live)</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-light); padding-bottom: 0.6rem;">
+                  <span style="color:var(--text-muted);">Last Published:</span>
+                  <strong id="stat-last-pub" style="color:#111827;">Just now</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-light); padding-bottom: 0.6rem;">
+                  <span style="color:var(--text-muted);">Client Hydration:</span>
+                  <span style="color:var(--gold); font-weight:700;">Instant Local + Remote Sync</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="color:var(--text-muted);">Publish Endpoint:</span>
+                  <code style="background:#F3F4F6; padding:0.15rem 0.4rem; border-radius:4px;">/cms/live.json</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             2. GLOBAL BRANDING VIEW
+        ══════════════════════════════════════ -->
+        <div class="module-view" id="view-branding">
+          <div class="module-header">
+            <div class="module-title">
+              <h2>Global Branding &amp; Identity</h2>
+              <p>Manage site logos, alternate versions, favicon, brand name, store links and contact info.</p>
+            </div>
+            <button class="btn btn-primary" onclick="MB_CMS_ADMIN.saveBrandingModule()">
+              <i data-lucide="save"></i>
+              <span>Save Branding Settings</span>
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Brand Identity &amp; Logos</h3>
+                <p>Set primary logo, transparent variant, and browser favicon.</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Brand Name</label>
+                <input class="form-input" type="text" id="brand-sitename" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Tagline</label>
+                <input class="form-input" type="text" id="brand-tagline" />
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Company Legal Name</label>
+                <input class="form-input" type="text" id="brand-company" />
+              </div>
+
+              <!-- Primary Logo -->
+              <div class="form-group span-full">
+                <label class="form-label">Primary Brand Logo (PNG)</label>
+                <div class="image-picker-field">
+                  <img src="/assets/images/logo.png" id="preview-logo" class="image-preview-thumb" alt="Primary Logo" />
+                  <div class="image-picker-actions">
+                    <input class="form-input" type="text" id="brand-logo" oninput="MB_CMS_ADMIN.updateThumbPreview('brand-logo', 'preview-logo')" />
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.openMediaPicker('brand-logo', 'preview-logo')">
+                      <i data-lucide="image"></i>
+                      <span>Choose from Media Library</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Alternate Logo -->
+              <div class="form-group span-full">
+                <label class="form-label">Alternate Brand Logo (JPG/Square)</label>
+                <div class="image-picker-field">
+                  <img src="/assets/images/logo.jpg" id="preview-logo-alt" class="image-preview-thumb" alt="Alternate Logo" />
+                  <div class="image-picker-actions">
+                    <input class="form-input" type="text" id="brand-logo-alt" oninput="MB_CMS_ADMIN.updateThumbPreview('brand-logo-alt', 'preview-logo-alt')" />
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.openMediaPicker('brand-logo-alt', 'preview-logo-alt')">
+                      <i data-lucide="image"></i>
+                      <span>Choose from Media Library</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Favicon -->
+              <div class="form-group span-full">
+                <label class="form-label">Favicon &amp; Browser Tab Icon</label>
+                <div class="image-picker-field">
+                  <img src="/assets/images/favicon.png" id="preview-favicon" class="image-preview-thumb" alt="Favicon" />
+                  <div class="image-picker-actions">
+                    <input class="form-input" type="text" id="brand-favicon" oninput="MB_CMS_ADMIN.updateThumbPreview('brand-favicon', 'preview-favicon')" />
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.openMediaPicker('brand-favicon', 'preview-favicon')">
+                      <i data-lucide="image"></i>
+                      <span>Choose from Media Library</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>App Store Links</h3>
+                <p>Official Google Play and Apple App Store links for download badges.</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Google Play Store URL</label>
+                <input class="form-input" type="url" id="brand-playstore" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Apple App Store URL</label>
+                <input class="form-input" type="url" id="brand-appstore" />
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Official Contact Information</h3>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input class="form-input" type="email" id="brand-email" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input class="form-input" type="tel" id="brand-phone" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">WhatsApp Number (e.g. 919490532121)</label>
+                <input class="form-input" type="text" id="brand-whatsapp" />
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Headquarters Address</label>
+                <textarea class="form-textarea" id="brand-address"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Social Media Profiles</h3>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Instagram Profile URL</label>
+                <input class="form-input" type="url" id="brand-instagram" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Facebook Page URL</label>
+                <input class="form-input" type="url" id="brand-facebook" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">YouTube Channel URL</label>
+                <input class="form-input" type="url" id="brand-youtube" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">LinkedIn Page URL</label>
+                <input class="form-input" type="url" id="brand-linkedin" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             3. PRELOADER VIEW
+        ══════════════════════════════════════ -->
+        <div class="module-view" id="view-preloader">
+          <div class="module-header">
+            <div class="module-title">
+              <h2>Preloader / Loading Screen</h2>
+              <p>Configure the initial welcome screen animation, brand logo, colors and duration.</p>
+            </div>
+            <button class="btn btn-primary" onclick="MB_CMS_ADMIN.savePreloaderModule()">
+              <i data-lucide="save"></i>
+              <span>Save Preloader</span>
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Preloader Controls</h3>
+              </div>
+              <label class="toggle-wrap">
+                <input type="checkbox" id="preloader-enabled" class="toggle-hidden" checked />
+                <span class="toggle-switch"></span>
+                <span style="font-weight:600;">Enable Preloader</span>
+              </label>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Primary Heading</label>
+                <input class="form-input" type="text" id="preloader-title" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Subtitle / Message</label>
+                <input class="form-input" type="text" id="preloader-subtitle" />
+              </div>
+
+              <div class="form-group span-full">
+                <label class="form-label">Preloader Logo</label>
+                <div class="image-picker-field">
+                  <img src="/assets/images/logo.png" id="preview-preloader-logo" class="image-preview-thumb" alt="Preloader Logo" />
+                  <div class="image-picker-actions">
+                    <input class="form-input" type="text" id="preloader-logo" oninput="MB_CMS_ADMIN.updateThumbPreview('preloader-logo', 'preview-preloader-logo')" />
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.openMediaPicker('preloader-logo', 'preview-preloader-logo')">
+                      <i data-lucide="image"></i>
+                      <span>Choose from Media Library</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Background Color</label>
+                <input class="form-input" type="color" id="preloader-bgcolor" style="height:44px; padding:2px;" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Accent / Spinner Color</label>
+                <input class="form-input" type="color" id="preloader-accent" style="height:44px; padding:2px;" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Animation Style</label>
+                <select class="form-select" id="preloader-animation">
+                  <option value="award-winning" selected>Award-Winning Brand Motion (Circular Stroke &amp; Mask Reveal)</option>
+                  <option value="pulse">Pulse (Breathing)</option>
+                  <option value="spin">Spin (Rotating)</option>
+                  <option value="bounce">Bounce (Subtle vertical)</option>
+                  <option value="fade">Fade (Gentle opacity)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Minimum Duration (ms)</label>
+                <input class="form-input" type="number" id="preloader-duration" min="300" max="4000" step="100" />
+                <span class="form-hint">E.g. 800ms for a snappy luxury feel.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             4. THEME & STYLING VIEW
+        ══════════════════════════════════════ -->
+        <div class="module-view" id="view-design">
+          <div class="module-header">
+            <div class="module-title">
+              <h2>Design System &amp; Brand Colors</h2>
+              <p>Customize primary red/magenta, fresh green accents, white/cream backgrounds, buttons and typography.</p>
+            </div>
+            <button class="btn btn-primary" onclick="MB_CMS_ADMIN.saveDesignModule()">
+              <i data-lucide="save"></i>
+              <span>Save Theme Colors</span>
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Brand Color Palette</h3>
+                <p>Changes apply instantly across CSS variables on the live website.</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Primary Brand Color (Logo Red / Magenta)</label>
+                <input class="form-input" type="color" id="theme-primary" style="height:44px; padding:2px;" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Primary Dark / Hover State</label>
+                <input class="form-input" type="color" id="theme-primary-dark" style="height:44px; padding:2px;" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Fresh Green Accent (Bandi Green)</label>
+                <input class="form-input" type="color" id="theme-secondary" style="height:44px; padding:2px;" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Foundation Surface Color (White)</label>
+                <input class="form-input" type="color" id="theme-dark" style="height:44px; padding:2px;" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Cream Surface Color</label>
+                <input class="form-input" type="color" id="theme-cream" style="height:44px; padding:2px;" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Light Background Color</label>
+                <input class="form-input" type="color" id="theme-light" style="height:44px; padding:2px;" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Button &amp; Card Corner Radius</label>
+                <select class="form-select" id="theme-radius">
+                  <option value="4px">Slight (4px)</option>
+                  <option value="8px">Standard (8px)</option>
+                  <option value="12px">Rounded (12px)</option>
+                  <option value="18px">Pill / Soft (18px)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             5. HEADER & NAV VIEW
+        ══════════════════════════════════════ -->
+        <div class="module-view" id="view-header">
+          <div class="module-header">
+            <div class="module-title">
+              <h2>Header &amp; Navigation CMS</h2>
+              <p>Manage the top announcement bar, navigation labels, links, ordering and app badges.</p>
+            </div>
+            <button class="btn btn-primary" onclick="MB_CMS_ADMIN.saveHeaderModule()">
+              <i data-lucide="save"></i>
+              <span>Save Header</span>
+            </button>
+          </div>
+
+          <!-- Top Announcement Bar -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Top Announcement Alert Bar</h3>
+              </div>
+              <label class="toggle-wrap">
+                <input type="checkbox" id="header-ann-enabled" class="toggle-hidden" />
+                <span class="toggle-switch"></span>
+                <span style="font-weight:600;">Enable Announcement Bar</span>
+              </label>
+            </div>
+            <div class="form-grid">
+              <div class="form-group span-full">
+                <label class="form-label">Announcement Banner Text</label>
+                <input class="form-input" type="text" id="header-ann-text" placeholder="Special festive sweet collections available now!" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Banner Link URL (Optional)</label>
+                <input class="form-input" type="text" id="header-ann-link" placeholder="index.html#categories" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Background Color</label>
+                <input class="form-input" type="color" id="header-ann-bg" style="height:44px; padding:2px;" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Header Logos & Badges -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Navigation Bar Branding &amp; Controls</h3>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Logo Primary Text</label>
+                <input class="form-input" type="text" id="header-logo-text" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Logo Sub-tag</label>
+                <input class="form-input" type="text" id="header-logo-tag" />
+              </div>
+              <div class="form-group span-full">
+                <label class="toggle-wrap">
+                  <input type="checkbox" id="header-store-badges" class="toggle-hidden" checked />
+                  <span class="toggle-switch"></span>
+                  <span style="font-weight:600;">Show App Store / Google Play Badges in Navigation</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Links Table -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Navigation Links</h3>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.addNavLink()">
+                <i data-lucide="link"></i>
+                <span>Add Navigation Link</span>
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Label</th>
+                    <th>Destination URL</th>
+                    <th>Reorder</th>
+                    <th style="text-align: right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="nav-links-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             6. FOOTER VIEW
+        ══════════════════════════════════════ -->
+        <div class="module-view" id="view-footer">
+          <div class="module-header">
+            <div class="module-title">
+              <h2>Footer Management</h2>
+              <p>Manage company details, brand description, corporate contact info, social links, app store links, and footer columns.</p>
+            </div>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <button class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.switchModule('legal-docs')">
+                <i data-lucide="scale"></i>
+                <span>Edit Legal Documents</span>
+              </button>
+              <button class="btn btn-primary" onclick="MB_CMS_ADMIN.saveFooterModule()">
+                <i data-lucide="save"></i>
+                <span>Save Footer Settings</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Company Identity, Bio &amp; Copyright</h3>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Company Legal Name</label>
+                <input class="form-input" type="text" id="footer-company-name" placeholder="GURMITRAA Technologies Pvt. Ltd." />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Powered-By Attribution</label>
+                <input class="form-input" type="text" id="footer-powered" />
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Footer Brand Bio / Description</label>
+                <textarea class="form-textarea" id="footer-brand-desc" rows="2"></textarea>
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Copyright Notice</label>
+                <input class="form-input" type="text" id="footer-copyright" />
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Footer Contact Details &amp; Social Media Links</h3>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group span-full">
+                <label class="form-label">Corporate Address</label>
+                <input class="form-input" type="text" id="footer-address" placeholder="Rajahmundry, Andhra Pradesh, India." />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Official Email</label>
+                <input class="form-input" type="email" id="footer-email" placeholder="mittaibandi@gmail.com" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input class="form-input" type="text" id="footer-phone" placeholder="+91 94905 32121" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Instagram URL</label>
+                <input class="form-input" type="text" id="footer-instagram" placeholder="https://instagram.com/mittaibandi" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Facebook URL</label>
+                <input class="form-input" type="text" id="footer-facebook" placeholder="https://facebook.com/mittaibandi" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">YouTube URL</label>
+                <input class="form-input" type="text" id="footer-youtube" placeholder="https://youtube.com/@mittaibandi" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">LinkedIn URL</label>
+                <input class="form-input" type="text" id="footer-linkedin" placeholder="https://linkedin.com/company/mittaibandi" />
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Footer App Download Links</h3>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Customer Google Play Store URL</label>
+                <input class="form-input" type="text" id="footer-playstore-url" placeholder="https://play.google.com/store/apps/details?id=com.mittaibandi.app" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Customer Apple App Store URL</label>
+                <input class="form-input" type="text" id="footer-appstore-url" placeholder="https://apps.apple.com/in/app/mittai-bandi" />
+              </div>
+              <div class="form-group span-full">
+                <label class="toggle-wrap">
+                  <input type="checkbox" id="footer-store-badges" class="toggle-hidden" checked />
+                  <span class="toggle-switch"></span>
+                  <span style="font-weight:600;">Show App Download Badges in Footer</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Links Table -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Column 1: Quick Links</h3>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.addFooterLink('quick')">
+                <i data-lucide="link"></i>
+                <span>Add Quick Link</span>
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Label</th>
+                    <th>URL</th>
+                    <th>Reorder</th>
+                    <th style="text-align: right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="footer-quick-links-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Legal Links Table -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Column 2: Legal &amp; Policy Links</h3>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.addFooterLink('legal')">
+                <i data-lucide="link"></i>
+                <span>Add Legal Link</span>
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Label</th>
+                    <th>URL</th>
+                    <th>Reorder</th>
+                    <th style="text-align: right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="footer-legal-links-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             PROMOTIONAL BANNERS CMS VIEW
+        ══════════════════════════════════════ -->
+        <div class="module-view" id="view-banners">
+          <div class="module-header">
+            <div class="module-title">
+              <h2>Promotional Banners CMS</h2>
+              <p>Manage the homepage promotional banner carousel, seasonal festival campaigns, promotional links, and release schedules.</p>
+            </div>
+            <div style="display:flex; gap:0.5rem; flex-wrap: wrap;">
+              <button class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.openLivePreview()">
+                <i data-lucide="eye"></i>
+                <span>Preview On Site</span>
+              </button>
+              <button class="btn btn-primary btn-sm" onclick="MB_CMS_ADMIN.openBannerEditor()">
+                <i data-lucide="plus-circle"></i>
+                <span>Add New Banner</span>
+              </button>
+              <button class="btn btn-success btn-sm" onclick="MB_CMS_ADMIN.publishBannersLive()" style="background:#16A34A; color:#FFFFFF; border:none;">
+                <i data-lucide="upload-cloud"></i>
+                <span>Publish Banners Live</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- KPI Summary Cards (5 stats) -->
+          <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom: 1.5rem;">
+            <div class="stat-card">
+              <div class="stat-icon" style="background: rgba(230,0,70,0.08); color: var(--color-brand-red, #E60046);">
+                <i data-lucide="layers"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-val" id="banner-kpi-total">4</div>
+                <div class="stat-label">Total Banners</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon" style="background: rgba(22,163,74,0.08); color: #16A34A;">
+                <i data-lucide="check-circle-2"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-val" id="banner-kpi-active">4</div>
+                <div class="stat-label">Active Now</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon" style="background: rgba(14,165,233,0.08); color: #0EA5E9;">
+                <i data-lucide="calendar"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-val" id="banner-kpi-scheduled">0</div>
+                <div class="stat-label">Scheduled</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon" style="background: rgba(234,179,8,0.08); color: #CA8A04;">
+                <i data-lucide="clock"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-val" id="banner-kpi-expired">0</div>
+                <div class="stat-label">Expired</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon" style="background: rgba(100,116,139,0.08); color: #64748B;">
+                <i data-lucide="eye-off"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-val" id="banner-kpi-inactive">0</div>
+                <div class="stat-label">Inactive</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filter & Search Toolbar -->
+          <div class="card" style="margin-bottom: 1.5rem;">
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+              <div style="position: relative; flex: 1 1 280px; max-width: 420px;">
+                <i data-lucide="search" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: #94A3B8;"></i>
+                <input type="text" id="banner-search-input" class="form-input" style="padding-left: 36px;" placeholder="Search campaigns, headlines, tags..." oninput="MB_CMS_ADMIN.filterBanners()" />
+              </div>
+              <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+                <div class="filter-pills" id="banner-status-filter-pills" style="margin: 0;">
+                  <button class="filter-pill active" data-status="all" onclick="MB_CMS_ADMIN.setBannerStatusFilter('all')">All</button>
+                  <button class="filter-pill" data-status="active" onclick="MB_CMS_ADMIN.setBannerStatusFilter('active')">Active</button>
+                  <button class="filter-pill" data-status="scheduled" onclick="MB_CMS_ADMIN.setBannerStatusFilter('scheduled')">Scheduled</button>
+                  <button class="filter-pill" data-status="expired" onclick="MB_CMS_ADMIN.setBannerStatusFilter('expired')">Expired</button>
+                  <button class="filter-pill" data-status="inactive" onclick="MB_CMS_ADMIN.setBannerStatusFilter('inactive')">Inactive</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Banners List / Cards Container -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Promotional Campaigns &amp; Carousel Order</h3>
+                <p style="font-size: 0.85rem; color: #64748B; margin: 0.25rem 0 0 0;">Slide order in carousel follows display rank. Use up/down controls to reorder instantly.</p>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.resetBannersToDefault()">
+                <i data-lucide="rotate-ccw"></i>
+                <span>Reset to Defaults</span>
+              </button>
+            </div>
+            <div id="banners-list-container">
+              <!-- Dynamically populated banner cards / table -->
+            </div>
+          </div>
+
+          <!-- Live In-Admin Responsive Carousel Preview -->
+          <div class="card" style="margin-top: 1.5rem;">
+            <div class="card-header">
+              <div>
+                <h3>Interactive Carousel Preview</h3>
+                <p style="font-size: 0.85rem; color: #64748B; margin: 0.25rem 0 0 0;">Preview how the active promotional banners render on different device sizes.</p>
+              </div>
+              <div class="device-switcher" style="display: flex; gap: 0.25rem; background: #F1F5F9; padding: 4px; border-radius: 8px;">
+                <button class="device-btn active" data-banner-device="desktop" onclick="MB_CMS_ADMIN.setBannerPreviewDevice('desktop')">Desktop</button>
+                <button class="device-btn" data-banner-device="tablet" onclick="MB_CMS_ADMIN.setBannerPreviewDevice('tablet')">Tablet</button>
+                <button class="device-btn" data-banner-device="mobile" onclick="MB_CMS_ADMIN.setBannerPreviewDevice('mobile')">Mobile</button>
+              </div>
+            </div>
+            <div id="banner-admin-preview-wrapper" style="padding: 1.5rem; background: #F8FAFC; border-radius: 12px; display: flex; justify-content: center; overflow: hidden;">
+              <div id="banner-admin-preview-stage" style="width: 100%; max-width: 100%; transition: max-width 0.3s ease;">
+                <!-- Mini carousel preview rendered by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             7. PAGE & SECTION CMS VIEW
+        ══════════════════════════════════════ -->
+        <div class="module-view" id="view-pages">
+          <div class="module-header">
+            <div class="module-title">
+              <h2>Page &amp; Section CMS</h2>
+              <p>Reorder sections, toggle visibility, and edit content for every page on the website.</p>
+            </div>
+            <button class="btn btn-gold" onclick="MB_CMS_ADMIN.openLivePreview()">
+              <i data-lucide="eye"></i>
+              <span>Preview Changes Live</span>
+            </button>
+          </div>
+
+          <!-- Page Selection Tabs -->
+          <div class="filter-pills" style="margin-bottom: 1.5rem;">
+            <button class="filter-pill page-tab-btn active" data-page="home" onclick="MB_CMS_ADMIN.switchPage('home')">Home (index.html)</button>
+            <button class="filter-pill page-tab-btn" data-page="about" onclick="MB_CMS_ADMIN.switchPage('about')">About Us (about.html)</button>
+            <button class="filter-pill page-tab-btn" data-page="partner" onclick="MB_CMS_ADMIN.switchPage('partner')">Partner With Us (partner.html)</button>
+            <button class="filter-pill page-tab-btn" data-page="contact" onclick="MB_CMS_ADMIN.switchPage('contact')">Contact Us (contact.html)</button>
+            <button class="filter-pill page-tab-btn" data-page="privacy" onclick="MB_CMS_ADMIN.switchPage('privacy')">Privacy Policy</button>
+            <button class="filter-pill page-tab-btn" data-page="terms" onclick="MB_CMS_ADMIN.switchPage('terms')">Terms of Service</button>
+            <button class="filter-pill page-tab-btn" data-page="refund" onclick="MB_CMS_ADMIN.switchPage('refund')">Cancellation &amp; Refund</button>
+            <button class="filter-pill page-tab-btn" data-page="api" onclick="MB_CMS_ADMIN.switchPage('api')">API Policy</button>
+            <button class="filter-pill page-tab-btn" data-page="404" onclick="MB_CMS_ADMIN.switchPage('404')">404 Page</button>
+          </div>
+
+          <!-- Page SEO Settings Card -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Page SEO &amp; Meta Settings</h3>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.savePageSEO()">
+                <i data-lucide="save"></i>
+                <span>Save Page SEO</span>
+              </button>
+            </div>
+            <div class="form-grid">
+              <div class="form-group span-full">
+                <label class="form-label">SEO Page Title (&lt;title&gt;)</label>
+                <input class="form-input" type="text" id="page-seo-title" />
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Meta Description</label>
+                <textarea class="form-textarea" id="page-seo-desc"></textarea>
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Meta Keywords</label>
+                <input class="form-input" type="text" id="page-seo-keywords" />
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Social Share OG Image</label>
+                <div class="image-picker-field">
+                  <img src="/assets/images/logo.png" id="preview-page-ogimg" class="image-preview-thumb" alt="OG Image" />
+                  <div class="image-picker-actions">
+                    <input class="form-input" type="text" id="page-seo-ogimg" oninput="MB_CMS_ADMIN.updateThumbPreview('page-seo-ogimg', 'preview-page-ogimg')" />
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.openMediaPicker('page-seo-ogimg', 'preview-page-ogimg')">
+                      <i data-lucide="image"></i>
+                      <span>Choose from Media Library</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Page Sections Container (Populated dynamically) -->
+          <div id="page-sections-container"></div>
+        </div>
+
+        <!-- ══════════════════════════════════════
+             8. MEDIA LIBRARY VIEW
+        ══════════════════════════════════════ -->
+        <div class="module-view" id="view-media">
+          <div class="module-header">
+            <div class="module-title">
+              <h2>Media &amp; Asset Library</h2>
+              <p>Manage, upload, preview, replace and delete all image and video assets.</p>
+            </div>
+            <div style="display:flex; gap:0.5rem; flex-wrap: wrap;">
+              <button class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.addMediaByUrl()">
+                <i data-lucide="link"></i>
+                <span>Add from URL</span>
+              </button>
+              <button class="btn btn-primary btn-sm" onclick="document.getElementById('media-file-input').click()">
+                <i data-lucide="upload"></i>
+                <span>Upload File</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Drag and drop upload zone -->
+          <div id="media-dropzone" style="border: 2px dashed #CBD5E1; border-radius: var(--radius-lg); padding: 2.75rem 2rem; text-align: center; cursor: pointer; background: #FFFFFF; margin-bottom: 2rem; transition: all 0.2s ease;">
+            <input type="file" id="media-file-input" style="display:none;" accept="image/*,video/*" />
+            <div style="display:flex; justify-content:center; margin-bottom: 0.75rem;">
+              <div style="width: 52px; height: 52px; border-radius: 50%; background: var(--primary-subtle); display:flex; align-items:center; justify-content:center; color: var(--primary);">
+                <i data-lucide="upload-cloud" style="width:28px; height:28px;"></i>
+              </div>
+            </div>
+            <h4 style="font-size: 1.15rem; color:#111827; margin-bottom: 0.35rem; font-weight:700;">Drop images or videos here, or click to browse</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); max-width: 500px; margin: 0 auto;">Supports PNG, JPG, WebP, SVG and MP4 videos. Images retain original aspect ratio and high resolution.</p>
+          </div>
+
+          <!-- Filter Pills -->
+          <div class="media-filter-bar">
+            <div class="filter-pills" id="media-filter-pills"></div>
+          </div>
+
+          <!-- Media Assets Grid -->
+          <div class="media-grid" id="media-grid-container"></div>
+        </div>
+
+        <!-- ══════════════════════════════════════
+             9. FORM SUBMISSIONS VIEW
+        ══════════════════════════════════════ -->
+        <div class="module-view" id="view-submissions">
+          <div class="module-header">
+            <div class="module-title">
+              <h2>Form Submissions &amp; Enquiries</h2>
+              <p>View live customer enquiries and partner registrations stored in Firebase Realtime Database.</p>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="MB_CMS_ADMIN.exportSubmissionsCSV()">
+              <i data-lucide="download"></i>
+              <span>Export to CSV</span>
+            </button>
+          </div>
+
+          <!-- Filter & Search Bar -->
+          <div class="card" style="padding: 1.25rem; margin-bottom: 1.5rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+              <div class="filter-pills">
+                <button class="filter-pill sub-tab-btn active" data-tab="all" onclick="MB_CMS_ADMIN.filterSubmissionsTab('all')">All Submissions</button>
+                <button class="filter-pill sub-tab-btn" data-tab="contact" onclick="MB_CMS_ADMIN.filterSubmissionsTab('contact')">Contact Enquiries</button>
+                <button class="filter-pill sub-tab-btn" data-tab="partner" onclick="MB_CMS_ADMIN.filterSubmissionsTab('partner')">Partner Registrations</button>
+              </div>
+              <input class="form-input" type="text" id="submission-search" placeholder="Search by name, email, phone..." style="max-width:320px;" oninput="MB_CMS_ADMIN.renderSubmissionsModule()" />
+            </div>
+          </div>
+
+          <!-- Submissions Table -->
+          <div class="card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Customer / Business</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Message Summary</th>
+                    <th>Date</th>
+                    <th style="text-align: right;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="submissions-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             10. ACTIVITY LOGS VIEW
+        ══════════════════════════════════════ -->
+        <div class="module-view" id="view-history">
+          <div class="module-header">
+            <div class="module-title">
+              <h2>Activity Logs &amp; Audit Trail</h2>
+              <p>Chronological record of publishing events, content modifications, and administrative logins.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Action</th>
+                    <th>Details</th>
+                    <th>User</th>
+                    <th>Timestamp</th>
+                  </tr>
+                </thead>
+                <tbody id="history-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             11. SETTINGS & SECURITY VIEW
+        ══════════════════════════════════════ -->
+        <div class="module-view" id="view-settings">
+          <div class="module-header">
+            <div class="module-title">
+              <h2>Admin Security &amp; Settings</h2>
+              <p>Manage admin password, export backups, and view cloud integration parameters.</p>
+            </div>
+          </div>
+
+          <!-- Change Password Card -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Change Admin Password</h3>
+                <p>Updates your Firebase Authentication password. Your current password is required to confirm.</p>
+              </div>
+            </div>
+            <form id="change-pwd-form" onsubmit="MB_CMS_ADMIN.handleChangePasswordSubmit(event)">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Current Password</label>
+                  <input class="form-input" type="password" id="pwd-current" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">New Password (Min 8 chars)</label>
+                  <input class="form-input" type="password" id="pwd-new" required minlength="8" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Confirm New Password</label>
+                  <input class="form-input" type="password" id="pwd-confirm" required minlength="8" />
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary" style="margin-top:1rem;">
+                <i data-lucide="lock"></i>
+                <span>Update Admin Password</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- System Integration Card -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Database &amp; Storage Integrations</h3>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group span-full">
+                <label class="form-label">Firebase Realtime Database Status</label>
+                <div id="settings-db-status" style="font-size:0.9rem; margin-top:0.25rem;">Checking...</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Backup & Recovery Card -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Backup &amp; Factory Reset</h3>
+                <p>Export complete website CMS data as a JSON file or restore from a past backup.</p>
+              </div>
+            </div>
+            <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+              <button class="btn btn-secondary" onclick="MB_CMS_ADMIN.exportBackupJSON()">
+                <i data-lucide="download"></i>
+                <span>Export Backup JSON</span>
+              </button>
+              
+              <label class="btn btn-outline" style="cursor:pointer; margin:0;">
+                <i data-lucide="upload"></i>
+                <span>Import Backup JSON</span>
+                <input type="file" accept=".json" style="display:none;" onchange="MB_CMS_ADMIN.importBackupJSON(this.files[0])" />
+              </label>
+
+              <button class="btn btn-danger" onclick="MB_CMS_ADMIN.resetToDefaults()">
+                <i data-lucide="rotate-ccw"></i>
+                <span>Factory Reset to Defaults</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             12. HERO SECTION CMS MANAGEMENT VIEW
+        ══════════════════════════════════════ -->
+        <div class="module-view" id="view-hero">
+          <div class="module-header">
+            <div class="module-title">
+              <h2>Hero Section Management</h2>
+              <p>Complete control over the Homepage Hero Section — typography, background image, video upload, buttons, alignment, and display settings.</p>
+            </div>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <button class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.openLivePreview()">
+                <i data-lucide="eye"></i>
+                <span>Preview On Site</span>
+              </button>
+              <button class="btn btn-outline btn-sm" onclick="MB_CMS_ADMIN.saveHeroModule()">
+                <i data-lucide="save"></i>
+                <span>Save Hero Draft</span>
+              </button>
+              <button class="btn btn-primary btn-sm" onclick="MB_CMS_ADMIN.saveHeroAndPublish()">
+                <i data-lucide="send"></i>
+                <span>Save &amp; Publish Live</span>
+              </button>
+            </div>
+          </div>
+
+          <form id="hero-cms-form" onsubmit="event.preventDefault(); MB_CMS_ADMIN.saveHeroModule();">
+            <!-- Card 1: Status, Order & Alignment -->
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3>1. Hero Visibility, Order &amp; Layout Alignment</h3>
+                  <p>Configure active state, display order, text alignment, and image focal point.</p>
+                </div>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="toggle-wrap" style="margin-top:0.5rem;">
+                    <input type="checkbox" id="hero-field-enabled" class="toggle-hidden" checked />
+                    <span class="toggle-switch"></span>
+                    <span style="font-weight:700;">Hero Section Active on Homepage</span>
+                  </label>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Display Order</label>
+                  <input type="number" id="hero-field-order" class="form-input" min="1" max="20" value="1" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Hero Text Alignment</label>
+                  <select id="hero-field-alignment" class="form-select" onchange="MB_CMS_ADMIN.renderHeroInlinePreview()">
+                    <option value="center">Center Aligned (Default)</option>
+                    <option value="left">Left Aligned</option>
+                    <option value="right">Right Aligned</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Hero Background Image Position</label>
+                  <select id="hero-field-imgpos" class="form-select" onchange="MB_CMS_ADMIN.renderHeroInlinePreview()">
+                    <option value="center center">Center Center</option>
+                    <option value="top center">Top Center</option>
+                    <option value="bottom center">Bottom Center</option>
+                    <option value="left center">Left Center</option>
+                    <option value="right center">Right Center</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2: Hero Typography & Headlines -->
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3>2. Hero Typography &amp; Messaging</h3>
+                  <p>Manage the Eyebrow Badge, Main Hero Title, Subtitle/Tagline, and Description.</p>
+                </div>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Eyebrow / Badge Text</label>
+                  <input type="text" id="hero-field-eyebrow" class="form-input" placeholder="Authentic Indian Confectionery" oninput="MB_CMS_ADMIN.renderHeroInlinePreview()" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Hero Title (Main Heading)</label>
+                  <input type="text" id="hero-field-heading" class="form-input" placeholder="MITTAI BANDI" oninput="MB_CMS_ADMIN.renderHeroInlinePreview()" />
+                </div>
+                <div class="form-group span-full">
+                  <label class="form-label">Hero Subtitle / Tagline</label>
+                  <input type="text" id="hero-field-tagline" class="form-input" placeholder="Traditional Taste. Delivered Fresh." oninput="MB_CMS_ADMIN.renderHeroInlinePreview()" />
+                </div>
+                <div class="form-group span-full">
+                  <label class="form-label">Hero Description</label>
+                  <textarea id="hero-field-description" class="form-textarea" rows="3" oninput="MB_CMS_ADMIN.renderHeroInlinePreview()"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3: Hero Media Settings (YouTube Video & Fallback Images) -->
+            <div class="card" id="hero-media-settings-card">
+              <div class="card-header">
+                <div>
+                  <h3>3. Hero Media Settings</h3>
+                  <p>Configure the background YouTube video and responsive 16:9 Desktop &amp; 9:16 Mobile fallback poster images.</p>
+                </div>
+              </div>
+              <div class="form-grid">
+                <!-- Toggles Row: Enable Hero Video & Enable Fallback Image -->
+                <div class="form-group span-full" style="display:flex; gap:2.5rem; flex-wrap:wrap; padding:0.6rem 0.8rem; background:var(--bg-subtle, #F9FAFB); border-radius:8px; border:1px solid #E5E7EB; margin-bottom:0.75rem;">
+                  <label class="toggle-wrap">
+                    <input type="checkbox" id="hero-field-show-video" class="toggle-hidden" checked onchange="MB_CMS_ADMIN.renderHeroInlinePreview()" />
+                    <span class="toggle-switch"></span>
+                    <span style="font-weight:700; color:var(--text-primary, #111827);">Enable Hero Video (YouTube)</span>
+                  </label>
+                  <label class="toggle-wrap">
+                    <input type="checkbox" id="hero-field-fallback-enabled" class="toggle-hidden" checked onchange="MB_CMS_ADMIN.renderHeroInlinePreview()" />
+                    <span class="toggle-switch"></span>
+                    <span style="font-weight:700; color:var(--text-primary, #111827);">Enable Fallback Image</span>
+                  </label>
+                </div>
+
+                <!-- Two Separate YouTube Video URLs: Desktop (16:9) and Mobile (9:16) -->
+                <div class="form-group">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+                    <label class="form-label" style="margin-bottom:0; font-weight:700;">Desktop YouTube Video URL</label>
+                    <span id="hero-desktop-yt-id-badge" style="font-size:0.75rem; font-weight:600; padding:0.2rem 0.55rem; border-radius:999px; background:#F3F4F6; color:#6B7280; display:inline-flex; align-items:center; gap:0.3rem;">
+                      <i data-lucide="youtube" style="width:13px; height:13px;"></i>
+                      <span id="hero-desktop-yt-id-text">No Video</span>
+                    </span>
+                  </div>
+                  <input type="text" id="hero-field-desktop-youtube-url" class="form-input" placeholder="e.g. https://www.youtube.com/watch?v=... (16:9 Landscape)" oninput="MB_CMS_ADMIN.handleHeroYouTubeInput('desktop'); MB_CMS_ADMIN.renderHeroInlinePreview();" />
+                  <span class="form-hint" style="margin-top:0.35rem; display:block; color:#6B7280; font-size:0.78rem;">
+                    Landscape (16:9) video used for desktop &amp; laptop screens. Accepts watch URLs, youtu.be, or embed links.
+                  </span>
+                </div>
+
+                <div class="form-group">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+                    <label class="form-label" style="margin-bottom:0; font-weight:700;">Mobile YouTube Video URL</label>
+                    <span id="hero-mobile-yt-id-badge" style="font-size:0.75rem; font-weight:600; padding:0.2rem 0.55rem; border-radius:999px; background:#F3F4F6; color:#6B7280; display:inline-flex; align-items:center; gap:0.3rem;">
+                      <i data-lucide="youtube" style="width:13px; height:13px;"></i>
+                      <span id="hero-mobile-yt-id-text">No Video</span>
+                    </span>
+                  </div>
+                  <input type="text" id="hero-field-mobile-youtube-url" class="form-input" placeholder="e.g. https://www.youtube.com/shorts/... (9:16 Portrait)" oninput="MB_CMS_ADMIN.handleHeroYouTubeInput('mobile'); MB_CMS_ADMIN.renderHeroInlinePreview();" />
+                  <span class="form-hint" style="margin-top:0.35rem; display:block; color:#6B7280; font-size:0.78rem;">
+                    Portrait (9:16) video used for mobile &amp; tablet screens. Accepts YouTube Shorts (<code>/shorts/...</code>) and portrait videos.
+                  </span>
+                </div>
+
+                <!-- Desktop Fallback Image (16:9 Ratio) -->
+                <div class="form-group">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+                    <label class="form-label" style="margin-bottom:0; font-weight:700;">Desktop Fallback Image</label>
+                    <span style="font-size:0.75rem; font-weight:700; color:#374151; background:#E5E7EB; padding:0.15rem 0.55rem; border-radius:4px;">16:9 Ratio</span>
+                  </div>
+                  <div class="image-picker-field" style="align-items:flex-start;">
+                    <div style="position:relative; width:150px; height:84px; flex-shrink:0; border-radius:8px; overflow:hidden; border:1px solid #D1D5DB; background:#1A0810;">
+                      <img src="/assets/images/artisan_making_sweets.png" id="preview-hero-desktop-img" class="image-preview-thumb" style="width:100%; height:100%; object-fit:cover;" alt="Desktop Hero 16:9" />
+                      <span style="position:absolute; bottom:3px; right:3px; background:rgba(0,0,0,0.7); color:#fff; font-size:0.62rem; font-weight:700; padding:2px 5px; border-radius:3px;">16:9</span>
+                    </div>
+                    <div class="image-picker-actions" style="flex:1;">
+                      <input type="text" id="hero-field-desktop-img" class="form-input" placeholder="Paste custom image URL or path..." oninput="MB_CMS_ADMIN.updateThumbPreview('hero-field-desktop-img', 'preview-hero-desktop-img'); MB_CMS_ADMIN.renderHeroInlinePreview();" />
+                      <div style="display:flex; gap:0.4rem; margin-top:0.5rem; flex-wrap:wrap;">
+                        <button type="button" class="btn btn-outline btn-sm" onclick="MB_CMS_ADMIN.openUploadModalForField('hero-field-desktop-img', 'preview-hero-desktop-img', 'Home', 'Hero Desktop Fallback (16:9)')">
+                          <i data-lucide="upload"></i>
+                          <span>Upload from Device</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.openMediaPicker('hero-field-desktop-img', 'preview-hero-desktop-img')">
+                          <i data-lucide="image"></i>
+                          <span>Image Library</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Mobile Fallback Image (9:16 Ratio) -->
+                <div class="form-group">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+                    <label class="form-label" style="margin-bottom:0; font-weight:700;">Mobile Fallback Image</label>
+                    <span style="font-size:0.75rem; font-weight:700; color:#374151; background:#E5E7EB; padding:0.15rem 0.55rem; border-radius:4px;">9:16 Ratio</span>
+                  </div>
+                  <div class="image-picker-field" style="align-items:flex-start;">
+                    <div style="position:relative; width:68px; height:105px; flex-shrink:0; border-radius:8px; overflow:hidden; border:1px solid #D1D5DB; background:#1A0810;">
+                      <img src="/assets/images/artisan_making_sweets.png" id="preview-hero-mobile-img" class="image-preview-thumb" style="width:100%; height:100%; object-fit:cover;" alt="Mobile Hero 9:16" />
+                      <span style="position:absolute; bottom:3px; right:3px; background:rgba(0,0,0,0.7); color:#fff; font-size:0.62rem; font-weight:700; padding:2px 5px; border-radius:3px;">9:16</span>
+                    </div>
+                    <div class="image-picker-actions" style="flex:1;">
+                      <input type="text" id="hero-field-mobile-img" class="form-input" placeholder="Paste custom image URL or path..." oninput="MB_CMS_ADMIN.updateThumbPreview('hero-field-mobile-img', 'preview-hero-mobile-img'); MB_CMS_ADMIN.renderHeroInlinePreview();" />
+                      <div style="display:flex; gap:0.4rem; margin-top:0.5rem; flex-wrap:wrap;">
+                        <button type="button" class="btn btn-outline btn-sm" onclick="MB_CMS_ADMIN.openUploadModalForField('hero-field-mobile-img', 'preview-hero-mobile-img', 'Home', 'Hero Mobile Fallback (9:16)')">
+                          <i data-lucide="upload"></i>
+                          <span>Upload from Device</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.openMediaPicker('hero-field-mobile-img', 'preview-hero-mobile-img')">
+                          <i data-lucide="image"></i>
+                          <span>Image Library</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 4: Hero Call-To-Action Buttons -->
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3>4. Hero Action Buttons (Primary &amp; Secondary)</h3>
+                </div>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Primary Button Text</label>
+                  <input type="text" id="hero-field-btn1-text" class="form-input" placeholder="Explore Sweets" oninput="MB_CMS_ADMIN.renderHeroInlinePreview()" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Primary Button Link / URL</label>
+                  <input type="text" id="hero-field-btn1-link" class="form-input" placeholder="#categories" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Secondary Button Text</label>
+                  <input type="text" id="hero-field-btn2-text" class="form-input" placeholder="Partner With Us" oninput="MB_CMS_ADMIN.renderHeroInlinePreview()" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Secondary Button Link / URL</label>
+                  <input type="text" id="hero-field-btn2-link" class="form-input" placeholder="partner.html" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 5: Live Hero Visual Preview with Desktop & Mobile Switcher -->
+            <div class="card">
+              <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+                <div>
+                  <h3>5. Live Hero Visual Preview</h3>
+                  <p>Real-time visual preview of your Hero Section with video state and responsive fallback poster simulation.</p>
+                </div>
+                <div class="btn-group" style="display:flex; gap:0.4rem; background:var(--bg-subtle, #F3F4F6); padding:0.25rem; border-radius:8px; border:1px solid #E5E7EB;">
+                  <button type="button" id="btn-hero-prev-desktop" class="btn btn-sm btn-primary" onclick="MB_CMS_ADMIN.setHeroPreviewMode('desktop')">
+                    <i data-lucide="monitor" style="width:14px; height:14px;"></i>
+                    <span>Preview Desktop (16:9)</span>
+                  </button>
+                  <button type="button" id="btn-hero-prev-mobile" class="btn btn-sm btn-secondary" onclick="MB_CMS_ADMIN.setHeroPreviewMode('mobile')">
+                    <i data-lucide="smartphone" style="width:14px; height:14px;"></i>
+                    <span>Preview Mobile (9:16)</span>
+                  </button>
+                </div>
+              </div>
+              <div id="hero-preview-outer-wrap" style="display:flex; justify-content:center; align-items:center; background:#0B0B0E; padding:1.5rem; border-radius:12px; overflow:hidden;">
+                <div id="hero-inline-preview-box" style="border-radius:16px; overflow:hidden; position:relative; width:100%; min-height:380px; display:flex; align-items:center; justify-content:center; background:#1A0810; transition:all 0.3s ease;"></div>
+              </div>
+
+              <!-- Hero Module Save & Publish Actions -->
+              <div class="card-footer" style="display:flex; justify-content:flex-end; align-items:center; gap:0.75rem; padding:1.25rem 1.5rem; background:#FAFAFA; border-top:1px solid #E5E7EB; margin-top:1.5rem; border-radius:0 0 12px 12px;">
+                <button type="button" class="btn btn-secondary" onclick="MB_CMS_ADMIN.saveHeroModule()">
+                  <i data-lucide="save"></i>
+                  <span>Save Hero to Draft</span>
+                </button>
+                <button type="button" class="btn btn-primary" onclick="MB_CMS_ADMIN.saveHeroAndPublish()">
+                  <i data-lucide="send"></i>
+                  <span>Save &amp; Publish Hero Live</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- ══════════════════════════════════════
+             13. CENTRALIZED IMAGE LIBRARY VIEW
+        ══════════════════════════════════════ -->
+        <div class="module-view" id="view-images">
+          <div class="module-header">
+            <div class="module-title">
+              <h2>Centralized Website Image Library</h2>
+              <p>Inspect, upload, preview, replace, and manage every live image used across the MITTAI BANDI website.</p>
+            </div>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <button class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.syncWebsiteImagesIntoLibrary()">
+                <i data-lucide="refresh-cw"></i>
+                <span>Sync Website Images</span>
+              </button>
+              <button class="btn btn-primary btn-sm" onclick="MB_CMS_ADMIN.openUploadModalForField(null, null, 'Website Library', 'General')">
+                <i data-lucide="upload"></i>
+                <span>Upload New Image</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Filter & Search Bar -->
+          <div class="card" style="margin-bottom: 1.5rem; padding: 1.25rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+              <div class="filter-pills" id="imglib-page-pills">
+                <button class="filter-pill active" data-page-filter="all" onclick="MB_CMS_ADMIN.setImageLibraryFilter('all')">All Website Images</button>
+                <button class="filter-pill" data-page-filter="Home" onclick="MB_CMS_ADMIN.setImageLibraryFilter('Home')">Home Page</button>
+                <button class="filter-pill" data-page-filter="Promotional Banners" onclick="MB_CMS_ADMIN.setImageLibraryFilter('Promotional Banners')">Promo Banners</button>
+                <button class="filter-pill" data-page-filter="About Us" onclick="MB_CMS_ADMIN.setImageLibraryFilter('About Us')">About Us</button>
+                <button class="filter-pill" data-page-filter="Partner With Us" onclick="MB_CMS_ADMIN.setImageLibraryFilter('Partner With Us')">Partner With Us</button>
+                <button class="filter-pill" data-page-filter="Global Branding" onclick="MB_CMS_ADMIN.setImageLibraryFilter('Global Branding')">Branding &amp; Logos</button>
+              </div>
+              <input type="text" id="imglib-search-input" class="form-input" placeholder="Search by image name, URL, page or section..." style="max-width:340px;" oninput="MB_CMS_ADMIN.renderImageLibraryModule()" />
+            </div>
+          </div>
+
+          <!-- Centralized Image Library Table -->
+          <div class="card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th style="width:110px;">Preview</th>
+                    <th>Image Name &amp; URL</th>
+                    <th>Used in Page</th>
+                    <th>Used in Section</th>
+                    <th>Upload Date</th>
+                    <th>Status</th>
+                    <th style="text-align:right; width:280px;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="imglib-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             14. PARTNER MANAGEMENT VIEW
+        ══════════════════════════════════════ -->
+        <div class="module-view" id="view-partner-cms">
+          <div class="module-header">
+            <div class="module-title">
+              <h2>Partner With Us — CMS Management</h2>
+              <p>Manage the Partner Hero Banner, Section 1 (Vendor / Sweet Maker Partnership with Android &amp; iOS apps), and Section 2 (Delivery Partner with Android-Only app).</p>
+            </div>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <button class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.openLivePreviewPage('partner.html')">
+                <i data-lucide="eye"></i>
+                <span>Preview Partner Page</span>
+              </button>
+              <button class="btn btn-outline btn-sm" onclick="MB_CMS_ADMIN.savePartnerModule()">
+                <i data-lucide="save"></i>
+                <span>Save Partner Draft</span>
+              </button>
+              <button class="btn btn-primary btn-sm" onclick="MB_CMS_ADMIN.savePartnerAndPublish()">
+                <i data-lucide="send"></i>
+                <span>Save &amp; Publish Live</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Partner Hero Card -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Partner Hero Banner (#partner-hero)</h3>
+              </div>
+              <label class="toggle-wrap">
+                <input type="checkbox" id="p-hero-enabled" class="toggle-hidden" checked />
+                <span class="toggle-switch"></span>
+                <span style="font-weight:600;">Enabled</span>
+              </label>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Hero Eyebrow</label>
+                <input type="text" id="p-hero-eyebrow" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Hero Heading</label>
+                <input type="text" id="p-hero-heading" class="form-input" />
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Hero Description</label>
+                <textarea id="p-hero-desc" class="form-textarea" rows="2"></textarea>
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Partner Hero Background Image</label>
+                <div class="image-picker-field">
+                  <img src="/assets/images/wedding_sweets.png" id="preview-p-hero-bg" class="image-preview-thumb" style="width:120px; height:72px; object-fit:cover;" alt="Partner Hero" />
+                  <div class="image-picker-actions" style="flex:1;">
+                    <input type="text" id="p-hero-bgimage" class="form-input" oninput="MB_CMS_ADMIN.updateThumbPreview('p-hero-bgimage', 'preview-p-hero-bg')" />
+                    <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+                      <button type="button" class="btn btn-primary btn-sm" onclick="MB_CMS_ADMIN.openUploadModalForField('p-hero-bgimage', 'preview-p-hero-bg', 'Partner With Us', 'Partner Hero Banner (#partner-hero)')">
+                        <i data-lucide="upload"></i>
+                        <span>Upload Image</span>
+                      </button>
+                      <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.openMediaPicker('p-hero-bgimage', 'preview-p-hero-bg')">
+                        <i data-lucide="images"></i>
+                        <span>Choose from Library</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 1: VENDOR / SWEET MAKER PARTNERSHIP -->
+          <div class="card" style="border-left: 4px solid #E60046;">
+            <div class="card-header">
+              <div>
+                <span class="badge" style="background:rgba(230,0,70,0.1); color:#E60046; font-weight:700; margin-bottom:0.35rem;">SECTION 1 &bull; ANDROID + iOS APPS</span>
+                <h3>Vendor / Sweet Maker Partnership (#vendor-partnership)</h3>
+                <p>Displayed first on Partner With Us page. Includes BOTH Google Play (Android) and App Store (iOS) download buttons.</p>
+              </div>
+              <label class="toggle-wrap">
+                <input type="checkbox" id="vp-enabled" class="toggle-hidden" checked />
+                <span class="toggle-switch"></span>
+                <span style="font-weight:600;">Section Active</span>
+              </label>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Eyebrow Badge</label>
+                <input type="text" id="vp-eyebrow" class="form-input" placeholder="FOR SWEET MAKERS &amp; CONFECTIONERS" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Vendor Section Title</label>
+                <input type="text" id="vp-heading" class="form-input" placeholder="Become a MITTAI BANDI Vendor" />
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Vendor Section Description</label>
+                <textarea id="vp-desc" class="form-textarea" rows="2"></textarea>
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Vendor Section Image</label>
+                <div class="image-picker-field">
+                  <img src="/assets/images/traditional_sweets.png" id="preview-vp-image" class="image-preview-thumb" style="width:120px; height:76px; object-fit:cover;" alt="Vendor Image" />
+                  <div class="image-picker-actions" style="flex:1;">
+                    <input type="text" id="vp-image" class="form-input" oninput="MB_CMS_ADMIN.updateThumbPreview('vp-image', 'preview-vp-image')" />
+                    <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+                      <button type="button" class="btn btn-primary btn-sm" onclick="MB_CMS_ADMIN.openUploadModalForField('vp-image', 'preview-vp-image', 'Partner With Us', 'Vendor Partnership (#vendor-partnership)')">
+                        <i data-lucide="upload"></i>
+                        <span>Upload Image</span>
+                      </button>
+                      <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.openMediaPicker('vp-image', 'preview-vp-image')">
+                        <i data-lucide="images"></i>
+                        <span>Choose from Library</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Vendor Key Features (One feature per line)</label>
+                <textarea id="vp-features" class="form-textarea" rows="5" placeholder="Expand your customer reach&#10;Digital storefront for your business&#10;Manage products and orders&#10;Reach customers beyond your local area&#10;Dedicated vendor support"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Vendor Android App URL (Google Play Store)</label>
+                <input type="text" id="vp-play-url" class="form-input" placeholder="https://play.google.com/store/apps/details?id=com.mittaibandi.vendor" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Vendor iOS App URL (Apple App Store)</label>
+                <input type="text" id="vp-apple-url" class="form-input" placeholder="https://apps.apple.com/in/app/mittai-bandi-vendor" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Vendor Registration Button Text</label>
+                <input type="text" id="vp-reg-text" class="form-input" placeholder="Register as a Vendor" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Vendor Registration Button Link</label>
+                <input type="text" id="vp-reg-url" class="form-input" placeholder="#partner-form" />
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2: DELIVERY PARTNER -->
+          <div class="card" style="border-left: 4px solid #16A34A;">
+            <div class="card-header">
+              <div>
+                <span class="badge" style="background:rgba(22,163,74,0.12); color:#16A34A; font-weight:700; margin-bottom:0.35rem;">SECTION 2 &bull; ANDROID APP ONLY (NO iOS)</span>
+                <h3>Delivery Partner Section (#delivery-partnership)</h3>
+                <p>Dedicated section for delivery executives. Displays ONLY the Google Play (Android) download button — iOS button is strictly excluded.</p>
+              </div>
+              <label class="toggle-wrap">
+                <input type="checkbox" id="dp-enabled" class="toggle-hidden" checked />
+                <span class="toggle-switch"></span>
+                <span style="font-weight:600;">Section Active</span>
+              </label>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Eyebrow Badge</label>
+                <input type="text" id="dp-eyebrow" class="form-input" placeholder="FOR DELIVERY FLEET &amp; LOGISTICS PARTNERS" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Delivery Partner Title</label>
+                <input type="text" id="dp-heading" class="form-input" placeholder="Deliver Happiness with MITTAI BANDI" />
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Delivery Partner Description</label>
+                <textarea id="dp-desc" class="form-textarea" rows="2"></textarea>
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Delivery Partner Image</label>
+                <div class="image-picker-field">
+                  <img src="/assets/sweets/step3-fulfilment.jpg" id="preview-dp-image" class="image-preview-thumb" style="width:120px; height:76px; object-fit:cover;" alt="Delivery Image" />
+                  <div class="image-picker-actions" style="flex:1;">
+                    <input type="text" id="dp-image" class="form-input" oninput="MB_CMS_ADMIN.updateThumbPreview('dp-image', 'preview-dp-image')" />
+                    <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+                      <button type="button" class="btn btn-primary btn-sm" onclick="MB_CMS_ADMIN.openUploadModalForField('dp-image', 'preview-dp-image', 'Partner With Us', 'Delivery Partner (#delivery-partnership)')">
+                        <i data-lucide="upload"></i>
+                        <span>Upload Image</span>
+                      </button>
+                      <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.openMediaPicker('dp-image', 'preview-dp-image')">
+                        <i data-lucide="images"></i>
+                        <span>Choose from Library</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Delivery Partner Features (One feature per line)</label>
+                <textarea id="dp-features" class="form-textarea" rows="4" placeholder="Flexible delivery opportunities&#10;Simple delivery management&#10;Order tracking&#10;Dedicated delivery partner application"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Delivery Partner Android App URL (Google Play Only)</label>
+                <input type="text" id="dp-play-url" class="form-input" placeholder="https://play.google.com/store/apps/details?id=com.mittaibandi.delivery" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Android Download Button Label</label>
+                <input type="text" id="dp-android-text" class="form-input" placeholder="Download Android App (Google Play)" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Delivery Registration Button Text</label>
+                <input type="text" id="dp-reg-text" class="form-input" placeholder="Become a Delivery Partner" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Delivery Registration Button Link</label>
+                <input type="text" id="dp-reg-url" class="form-input" placeholder="#partner-form" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════════════
+             14B. CONTACT & SUPPORT CMS VIEW
+        ══════════════════════════════════════ -->
+        <div class="module-view" id="view-contact-cms">
+          <div class="module-header">
+            <div class="module-title">
+              <h2>Contact Management — CMS Editor</h2>
+              <p>Manage all Contact Page sections: Hero Banner, Direct Assistance Channels (6 Cards), Support Panels, Food Safety Advisory, Complaint Escalation Framework, Grievance Redressal Officer, and Registered Office (FSSAI License Number).</p>
+            </div>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.openLivePreviewPage('contact.html')">
+                <i data-lucide="eye"></i>
+                <span>Preview Contact Page</span>
+              </button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="MB_CMS_ADMIN.saveContactModule()">
+                <i data-lucide="save"></i>
+                <span>Save Contact Draft</span>
+              </button>
+              <button type="button" class="btn btn-primary btn-sm" onclick="MB_CMS_ADMIN.saveContactAndPublish()">
+                <i data-lucide="send"></i>
+                <span>Save &amp; Publish Live</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Section 1: Contact Hero Banner -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>1. Contact Hero Banner (#contact-hero)</h3>
+                <p style="font-size:0.82rem; color:var(--color-text-muted); margin-top:2px;">Top breadcrumb, primary heading and supporting intro paragraph.</p>
+              </div>
+              <label class="toggle-wrap">
+                <input type="checkbox" id="c-hero-enabled" class="toggle-hidden" checked />
+                <span class="toggle-switch"></span>
+                <span style="font-weight:600;">Enabled</span>
+              </label>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Hero Eyebrow / Category</label>
+                <input type="text" id="c-hero-eyebrow" class="form-input" placeholder="Support" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Breadcrumb Path</label>
+                <input type="text" id="c-hero-breadcrumb" class="form-input" placeholder="Home / Support / Contact Us" />
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Hero Main Heading</label>
+                <input type="text" id="c-hero-heading" class="form-input" placeholder="We're Here to Help." />
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Hero Description / Subheading</label>
+                <textarea id="c-hero-subheading" class="form-textarea" rows="2" placeholder="Whether you have a question about an order, a refund, food safety, a partnership or anything else, reach out through our dedicated support channels below."></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Direct Assistance (6 Channels) -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>2. Direct Assistance Channels (#channels — 6 Cards)</h3>
+                <p style="font-size:0.82rem; color:var(--color-text-muted); margin-top:2px;">Six direct inquiry cards for customers, orders, hygiene, legal, and partners.</p>
+              </div>
+              <label class="toggle-wrap">
+                <input type="checkbox" id="c-channels-enabled" class="toggle-hidden" checked />
+                <span class="toggle-switch"></span>
+                <span style="font-weight:600;">Enabled</span>
+              </label>
+            </div>
+            <div class="form-grid" style="margin-bottom:1rem;">
+              <div class="form-group">
+                <label class="form-label">Section Eyebrow</label>
+                <input type="text" id="c-channels-eyebrow" class="form-input" placeholder="Direct Assistance" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Section Heading</label>
+                <input type="text" id="c-channels-heading" class="form-input" placeholder="Get in Touch Directly" />
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Section Subheading</label>
+                <textarea id="c-channels-subheading" class="form-textarea" rows="2" placeholder="Select the specific team best suited to assist with your inquiry for prompt resolution."></textarea>
+              </div>
+            </div>
+
+            <!-- 6 Channel Cards Grid -->
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1rem;">
+              <!-- Card 1 -->
+              <div style="border:1px solid var(--color-border); border-radius:8px; padding:1rem; background:var(--color-bg-subtle, #fafafa);">
+                <div style="font-weight:700; color:var(--color-primary); margin-bottom:0.5rem; display:flex; justify-content:space-between; align-items:center;">
+                  <span>Channel 1: Orders &amp; Refunds</span>
+                  <span class="badge" style="font-size:0.7rem; background:#fee2e2; color:#991b1b;">Card #1</span>
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Card Title</label>
+                  <input type="text" id="c-card1-title" class="form-input" placeholder="Orders &amp; Refunds" />
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Badge Text (Optional)</label>
+                  <input type="text" id="c-card1-badge" class="form-input" placeholder="Priority" />
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Description</label>
+                  <textarea id="c-card1-desc" class="form-textarea" rows="2" placeholder="For order status, delivery queries, missing or damaged items, and refund assistance."></textarea>
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Action Text / Email</label>
+                  <input type="text" id="c-card1-action" class="form-input" placeholder="order@mittaibandi.com" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-size:0.75rem;">Action URL (mailto: / link)</label>
+                  <input type="text" id="c-card1-url" class="form-input" placeholder="mailto:order@mittaibandi.com" />
+                </div>
+              </div>
+
+              <!-- Card 2 -->
+              <div style="border:1px solid var(--color-border); border-radius:8px; padding:1rem; background:var(--color-bg-subtle, #fafafa);">
+                <div style="font-weight:700; color:var(--color-primary); margin-bottom:0.5rem; display:flex; justify-content:space-between; align-items:center;">
+                  <span>Channel 2: Customer Care Phone</span>
+                  <span class="badge" style="font-size:0.7rem; background:#fee2e2; color:#991b1b;">Card #2</span>
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Card Title</label>
+                  <input type="text" id="c-card2-title" class="form-input" placeholder="Customer Care Phone" />
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Badge Text</label>
+                  <input type="text" id="c-card2-badge" class="form-input" placeholder="Mon–Fri" />
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Description</label>
+                  <textarea id="c-card2-desc" class="form-textarea" rows="2" placeholder="Direct telephone support. Available Monday to Friday, 9:00 am – 6:00 pm (IST)."></textarea>
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Action Text / Phone</label>
+                  <input type="text" id="c-card2-action" class="form-input" placeholder="+91-9494614551" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-size:0.75rem;">Action URL (tel: link)</label>
+                  <input type="text" id="c-card2-url" class="form-input" placeholder="tel:+919494614551" />
+                </div>
+              </div>
+
+              <!-- Card 3 -->
+              <div style="border:1px solid var(--color-border); border-radius:8px; padding:1rem; background:var(--color-bg-subtle, #fafafa);">
+                <div style="font-weight:700; color:var(--color-primary); margin-bottom:0.5rem; display:flex; justify-content:space-between; align-items:center;">
+                  <span>Channel 3: General Enquiries</span>
+                  <span class="badge" style="font-size:0.7rem; background:#fee2e2; color:#991b1b;">Card #3</span>
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Card Title</label>
+                  <input type="text" id="c-card3-title" class="form-input" placeholder="General Enquiries" />
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Badge Text (Optional)</label>
+                  <input type="text" id="c-card3-badge" class="form-input" placeholder="" />
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Description</label>
+                  <textarea id="c-card3-desc" class="form-textarea" rows="2" placeholder="Customer feedback, sweet maker partnerships, business questions and account assistance."></textarea>
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Action Text / Email</label>
+                  <input type="text" id="c-card3-action" class="form-input" placeholder="info@mittaibandi.com" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-size:0.75rem;">Action URL (mailto: link)</label>
+                  <input type="text" id="c-card3-url" class="form-input" placeholder="mailto:info@mittaibandi.com" />
+                </div>
+              </div>
+
+              <!-- Card 4 -->
+              <div style="border:1px solid var(--color-border); border-radius:8px; padding:1rem; background:var(--color-bg-subtle, #fafafa);">
+                <div style="font-weight:700; color:var(--color-primary); margin-bottom:0.5rem; display:flex; justify-content:space-between; align-items:center;">
+                  <span>Channel 4: Food Safety &amp; Hygiene</span>
+                  <span class="badge" style="font-size:0.7rem; background:#fee2e2; color:#991b1b;">Card #4</span>
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Card Title</label>
+                  <input type="text" id="c-card4-title" class="form-input" placeholder="Food Safety &amp; Hygiene" />
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Badge Text (Optional)</label>
+                  <input type="text" id="c-card4-badge" class="form-input" placeholder="" />
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Description</label>
+                  <textarea id="c-card4-desc" class="form-textarea" rows="2" placeholder="Dedicated desk for food hygiene reports, quality audits and health concerns."></textarea>
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Action Text / Email</label>
+                  <input type="text" id="c-card4-action" class="form-input" placeholder="hygiene@mittaibandi.com" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-size:0.75rem;">Action URL (mailto: link)</label>
+                  <input type="text" id="c-card4-url" class="form-input" placeholder="mailto:hygiene@mittaibandi.com" />
+                </div>
+              </div>
+
+              <!-- Card 5 -->
+              <div style="border:1px solid var(--color-border); border-radius:8px; padding:1rem; background:var(--color-bg-subtle, #fafafa);">
+                <div style="font-weight:700; color:var(--color-primary); margin-bottom:0.5rem; display:flex; justify-content:space-between; align-items:center;">
+                  <span>Channel 5: Legal &amp; Regulatory</span>
+                  <span class="badge" style="font-size:0.7rem; background:#fee2e2; color:#991b1b;">Card #5</span>
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Card Title</label>
+                  <input type="text" id="c-card5-title" class="form-input" placeholder="Legal &amp; Regulatory" />
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Badge Text (Optional)</label>
+                  <input type="text" id="c-card5-badge" class="form-input" placeholder="" />
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Description</label>
+                  <textarea id="c-card5-desc" class="form-textarea" rows="2" placeholder="Statutory communications, legal notices, copyright, IP and trademark matters."></textarea>
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Action Text / Email</label>
+                  <input type="text" id="c-card5-action" class="form-input" placeholder="legal@mittaibandi.com" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-size:0.75rem;">Action URL (mailto: link)</label>
+                  <input type="text" id="c-card5-url" class="form-input" placeholder="mailto:legal@mittaibandi.com" />
+                </div>
+              </div>
+
+              <!-- Card 6 -->
+              <div style="border:1px solid var(--color-border); border-radius:8px; padding:1rem; background:var(--color-bg-subtle, #fafafa);">
+                <div style="font-weight:700; color:var(--color-primary); margin-bottom:0.5rem; display:flex; justify-content:space-between; align-items:center;">
+                  <span>Channel 6: Vendor Partnerships</span>
+                  <span class="badge" style="font-size:0.7rem; background:#fee2e2; color:#991b1b;">Card #6</span>
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Card Title</label>
+                  <input type="text" id="c-card6-title" class="form-input" placeholder="Vendor Partnerships" />
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Badge Text (Optional)</label>
+                  <input type="text" id="c-card6-badge" class="form-input" placeholder="" />
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Description</label>
+                  <textarea id="c-card6-desc" class="form-textarea" rows="2" placeholder="List your traditional sweet shop or regional confectionery on MITTAI BANDI."></textarea>
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Action Text</label>
+                  <input type="text" id="c-card6-action" class="form-input" placeholder="Join as a Partner" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-size:0.75rem;">Action URL</label>
+                  <input type="text" id="c-card6-url" class="form-input" placeholder="partner.html" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3: Dual Support Panels -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>3. Dual Support Panels (.contact-split-panels)</h3>
+                <p style="font-size:0.82rem; color:var(--color-text-muted); margin-top:2px;">Side-by-side callout panels for Order Help and Vendor Onboarding.</p>
+              </div>
+              <label class="toggle-wrap">
+                <input type="checkbox" id="c-panels-enabled" class="toggle-hidden" checked />
+                <span class="toggle-switch"></span>
+                <span style="font-weight:600;">Enabled</span>
+              </label>
+            </div>
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem;">
+              <!-- Panel 1: Order Help -->
+              <div style="border:1px solid var(--color-border); border-radius:8px; padding:1.25rem; background:var(--color-bg-subtle, #fafafa);">
+                <h4 style="color:var(--color-primary); margin-bottom:0.75rem; font-size:1rem;">Panel A: Need Help With an Order?</h4>
+                <div class="form-group">
+                  <label class="form-label">Panel Badge</label>
+                  <input type="text" id="c-panel-order-badge" class="form-input" placeholder="Fastest Resolution" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Panel Title</label>
+                  <input type="text" id="c-panel-order-title" class="form-input" placeholder="Need Help With an Order?" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Paragraph 1 (In-app instructions)</label>
+                  <textarea id="c-panel-order-p1" class="form-textarea" rows="3" placeholder="For the fastest support with an in-progress order..."></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Paragraph 2 (Email &amp; ticket policy)</label>
+                  <textarea id="c-panel-order-p2" class="form-textarea" rows="3" placeholder="For refunds, missing items, or order-related complaints after delivery..."></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Tip Callout Note</label>
+                  <textarea id="c-panel-order-tip" class="form-textarea" rows="2" placeholder="Tip: In-app chat connects you directly with our real-time dispatch..."></textarea>
+                </div>
+              </div>
+
+              <!-- Panel 2: Vendor Onboarding -->
+              <div style="border:1px solid var(--color-border); border-radius:8px; padding:1.25rem; background:var(--color-bg-subtle, #fafafa);">
+                <h4 style="color:var(--color-primary); margin-bottom:0.75rem; font-size:1rem;">Panel B: Want to List Your Sweet Shop?</h4>
+                <div class="form-group">
+                  <label class="form-label">Panel Badge</label>
+                  <input type="text" id="c-panel-vendor-badge" class="form-input" placeholder="Vendor Onboarding" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Panel Title</label>
+                  <input type="text" id="c-panel-vendor-title" class="form-input" placeholder="Want to List Your Sweet Shop?" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Paragraph 1 (Vendor application info)</label>
+                  <textarea id="c-panel-vendor-p1" class="form-textarea" rows="3" placeholder="If you own a sweet shop, bakery, or confectionery..."></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Paragraph 2 (Onboarding team guidance)</label>
+                  <textarea id="c-panel-vendor-p2" class="form-textarea" rows="3" placeholder="Our vendor onboarding team will review your details..."></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Button Text</label>
+                  <input type="text" id="c-panel-vendor-btntext" class="form-input" placeholder="Partner With Us Page" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Button Link URL</label>
+                  <input type="text" id="c-panel-vendor-btnlink" class="form-input" placeholder="partner.html" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Food Safety & Hygiene Commitment -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>4. Food Safety &amp; Hygiene Commitment (.contact-safety-callout)</h3>
+                <p style="font-size:0.82rem; color:var(--color-text-muted); margin-top:2px;">Highlighted commitment banner with health advisory message.</p>
+              </div>
+              <label class="toggle-wrap">
+                <input type="checkbox" id="c-safety-enabled" class="toggle-hidden" checked />
+                <span class="toggle-switch"></span>
+                <span style="font-weight:600;">Enabled</span>
+              </label>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Callout Badge</label>
+                <input type="text" id="c-safety-badge" class="form-input" placeholder="Customer Health &amp; Trust" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Callout Title</label>
+                <input type="text" id="c-safety-title" class="form-input" placeholder="Food Safety and Hygiene Commitment" />
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Commitment Description</label>
+                <textarea id="c-safety-desc" class="form-textarea" rows="3" placeholder="Your health and satisfaction are our utmost priority. If you experience any hygiene concerns or believe a product made you unwell, please notify us immediately at hygiene@mittaibandi.com with your order number and specific details."></textarea>
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Health Advisory Alert Text</label>
+                <textarea id="c-safety-advisory" class="form-textarea" rows="2" placeholder="Important Health Advisory: If you require immediate medical care or attention, please consult a certified healthcare professional first before filing a report."></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 5: Complaint Escalation Framework -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>5. Complaint Escalation Framework (.contact-escalation-matrix)</h3>
+                <p style="font-size:0.82rem; color:var(--color-text-muted); margin-top:2px;">The 4-stage resolution matrix: In-App, Email Desk, Priority Phone Line, Grievance Officer.</p>
+              </div>
+              <label class="toggle-wrap">
+                <input type="checkbox" id="c-escalation-enabled" class="toggle-hidden" checked />
+                <span class="toggle-switch"></span>
+                <span style="font-weight:600;">Enabled</span>
+              </label>
+            </div>
+            <div class="form-grid" style="margin-bottom:1rem;">
+              <div class="form-group">
+                <label class="form-label">Escalation Eyebrow</label>
+                <input type="text" id="c-escalation-eyebrow" class="form-input" placeholder="Resolution Framework" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Escalation Heading</label>
+                <input type="text" id="c-escalation-heading" class="form-input" placeholder="Not Satisfied? Escalate Your Complaint" />
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Escalation Subheading</label>
+                <textarea id="c-escalation-subheading" class="form-textarea" rows="2" placeholder="We maintain a structured four-stage escalation matrix to ensure every issue is fairly and transparently addressed."></textarea>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1rem;">
+              <!-- Step 1 -->
+              <div style="border:1px solid var(--color-border); border-radius:8px; padding:1rem; background:var(--color-bg-subtle, #fafafa);">
+                <div style="font-weight:700; color:var(--color-primary); margin-bottom:0.5rem;">Step 1</div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Title</label>
+                  <input type="text" id="c-step1-title" class="form-input" placeholder="In-App Support" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-size:0.75rem;">Description</label>
+                  <textarea id="c-step1-desc" class="form-textarea" rows="3" placeholder="Initiate real-time call or chat support through the MITTAI BANDI app for immediate response on active deliveries."></textarea>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div style="border:1px solid var(--color-border); border-radius:8px; padding:1rem; background:var(--color-bg-subtle, #fafafa);">
+                <div style="font-weight:700; color:var(--color-primary); margin-bottom:0.5rem;">Step 2</div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Title</label>
+                  <input type="text" id="c-step2-title" class="form-input" placeholder="Email Support Desk" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-size:0.75rem;">Description</label>
+                  <textarea id="c-step2-desc" class="form-textarea" rows="3" placeholder="Email order@mittaibandi.com with order details and photos to receive an official complaint ticket number."></textarea>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div style="border:1px solid var(--color-border); border-radius:8px; padding:1rem; background:var(--color-bg-subtle, #fafafa);">
+                <div style="font-weight:700; color:var(--color-primary); margin-bottom:0.5rem;">Step 3</div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Title</label>
+                  <input type="text" id="c-step3-title" class="form-input" placeholder="Priority Phone Line" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-size:0.75rem;">Description</label>
+                  <textarea id="c-step3-desc" class="form-textarea" rows="3" placeholder="If unresolved, call +91-9494614551 (Mon–Fri, 9am–6pm IST) quoting your ticket. We aim to resolve within ~48 hours."></textarea>
+                </div>
+              </div>
+
+              <!-- Step 4 -->
+              <div style="border:1px solid var(--color-border); border-radius:8px; padding:1rem; background:var(--color-bg-subtle, #fafafa);">
+                <div style="font-weight:700; color:var(--color-primary); margin-bottom:0.5rem;">Step 4</div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" style="font-size:0.75rem;">Title</label>
+                  <input type="text" id="c-step4-title" class="form-input" placeholder="Grievance Officer" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-size:0.75rem;">Description</label>
+                  <textarea id="c-step4-desc" class="form-textarea" rows="3" placeholder="For persistent or legal grievances, reach out directly to our statutory Grievance Officer detailed below."></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 6: Grievance Officer & Statutory Details -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>6. Grievance Redressal Officer (#grievance)</h3>
+                <p style="font-size:0.82rem; color:var(--color-text-muted); margin-top:2px;">Statutory officer designation, email, phone, office address, and resolution SLA timelines.</p>
+              </div>
+              <label class="toggle-wrap">
+                <input type="checkbox" id="c-grievance-enabled" class="toggle-hidden" checked />
+                <span class="toggle-switch"></span>
+                <span style="font-weight:600;">Enabled</span>
+              </label>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Card Title</label>
+                <input type="text" id="c-grievance-title" class="form-input" placeholder="Grievance Officer (India)" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Officer Full Name</label>
+                <input type="text" id="c-grievance-officer" class="form-input" placeholder="Budi Srinivasa Rao [CEO]" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Officer Designation</label>
+                <input type="text" id="c-grievance-designation" class="form-input" placeholder="CEO" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Corporate Entity Name</label>
+                <input type="text" id="c-grievance-company" class="form-input" placeholder="Gurmitraa Technologies Pvt Ltd" />
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Statutory Introduction / Context</label>
+                <textarea id="c-grievance-intro" class="form-textarea" rows="2" placeholder="In accordance with the Information Technology Act, 2000 and the Consumer Protection Act, 2019 and the rules established thereunder:"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Officer Email</label>
+                <input type="text" id="c-grievance-email" class="form-input" placeholder="grievance@mittaibandi.com" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Officer Phone</label>
+                <input type="text" id="c-grievance-phone" class="form-input" placeholder="+91-9490532121" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Working Hours</label>
+                <input type="text" id="c-grievance-hours" class="form-input" placeholder="Monday to Friday, 9:00 am – 6:00 pm IST" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Acknowledgment SLA</label>
+                <input type="text" id="c-grievance-sla-ack" class="form-input" placeholder="24 Hours" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Resolution SLA</label>
+                <input type="text" id="c-grievance-sla-res" class="form-input" placeholder="15 Days" />
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Officer Address</label>
+                <input type="text" id="c-grievance-address" class="form-input" placeholder="AVA Road, Rajahmundry – 533106, Andhra Pradesh, India" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 7: Our Registered Office & FSSAI Number -->
+          <div class="card" style="border:2px solid #C9003D22;">
+            <div class="card-header">
+              <div>
+                <h3>7. Our Registered Office &amp; FSSAI License Number</h3>
+                <p style="font-size:0.82rem; color:var(--color-text-muted); margin-top:2px;">Corporate identity, CIN, and officially registered FSSAI License Number.</p>
+              </div>
+              <label class="toggle-wrap">
+                <input type="checkbox" id="c-corporate-enabled" class="toggle-hidden" checked />
+                <span class="toggle-switch"></span>
+                <span style="font-weight:600;">Enabled</span>
+              </label>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Card Title</label>
+                <input type="text" id="c-corporate-title" class="form-input" placeholder="Our Registered Office" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Corporate Entity Name</label>
+                <input type="text" id="c-corporate-name" class="form-input" placeholder="Gurmitraa Technologies Pvt Ltd" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Parent Note</label>
+                <input type="text" id="c-corporate-parent-note" class="form-input" placeholder="(Parent company of MITTAI BANDI)" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Corporate Identity Number (CIN)</label>
+                <input type="text" id="c-corporate-cin" class="form-input" placeholder="U72900AP2020PTC114398" />
+              </div>
+              <!-- FSSAI License Number Field -->
+              <div class="form-group" style="background:#FFF9F0; padding:0.75rem; border-radius:6px; border:1px solid #FFE0B2;">
+                <label class="form-label" style="font-weight:700; color:#D97706;">FSSAI License Number *</label>
+                <input type="text" id="c-corporate-fssai" class="form-input" style="font-weight:700; letter-spacing:0.5px; border-color:#F59E0B;" placeholder="10125018000861" />
+                <span style="font-size:0.75rem; color:#B45309; margin-top:0.25rem; display:block;">Statutory food safety license shown on Registered Office card.</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Corporate Contact Email</label>
+                <input type="text" id="c-corporate-email" class="form-input" placeholder="mittaibandi@gmail.com" />
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Registered Office Address</label>
+                <input type="text" id="c-corporate-address" class="form-input" placeholder="AVA Road, Rajahmundry – 533429, Andhra Pradesh, India" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Official Website Label</label>
+                <input type="text" id="c-corporate-web-label" class="form-input" placeholder="www.mittaibandi.com" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Official Website URL</label>
+                <input type="text" id="c-corporate-web-url" class="form-input" placeholder="https://www.mittaibandi.com" />
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Office Postal Notice / Policy Disclaimer</label>
+                <textarea id="c-corporate-notice" class="form-textarea" rows="2" placeholder="Notice: This is our registered corporate office address. Please do not send orders, return parcels, or refund claims by postal mail. Use our digital email or app channels for immediate assistance."></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 8: Stay Safe Security Notice -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>8. Stay Safe — Security Alert Notice (.contact-security-alert)</h3>
+                <p style="font-size:0.82rem; color:var(--color-text-muted); margin-top:2px;">Fraud prevention and credential security advice displayed at bottom of Contact page.</p>
+              </div>
+              <label class="toggle-wrap">
+                <input type="checkbox" id="c-security-enabled" class="toggle-hidden" checked />
+                <span class="toggle-switch"></span>
+                <span style="font-weight:600;">Enabled</span>
+              </label>
+            </div>
+            <div class="form-grid">
+              <div class="form-group span-full">
+                <label class="form-label">Security Alert Title</label>
+                <input type="text" id="c-security-title" class="form-input" placeholder="Stay Safe — Important Security Notice" />
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Security Alert Message</label>
+                <textarea id="c-security-message" class="form-textarea" rows="3" placeholder="MITTAI BANDI representatives will never ask for your OTP, credit/debit card number, CVV, UPI PIN, or net-banking credentials via telephone, SMS, WhatsApp, or email. Never share these sensitive credentials with anyone claiming affiliation with MITTAI BANDI. If you encounter any suspicious message or request, report it immediately to our security team at order@mittaibandi.com."></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Action Buttons -->
+          <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:1.5rem; margin-bottom:3rem;">
+            <button type="button" class="btn btn-secondary" onclick="MB_CMS_ADMIN.openLivePreviewPage('contact.html')">
+              <i data-lucide="eye"></i>
+              <span>Preview Contact Page</span>
+            </button>
+            <button type="button" class="btn btn-outline" onclick="MB_CMS_ADMIN.saveContactModule()">
+              <i data-lucide="save"></i>
+              <span>Save Contact Draft</span>
+            </button>
+            <button type="button" class="btn btn-primary" onclick="MB_CMS_ADMIN.saveContactAndPublish()">
+              <i data-lucide="send"></i>
+              <span>Save &amp; Publish Live</span>
+            </button>
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             15. LEGAL DOCUMENTS CMS VIEW
+        ══════════════════════════════════════ -->
+        <div class="module-view" id="view-legal-docs">
+          <div class="module-header">
+            <div class="module-title">
+              <h2>Legal Documents &amp; Policies CMS</h2>
+              <p>Full rich-text &amp; HTML document editor for Privacy Policy, Terms of Service, Cancellation &amp; Refund Policy, API Policy, and Grievance Redressal.</p>
+            </div>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <button class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.previewCurrentLegalDoc()">
+                <i data-lucide="eye"></i>
+                <span>Preview Document Page</span>
+              </button>
+              <button class="btn btn-outline btn-sm" onclick="MB_CMS_ADMIN.saveLegalDocument()">
+                <i data-lucide="save"></i>
+                <span>Save Document Draft</span>
+              </button>
+              <button class="btn btn-primary btn-sm" onclick="MB_CMS_ADMIN.saveLegalAndPublish()">
+                <i data-lucide="send"></i>
+                <span>Save &amp; Publish Live</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Legal Document Selection Tabs -->
+          <div class="filter-pills" style="margin-bottom: 1.5rem;" id="legal-doc-tabs">
+            <button class="filter-pill active" data-legal-key="privacy" onclick="MB_CMS_ADMIN.switchLegalDoc('privacy')">1. Privacy Policy</button>
+            <button class="filter-pill" data-legal-key="terms" onclick="MB_CMS_ADMIN.switchLegalDoc('terms')">2. Terms of Service</button>
+            <button class="filter-pill" data-legal-key="refund" onclick="MB_CMS_ADMIN.switchLegalDoc('refund')">3. Cancellation &amp; Refund</button>
+            <button class="filter-pill" data-legal-key="api" onclick="MB_CMS_ADMIN.switchLegalDoc('api')">4. API Policy</button>
+            <button class="filter-pill" data-legal-key="grievance" onclick="MB_CMS_ADMIN.switchLegalDoc('grievance')">5. Grievance Redressal</button>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 id="legal-editor-card-title">Edit Privacy Policy</h3>
+                <p id="legal-editor-route-label" style="font-size:0.82rem; color:#64748B;">Public Route: <code>/privacy-policy.html</code></p>
+              </div>
+              <label class="toggle-wrap">
+                <input type="checkbox" id="legal-field-active" class="toggle-hidden" checked />
+                <span class="toggle-switch"></span>
+                <span style="font-weight:600;">Document Active</span>
+              </label>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Document Title / Heading</label>
+                <input type="text" id="legal-field-heading" class="form-input" placeholder="Privacy Policy" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Effective / Last Updated Date</label>
+                <input type="text" id="legal-field-date" class="form-input" placeholder="Effective Date: 18 March 2026 | Last Updated: March 2026" />
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Document Subtitle / Summary Notice</label>
+                <textarea id="legal-field-subtitle" class="form-textarea" rows="2"></textarea>
+              </div>
+            </div>
+
+            <!-- Grievance Officer Specific Fields (Visible when Grievance Redressal tab is selected) -->
+            <div id="grievance-extra-fields" style="display:none; border-top:1px solid #E5E7EB; padding-top:1.25rem; margin-top:1rem;">
+              <h4 style="margin-bottom:0.85rem; color:#C9003D;">Grievance Officer Structured Details (Displayed on Contact &amp; Grievance Section)</h4>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Officer Name</label>
+                  <input type="text" id="grievance-officer-name" class="form-input" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Designation</label>
+                  <input type="text" id="grievance-officer-role" class="form-input" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Company Legal Name</label>
+                  <input type="text" id="grievance-company" class="form-input" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Grievance Email</label>
+                  <input type="email" id="grievance-email" class="form-input" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Contact Phone</label>
+                  <input type="text" id="grievance-phone" class="form-input" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Working Hours</label>
+                  <input type="text" id="grievance-hours" class="form-input" />
+                </div>
+                <div class="form-group span-full">
+                  <label class="form-label">Registered Address</label>
+                  <input type="text" id="grievance-address" class="form-input" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Rich Text / HTML Editor -->
+            <div style="margin-top: 1.25rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; flex-wrap:wrap; gap:0.5rem;">
+                <label class="form-label" style="margin:0;">Full Legal Document Content (Rich Text / HTML)</label>
+                <div style="display:flex; gap:0.35rem; flex-wrap:wrap;">
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.execLegalCmd('bold')" title="Bold"><strong>B</strong></button>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.execLegalCmd('italic')" title="Italic"><em>I</em></button>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.execLegalCmd('underline')" title="Underline"><u>U</u></button>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.execLegalBlock('H2')" title="Heading 2">H2</button>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.execLegalBlock('H3')" title="Heading 3">H3</button>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.execLegalBlock('P')" title="Paragraph">P</button>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.execLegalCmd('insertUnorderedList')" title="Bullet List"><i data-lucide="list"></i></button>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.toggleLegalSourceMode()" id="btn-legal-source-toggle">
+                    <i data-lucide="code"></i>
+                    <span>HTML Source</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Visual Rich Text Surface -->
+              <div id="legal-visual-editor" contenteditable="true" class="rich-text-surface" oninput="MB_CMS_ADMIN.syncVisualToHtml()"></div>
+
+              <!-- Raw HTML Textarea (Toggled via HTML Source button) -->
+              <textarea id="legal-field-content" class="form-textarea" rows="18" style="display:none; font-family:monospace; font-size:0.84rem;" oninput="MB_CMS_ADMIN.syncHtmlToVisual()"></textarea>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             16. APP LINKS MANAGEMENT VIEW
+        ══════════════════════════════════════ -->
+        <div class="module-view" id="view-app-links">
+          <div class="module-header">
+            <div class="module-title">
+              <h2>App Links Management</h2>
+              <p>Centralized management for Customer App (Android &amp; iOS), Vendor App (Android &amp; iOS), and Delivery Partner App (Android Only).</p>
+            </div>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <button class="btn btn-outline btn-sm" onclick="MB_CMS_ADMIN.saveAppLinksModule()">
+                <i data-lucide="save"></i>
+                <span>Save App Links</span>
+              </button>
+              <button class="btn btn-primary btn-sm" onclick="MB_CMS_ADMIN.saveAppLinksAndPublish()">
+                <i data-lucide="send"></i>
+                <span>Save &amp; Publish Live</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <span class="badge badge-info" style="margin-bottom:0.35rem;">1. CUSTOMER MOBILE APP</span>
+                <h3>Customer App Download Links (Header, Homepage &amp; Footer)</h3>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Customer Android App URL (Google Play Store)</label>
+                <input type="text" id="app-cust-play" class="form-input" placeholder="https://play.google.com/store/apps/details?id=com.mittaibandi.app" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Customer iOS App URL (Apple App Store)</label>
+                <input type="text" id="app-cust-apple" class="form-input" placeholder="https://apps.apple.com/in/app/mittai-bandi" />
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-left:4px solid #E60046;">
+            <div class="card-header">
+              <div>
+                <span class="badge" style="background:rgba(230,0,70,0.1); color:#E60046; font-weight:700; margin-bottom:0.35rem;">2. VENDOR / SWEET MAKER APP (ANDROID + iOS)</span>
+                <h3>Vendor Partnership App Links (Partner Page — Section 1)</h3>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Vendor Android App URL (Google Play Store)</label>
+                <input type="text" id="app-vendor-play" class="form-input" placeholder="https://play.google.com/store/apps/details?id=com.mittaibandi.vendor" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Vendor iOS App URL (Apple App Store)</label>
+                <input type="text" id="app-vendor-apple" class="form-input" placeholder="https://apps.apple.com/in/app/mittai-bandi-vendor" />
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-left:4px solid #16A34A;">
+            <div class="card-header">
+              <div>
+                <span class="badge" style="background:rgba(22,163,74,0.12); color:#16A34A; font-weight:700; margin-bottom:0.35rem;">3. DELIVERY PARTNER APP (ANDROID ONLY — NO iOS)</span>
+                <h3>Delivery Partner App Link (Partner Page — Section 2)</h3>
+                <p>Delivery Partner is Android-only. Only the Google Play download button is displayed on the Partner page.</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group span-full">
+                <label class="form-label">Delivery Partner Android App URL (Google Play Store)</label>
+                <input type="text" id="app-delivery-play" class="form-input" placeholder="https://play.google.com/store/apps/details?id=com.mittaibandi.delivery" />
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <span class="badge badge-gold" style="margin-bottom:0.35rem;">4. APP LAUNCH MODE &amp; PROMOTIONAL BANNER</span>
+                <h3>Coming Soon Mode &amp; Homepage App Banner (#download)</h3>
+                <p>Control whether store buttons open a "Coming Soon" modal or redirect directly to the app stores, and manage the Homepage App Download Banner image.</p>
+              </div>
+              <label class="toggle-wrap">
+                <input type="checkbox" id="app-coming-soon-mode" class="toggle-hidden" />
+                <span class="toggle-switch"></span>
+                <span style="font-weight:600;">"Coming Soon" Modal Active</span>
+              </label>
+            </div>
+            <div class="form-grid">
+              <div class="form-group span-full">
+                <label class="form-label">Coming Soon Popup Message</label>
+                <textarea id="app-coming-soon-msg" class="form-textarea" rows="2" placeholder="The MITTAI BANDI mobile app is launching soon on Google Play and App Store!"></textarea>
+              </div>
+              <div class="form-group span-full">
+                <label class="form-label">Homepage App Download Banner Image (#download)</label>
+                <div class="image-picker-field">
+                  <img src="/assets/images/app-download-banner.jpg" id="preview-app-dl-banner" class="image-preview-thumb" style="width:140px; height:72px; object-fit:cover;" alt="App Download Banner" />
+                  <div class="image-picker-actions" style="flex:1;">
+                    <input type="text" id="app-download-banner-img" class="form-input" oninput="MB_CMS_ADMIN.updateThumbPreview('app-download-banner-img', 'preview-app-dl-banner')" />
+                    <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+                      <button type="button" class="btn btn-primary btn-sm" onclick="MB_CMS_ADMIN.openUploadModalForField('app-download-banner-img', 'preview-app-dl-banner', 'Home', 'Download App Banner (#download)')">
+                        <i data-lucide="upload"></i>
+                        <span>Upload Banner</span>
+                      </button>
+                      <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.openMediaPicker('app-download-banner-img', 'preview-app-dl-banner')">
+                        <i data-lucide="images"></i>
+                        <span>Choose from Library</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MODALS
+  ══════════════════════════════════════════ -->
+
+  <!-- 1. Live Preview Modal -->
+  <div class="modal-overlay" id="live-preview-modal">
+    <div class="modal-dialog preview-modal-dialog">
+      <div class="modal-header">
+        <div class="preview-controls">
+          <select class="form-select" id="preview-page-select" style="max-width:220px;" onchange="MB_CMS_ADMIN.changePreviewPage(this.value)">
+            <option value="index.html">Home (index.html)</option>
+            <option value="about.html">About Us (about.html)</option>
+            <option value="partner.html">Partner With Us (partner.html)</option>
+            <option value="contact.html">Contact Us (contact.html)</option>
+            <option value="privacy-policy.html">Privacy Policy</option>
+            <option value="terms-of-service.html">Terms of Service</option>
+            <option value="cancellation-refund.html">Cancellation &amp; Refund</option>
+            <option value="api-policy.html">API Policy</option>
+            <option value="404.html">404 Page</option>
+          </select>
+          <div style="display:flex; gap:0.35rem;">
+            <button class="device-btn active" data-device="desktop" onclick="MB_CMS_ADMIN.setPreviewDevice('desktop')">Desktop (1200px)</button>
+            <button class="device-btn" data-device="tablet" onclick="MB_CMS_ADMIN.setPreviewDevice('tablet')">Tablet (768px)</button>
+            <button class="device-btn" data-device="mobile" onclick="MB_CMS_ADMIN.setPreviewDevice('mobile')">Mobile (375px)</button>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <button class="btn btn-primary btn-sm" onclick="MB_CMS_ADMIN.publishToLive()">
+            <i data-lucide="send"></i>
+            <span>Publish Live Now</span>
+          </button>
+          <button class="modal-close" onclick="MB_CMS_ADMIN.closeModal('live-preview-modal')" aria-label="Close">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+      </div>
+      <div class="preview-frame-wrap">
+        <iframe id="preview-iframe" class="preview-frame desktop" src="about:blank"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Section Edit Modal -->
+  <div class="modal-dialog-wrap modal-overlay" id="section-edit-modal">
+    <div class="modal-dialog" style="max-width:750px;">
+      <div class="modal-header">
+        <h3 id="section-modal-title">Edit Section</h3>
+        <button class="modal-close" onclick="MB_CMS_ADMIN.closeModal('section-edit-modal')" aria-label="Close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body" id="section-modal-body"></div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="MB_CMS_ADMIN.closeModal('section-edit-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="document.getElementById('edit-section-form').dispatchEvent(new Event('submit'))">
+          <i data-lucide="check"></i>
+          <span>Apply Section Changes</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Media Picker Modal -->
+  <div class="modal-overlay" id="media-picker-modal">
+    <div class="modal-dialog" style="max-width:850px;">
+      <div class="modal-header">
+        <h3>Choose Asset from Media Library</h3>
+        <button class="modal-close" onclick="MB_CMS_ADMIN.closeModal('media-picker-modal')" aria-label="Close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="media-grid" id="media-picker-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Submission Details Modal -->
+  <div class="modal-overlay" id="submission-view-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Enquiry Details</h3>
+        <button class="modal-close" onclick="MB_CMS_ADMIN.closeModal('submission-view-modal')" aria-label="Close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body" id="submission-modal-body"></div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="MB_CMS_ADMIN.closeModal('submission-view-modal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Promotional Banner Editor Modal -->
+  <div class="modal-overlay" id="banner-edit-modal">
+    <div class="modal-dialog" style="max-width: 820px;">
+      <div class="modal-header">
+        <h3 id="banner-modal-title">Edit Promotional Banner</h3>
+        <button class="modal-close" onclick="MB_CMS_ADMIN.closeModal('banner-edit-modal')" aria-label="Close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="form-banner-editor" onsubmit="MB_CMS_ADMIN.saveBannerForm(event)">
+          <input type="hidden" id="banner-field-id" />
+          
+          <div class="form-grid">
+            <!-- Campaign Reference Name -->
+            <div class="form-group span-half">
+              <label class="form-label">Campaign Name <span style="color:#DC2626;">*</span></label>
+              <input type="text" id="banner-field-campaign" class="form-input" placeholder="e.g. Diwali &amp; Festive Delights" required />
+            </div>
+
+            <!-- Tag / Badge text -->
+            <div class="form-group span-half">
+              <label class="form-label">Badge / Pill Text <span style="color:#DC2626;">*</span></label>
+              <input type="text" id="banner-field-badge" class="form-input" placeholder="e.g. FESTIVE OFFERS, NEW ARRIVALS, SPECIAL DISCOUNT" required />
+            </div>
+
+            <!-- Headline -->
+            <div class="form-group span-full">
+              <label class="form-label">Banner Headline (Title) <span style="color:#DC2626;">*</span></label>
+              <input type="text" id="banner-field-title" class="form-input" placeholder="e.g. Celebrate Every Occasion with Traditional Mithai." required />
+            </div>
+
+            <!-- Description -->
+            <div class="form-group span-full">
+              <label class="form-label">Short Description (2-3 lines)</label>
+              <textarea id="banner-field-desc" class="form-textarea" rows="3" placeholder="Handcrafted authentic pure ghee sweets, celebration gift boxes..."></textarea>
+            </div>
+
+            <!-- Banner Image Selection -->
+            <div class="form-group span-full">
+              <label class="form-label">Banner Image <span style="color:#DC2626;">*</span></label>
+              <div style="background: #FFF9F3; border: 1px solid #FFE4D6; border-radius: 8px; padding: 0.6rem 0.85rem; margin-bottom: 0.75rem; font-size: 0.82rem; color: #9A3412; display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="info" style="width: 16px; height: 16px; flex-shrink: 0;"></i>
+                <span><strong>Recommended Dimension:</strong> 1200 x 600px landscape (2:1 aspect ratio), JPG/PNG/WebP, optimized under 2MB.</span>
+              </div>
+              <div class="image-picker-field">
+                <img src="/assets/images/wedding_sweets.png" id="preview-banner-image" class="image-preview-thumb" alt="Banner Preview" style="width: 130px; height: 75px; object-fit: cover; border-radius: 8px;" />
+                <div class="image-picker-actions" style="flex: 1;">
+                  <input type="text" id="banner-field-image" class="form-input" placeholder="assets/images/... or https://..." oninput="MB_CMS_ADMIN.updateThumbPreview('banner-field-image', 'preview-banner-image')" required />
+                  <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="MB_CMS_ADMIN.openMediaPicker('banner-field-image', 'preview-banner-image')">
+                      <i data-lucide="image"></i>
+                      <span>Choose from Media Library</span>
+                    </button>
+                    <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('banner-file-input').click()">
+                      <i data-lucide="upload"></i>
+                      <span>Upload New Image</span>
+                    </button>
+                    <input type="file" id="banner-file-input" style="display:none;" accept="image/*" onchange="MB_CMS_ADMIN.handleBannerImageUpload(event)" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Primary CTA -->
+            <div class="form-group span-half">
+              <label class="form-label">Primary Button Text <span style="color:#DC2626;">*</span></label>
+              <input type="text" id="banner-field-btn1-text" class="form-input" placeholder="e.g. Explore Festive Collection" required />
+            </div>
+            <div class="form-group span-half">
+              <label class="form-label">Primary Button URL</label>
+              <input type="text" id="banner-field-btn1-url" class="form-input" placeholder="e.g. index.html#categories" required />
+            </div>
+
+            <!-- Secondary CTA (Optional) -->
+            <div class="form-group span-full" style="border-top: 1px solid #F1F5F9; padding-top: 0.75rem; margin-top: 0.25rem;">
+              <label class="toggle-wrap" style="margin-bottom: 0.75rem;">
+                <input type="checkbox" id="banner-field-btn2-enabled" class="toggle-hidden" onchange="MB_CMS_ADMIN.toggleBannerBtn2Fields(this.checked)" checked />
+                <span class="toggle-switch"></span>
+                <span style="font-weight:600;">Enable Secondary Button</span>
+              </label>
+            </div>
+            <div class="form-group span-half banner-btn2-group">
+              <label class="form-label">Secondary Button Text</label>
+              <input type="text" id="banner-field-btn2-text" class="form-input" placeholder="e.g. Order On App" />
+            </div>
+            <div class="form-group span-half banner-btn2-group">
+              <label class="form-label">Secondary Button URL</label>
+              <input type="text" id="banner-field-btn2-url" class="form-input" placeholder="e.g. index.html#app" />
+            </div>
+
+            <!-- Scheduling -->
+            <div class="form-group span-half" style="border-top: 1px solid #F1F5F9; padding-top: 0.75rem;">
+              <label class="form-label">Start Date &amp; Time (Optional)</label>
+              <input type="datetime-local" id="banner-field-start" class="form-input" />
+              <small style="color: #64748B;">Leave empty to publish immediately.</small>
+            </div>
+            <div class="form-group span-half" style="border-top: 1px solid #F1F5F9; padding-top: 0.75rem;">
+              <label class="form-label">End Date &amp; Time (Optional)</label>
+              <input type="datetime-local" id="banner-field-end" class="form-input" />
+              <small style="color: #64748B;">Leave empty for continuous campaign.</small>
+            </div>
+
+            <!-- Display Order & Active status -->
+            <div class="form-group span-half" style="border-top: 1px solid #F1F5F9; padding-top: 0.75rem;">
+              <label class="form-label">Display Order</label>
+              <input type="number" id="banner-field-order" class="form-input" min="1" max="99" value="1" />
+            </div>
+            <div class="form-group span-half" style="border-top: 1px solid #F1F5F9; padding-top: 0.75rem; display: flex; align-items: center;">
+              <label class="toggle-wrap" style="margin-top: 1.25rem;">
+                <input type="checkbox" id="banner-field-active" class="toggle-hidden" checked />
+                <span class="toggle-switch"></span>
+                <span style="font-weight:600;">Active in Carousel</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="modal-footer" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #E2E8F0; display:flex; justify-content: flex-end; gap: 0.75rem; flex-wrap:wrap;">
+            <button type="button" class="btn btn-outline" onclick="MB_CMS_ADMIN.closeModal('banner-edit-modal')">Cancel</button>
+            <button type="submit" class="btn btn-primary">
+              <i data-lucide="check"></i>
+              <span>Save to Draft</span>
+            </button>
+            <button type="button" class="btn btn-success" onclick="MB_CMS_ADMIN.saveBannerAndPublish(event)" style="background:#16A34A; color:#FFFFFF; border:none;">
+              <i data-lucide="upload-cloud"></i>
+              <span>Save &amp; Publish Live</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Delete Confirmation Modal -->
+  <div class="modal-overlay" id="banner-delete-modal">
+    <div class="modal-dialog" style="max-width: 440px;">
+      <div class="modal-header">
+        <h3 style="color: #DC2626;">Delete Promotional Banner</h3>
+        <button class="modal-close" onclick="MB_CMS_ADMIN.closeModal('banner-delete-modal')" aria-label="Close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p style="color: #334155; margin-bottom: 0.5rem;">Are you sure you want to delete this promotional banner campaign?</p>
+        <p id="banner-delete-name" style="font-weight: 700; color: #0F172A; margin-bottom: 1rem;"></p>
+        <p style="font-size: 0.82rem; color: #64748B;">This campaign will be removed from your draft. Remember to click "Publish Changes" to sync to the live website.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" onclick="MB_CMS_ADMIN.closeModal('banner-delete-modal')">Cancel</button>
+        <button type="button" class="btn btn-danger" id="btn-confirm-banner-delete" style="background: #DC2626; color: white;">
+          <i data-lucide="trash-2"></i>
+          <span>Delete Banner</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Image Upload & Replace Modal (With Preview Before Saving & Progress Bar) -->
+  <div class="modal-overlay" id="image-upload-modal">
+    <div class="modal-dialog" style="max-width: 640px;">
+      <div class="modal-header">
+        <h3 id="img-upload-modal-title">Upload / Replace Website Image</h3>
+        <button class="modal-close" onclick="MB_CMS_ADMIN.closeModal('image-upload-modal')" aria-label="Close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="form-image-upload" onsubmit="MB_CMS_ADMIN.confirmImageUploadAndSave(event)">
+          <input type="hidden" id="img-upload-replace-id" />
+          <input type="hidden" id="img-upload-target-input" />
+          <input type="hidden" id="img-upload-target-preview" />
+
+          <div class="form-grid">
+            <div class="form-group span-full">
+              <label class="form-label">Select Image File (JPG, JPEG, PNG, WEBP)</label>
+              <input type="file" id="img-upload-file-input" class="form-input" accept="image/jpeg,image/jpg,image/png,image/webp,image/*" onchange="MB_CMS_ADMIN.handleUploadModalFileSelect(event)" />
+            </div>
+
+            <div class="form-group span-full">
+              <label class="form-label">Or Enter Direct Image URL</label>
+              <input type="text" id="img-upload-url-input" class="form-input" placeholder="https://... or assets/images/..." oninput="MB_CMS_ADMIN.handleUploadModalUrlInput(this.value)" />
+            </div>
+
+            <!-- Live Preview Before Saving -->
+            <div class="form-group span-full">
+              <label class="form-label">Image Preview Before Saving (100% Original Clarity)</label>
+              <div style="background:#F8FAFC; border:1px dashed #CBD5E1; border-radius:12px; padding:1rem; text-align:center;">
+                <img id="img-upload-live-preview" src="/assets/images/logo.png" alt="Preview" style="max-width:100%; max-height:240px; object-fit:contain; border-radius:8px; box-shadow:0 4px 14px rgba(0,0,0,0.08);" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Image Display Name</label>
+              <input type="text" id="img-upload-name-input" class="form-input" placeholder="e.g. Homepage Hero Image" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Used in Page</label>
+              <input type="text" id="img-upload-page-input" class="form-input" placeholder="e.g. Home, About Us, Partner With Us" />
+            </div>
+
+            <div class="form-group span-full">
+              <label class="form-label">Used in Section</label>
+              <input type="text" id="img-upload-section-input" class="form-input" placeholder="e.g. Hero Section (#hero)" />
+            </div>
+
+            <!-- Upload Progress Indicator -->
+            <div class="form-group span-full" id="img-upload-progress-wrap" style="display:none;">
+              <div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:600; margin-bottom:0.35rem;">
+                <span id="img-upload-progress-text">Uploading image...</span>
+                <span id="img-upload-progress-pct">0%</span>
+              </div>
+              <div style="width:100%; height:8px; background:#E2E8F0; border-radius:999px; overflow:hidden;">
+                <div id="img-upload-progress-bar" style="width:0%; height:100%; background:#E60046; transition:width 0.25s ease;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer" style="margin-top:1.25rem; padding-top:1rem; border-top:1px solid #E5E7EB;">
+            <button type="button" class="btn btn-outline" onclick="MB_CMS_ADMIN.closeModal('image-upload-modal')">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="btn-confirm-img-upload">
+              <i data-lucide="check-circle-2"></i>
+              <span>Save Image to CMS</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. Edit Image Details Modal -->
+  <div class="modal-overlay" id="image-edit-modal">
+    <div class="modal-dialog" style="max-width: 540px;">
+      <div class="modal-header">
+        <h3>Edit Image Details</h3>
+        <button class="modal-close" onclick="MB_CMS_ADMIN.closeModal('image-edit-modal')" aria-label="Close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="form-image-edit" onsubmit="MB_CMS_ADMIN.saveImageDetailsModal(event)">
+          <input type="hidden" id="img-edit-id" />
+          <div class="form-grid">
+            <div class="form-group span-full">
+              <label class="form-label">Image Name</label>
+              <input type="text" id="img-edit-name" class="form-input" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Used in Page</label>
+              <input type="text" id="img-edit-page" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Used in Section</label>
+              <input type="text" id="img-edit-section" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Category Tag</label>
+              <select id="img-edit-tag" class="form-select">
+                <option value="banners">Banners &amp; Backgrounds</option>
+                <option value="sweets">Sweets &amp; Products</option>
+                <option value="logos">Logos &amp; Icons</option>
+                <option value="videos">Videos</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Status</label>
+              <select id="img-edit-status" class="form-select">
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer" style="margin-top:1.25rem; padding-top:1rem; border-top:1px solid #E5E7EB;">
+            <button type="button" class="btn btn-outline" onclick="MB_CMS_ADMIN.closeModal('image-edit-modal')">Cancel</button>
+            <button type="submit" class="btn btn-primary">
+              <i data-lucide="check"></i>
+              <span>Save Details</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. Image Lightbox Preview Modal -->
+  <div class="modal-overlay" id="image-lightbox-modal">
+    <div class="modal-dialog" style="max-width: 920px; background:#0F172A; border-color:#1E293B;">
+      <div class="modal-header" style="border-bottom-color:#1E293B;">
+        <h3 id="lightbox-img-title" style="color:#FFFFFF;">Image Preview</h3>
+        <button class="modal-close" style="color:#FFFFFF;" onclick="MB_CMS_ADMIN.closeModal('image-lightbox-modal')" aria-label="Close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align:center; background:#090D16; padding:1.5rem;">
+        <img id="lightbox-img-el" src="/assets/images/logo.png" alt="Full Preview" style="max-width:100%; max-height:70vh; object-fit:contain; border-radius:8px;" />
+        <p id="lightbox-img-meta" style="color:#94A3B8; font-size:0.84rem; margin-top:0.85rem;"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase App & Auth SDK (v10 compat) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <!-- Scripts with Root-Relative Absolute Paths -->
+  <script src="/admin/js/lucide.min.js"></script>
+  <script src="/assets/js/cloudinary.js"></script>
+  <script src="/assets/js/cms-default-data.js"></script>
+  <script src="/admin/js/admin-auth.js"></script>
+  <script src="/admin/js/admin-cms.js"></script>
+</body>
+</html>

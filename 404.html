@@ -9,20 +9,27 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- CMS Engine -->
+  <script src="assets/js/cms-default-data.js"></script>
+  <script src="assets/js/cms-client.js"></script>
   <style>
     :root {
-      --color-magenta: #C9003D;
-      --color-magenta-dark: #A5002F;
-      --color-green: #168B32;
-      --color-cream: #FFF9F3;
-      --color-dark: #14020B;
+      --color-magenta: #E60046;
+      --color-magenta-dark: #C4003B;
+      --color-green: #16A34A;
+      --color-cream: #FFFCFA;
+      --color-dark: #FFFFFF;
       --color-white: #FFFFFF;
+      --color-border: #EEEEEE;
+      --color-text-primary: #252525;
+      --color-text-secondary: #666666;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Manrope', system-ui, -apple-system, sans-serif;
-      background: var(--color-dark);
-      color: var(--color-cream);
+      background: #FFFFFF;
+      color: var(--color-text-primary);
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -34,8 +41,12 @@
     .error-container {
       position: relative;
       z-index: 1;
-      padding: 2rem;
+      padding: 3rem 2rem;
       max-width: 600px;
+      background: var(--color-cream);
+      border: 1.5px solid var(--color-border);
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
     }
     .error-logo {
       width: 96px; height: 96px;
@@ -43,13 +54,13 @@
       object-fit: contain;
       background: #FFFFFF;
       padding: 4px;
-      margin: 0 auto 2rem;
+      margin: 0 auto 1.5rem;
       border: 3px solid var(--color-magenta);
-      box-shadow: 0 4px 20px rgba(201, 0, 61, 0.3);
+      box-shadow: 0 4px 20px rgba(201, 0, 61, 0.2);
     }
     .error-code {
       font-family: 'Inter', system-ui, sans-serif;
-      font-size: clamp(5.5rem, 18vw, 10rem);
+      font-size: clamp(4.5rem, 14vw, 7.5rem);
       font-weight: 800;
       color: var(--color-magenta);
       line-height: 1;
@@ -57,18 +68,18 @@
     }
     .error-title {
       font-family: 'Inter', system-ui, sans-serif;
-      font-size: clamp(1.5rem, 4vw, 2.25rem);
+      font-size: clamp(1.5rem, 4vw, 2rem);
       font-weight: 700;
-      margin: 0.5rem 0 1.25rem;
-      color: var(--color-white);
+      margin: 0.5rem 0 1rem;
+      color: var(--color-text-primary);
     }
     .error-title em { color: var(--color-green); font-style: normal; }
     .error-desc {
-      font-size: 1.05rem;
-      color: rgba(255, 249, 243, 0.75);
+      font-size: 1rem;
+      color: var(--color-text-secondary);
       line-height: 1.7;
       max-width: 440px;
-      margin: 0 auto 2.5rem;
+      margin: 0 auto 2rem;
     }
     .error-actions {
       display: flex;
@@ -93,34 +104,34 @@
     .error-btn-primary {
       background: var(--color-magenta);
       color: #fff;
-      box-shadow: 0 4px 20px rgba(201, 0, 61, 0.35);
+      box-shadow: 0 4px 16px rgba(201, 0, 61, 0.25);
     }
     .error-btn-primary:hover {
       background: var(--color-magenta-dark);
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(201, 0, 61, 0.5);
+      box-shadow: 0 8px 24px rgba(201, 0, 61, 0.35);
     }
     .error-btn-secondary {
-      background: transparent;
-      color: var(--color-cream);
-      border: 1.5px solid rgba(255, 249, 243, 0.3);
+      background: #FFFFFF;
+      color: var(--color-magenta);
+      border: 1.5px solid var(--color-magenta);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
     }
     .error-btn-secondary:hover {
-      background: rgba(255, 249, 243, 0.1);
-      border-color: var(--color-cream);
+      background: rgba(201, 0, 61, 0.06);
       transform: translateY(-2px);
     }
     .error-footer {
-      margin-top: 4rem;
+      margin-top: 2.5rem;
       font-size: 0.8rem;
-      color: rgba(255, 249, 243, 0.4);
+      color: #6B7280;
       letter-spacing: 0.04em;
     }
     /* Decorative ring */
     .deco-ring {
       position: absolute;
       border-radius: 50%;
-      border: 1px solid rgba(201, 0, 61, 0.12);
+      border: 1px solid rgba(201, 0, 61, 0.08);
       pointer-events: none;
     }
     .deco-ring-1 { width: 440px; height: 440px; top: -120px; right: -120px; }
@@ -149,11 +160,11 @@
     </div>
     <p class="error-footer">
       MITTAI BANDI — Traditional Taste. Digital Convenience.<br />
-      <span style="display:inline-flex; gap:1rem; margin-top:0.75rem; font-size:0.8rem; opacity:0.8;">
-        <a href="privacy-policy.html" style="color:#FFFFFF; text-decoration:none;">Privacy Policy</a> &bull;
-        <a href="terms-of-service.html" style="color:#FFFFFF; text-decoration:none;">Terms of Service</a> &bull;
-        <a href="cancellation-refund.html" style="color:#FFFFFF; text-decoration:none;">Cancellation &amp; Refund</a> &bull;
-        <a href="contact.html" style="color:#FFFFFF; text-decoration:none;">Contact</a>
+      <span style="display:inline-flex; gap:1rem; margin-top:0.75rem; font-size:0.8rem;">
+        <a href="privacy-policy.html" style="color:var(--color-text-secondary); text-decoration:none;">Privacy Policy</a> &bull;
+        <a href="terms-of-service.html" style="color:var(--color-text-secondary); text-decoration:none;">Terms of Service</a> &bull;
+        <a href="cancellation-refund.html" style="color:var(--color-text-secondary); text-decoration:none;">Cancellation &amp; Refund</a> &bull;
+        <a href="contact.html" style="color:var(--color-text-secondary); text-decoration:none;">Contact</a>
       </span>
     </p>
   </div>
