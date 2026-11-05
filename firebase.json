@@ -1,6 +1,57 @@
 {
   "database": {
     "rules": "database.rules.json"
+  },
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "redirects": [
+      {
+        "source": "/index.html",
+        "destination": "/",
+        "type": 301
+      },
+      {
+        "source": "/about.html",
+        "destination": "/about",
+        "type": 301
+      },
+      {
+        "source": "/partner.html",
+        "destination": "/partner",
+        "type": 301
+      },
+      {
+        "source": "/contact.html",
+        "destination": "/contact",
+        "type": 301
+      },
+      {
+        "source": "/privacy-policy.html",
+        "destination": "/privacy-policy",
+        "type": 301
+      },
+      {
+        "source": "/terms-of-service.html",
+        "destination": "/terms-of-service",
+        "type": 301
+      },
+      {
+        "source": "/cancellation-refund.html",
+        "destination": "/cancellation-refund",
+        "type": 301
+      },
+      {
+        "source": "/api-policy.html",
+        "destination": "/api-policy",
+        "type": 301
+      }
+    ]
   }
 }
-

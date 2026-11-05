@@ -424,9 +424,9 @@ window.MB_CMS_ADMIN = (function () {
           const img = b.image || b.desktopImage || b.mobileImage || 'assets/sweets/banner-celebration-table.jpg';
           const isAct = b.active !== false && b.visible !== false && b.status !== 'inactive';
           const pText = b.btnPrimary?.text || b.ctaPrimaryText || 'Explore Collection';
-          const pUrl = b.btnPrimary?.url || b.ctaPrimaryUrl || 'index.html#categories';
+          const pUrl = b.btnPrimary?.url || b.ctaPrimaryUrl || '/#categories';
           const sText = b.btnSecondary?.text || b.ctaSecondaryText || '';
-          const sUrl = b.btnSecondary?.url || b.ctaSecondaryUrl || 'index.html#app';
+          const sUrl = b.btnSecondary?.url || b.ctaSecondaryUrl || '/#app';
           const sVis = b.btnSecondary ? (b.btnSecondary.visible !== false && !!sText) : !!sText;
 
           return Object.assign({}, b, {
@@ -993,7 +993,7 @@ window.MB_CMS_ADMIN = (function () {
   function addNavLink() {
     const label = prompt('Enter Navigation Link Label (e.g. Menu, Stories):');
     if (!label) return;
-    const url = prompt('Enter URL / Anchor (e.g. index.html#categories, about.html):', '#');
+    const url = prompt('Enter URL / Anchor (e.g. /#categories, /about):', '#');
     if (!url) return;
 
     const h = Object.assign({}, draftData.header || {}, draftData.global?.header || {});
@@ -1640,10 +1640,10 @@ window.MB_CMS_ADMIN = (function () {
       if (imgInput) imgInput.value = 'assets/images/wedding_sweets.png';
       if (imgPreview) imgPreview.src = '/assets/images/wedding_sweets.png';
       if (btn1TextInput) btn1TextInput.value = 'Explore Now';
-      if (btn1UrlInput) btn1UrlInput.value = 'index.html#categories';
+      if (btn1UrlInput) btn1UrlInput.value = '/#categories';
       if (btn2EnabledInput) btn2EnabledInput.checked = true;
       if (btn2TextInput) btn2TextInput.value = 'Order On App';
-      if (btn2UrlInput) btn2UrlInput.value = 'index.html#app';
+      if (btn2UrlInput) btn2UrlInput.value = '/#app';
       toggleBannerBtn2Fields(true);
       if (startInput) startInput.value = '';
       if (endInput) endInput.value = '';
@@ -1695,17 +1695,17 @@ window.MB_CMS_ADMIN = (function () {
       desktopImage: image.startsWith('data:') ? '' : image,
       mobileImage: image.startsWith('data:') ? '' : image,
       ctaPrimaryText: btn1Text,
-      ctaPrimaryUrl: btn1Url || 'index.html#categories',
+      ctaPrimaryUrl: btn1Url || '/#categories',
       ctaSecondaryText: btn2Enabled ? btn2Text : '',
-      ctaSecondaryUrl: btn2Url || 'index.html#app',
+      ctaSecondaryUrl: btn2Url || '/#app',
       btnPrimary: {
         text: btn1Text,
-        url: btn1Url || 'index.html#categories',
+        url: btn1Url || '/#categories',
         target: '_self'
       },
       btnSecondary: {
         text: btn2Text,
-        url: btn2Url || 'index.html#app',
+        url: btn2Url || '/#app',
         target: '_self',
         visible: btn2Enabled
       },
@@ -1906,8 +1906,8 @@ window.MB_CMS_ADMIN = (function () {
     // Special 404 Error Page Editor
     if (activePageKey === '404') {
       const hero = page.sections?.hero || {};
-      const btn1 = hero.btnPrimary || { label: 'Back to Homepage', text: 'Back to Homepage', href: 'index.html', link: 'index.html' };
-      const btn2 = hero.btnSecondary || { label: 'Contact Support', text: 'Contact Support', href: 'contact.html', link: 'contact.html' };
+      const btn1 = hero.btnPrimary || { label: 'Back to Homepage', text: 'Back to Homepage', href: '/', link: '/' };
+      const btn2 = hero.btnSecondary || { label: 'Contact Support', text: 'Contact Support', href: '/contact', link: '/contact' };
       secListWrap.innerHTML = `
         <div class="card" style="margin-top:1.5rem;">
           <div class="card-header">
@@ -1939,7 +1939,7 @@ window.MB_CMS_ADMIN = (function () {
             </div>
             <div class="form-group">
               <label class="form-label">Primary Button Link</label>
-              <input class="form-input" type="text" id="404-btn1-href" value="${(btn1.href || btn1.link || 'index.html').replace(/"/g, '&quot;')}" />
+              <input class="form-input" type="text" id="404-btn1-href" value="${(btn1.href || btn1.link || '/').replace(/"/g, '&quot;')}" />
             </div>
             <div class="form-group">
               <label class="form-label">Secondary Button Label</label>
@@ -1947,7 +1947,7 @@ window.MB_CMS_ADMIN = (function () {
             </div>
             <div class="form-group">
               <label class="form-label">Secondary Button Link</label>
-              <input class="form-input" type="text" id="404-btn2-href" value="${(btn2.href || btn2.link || 'contact.html').replace(/"/g, '&quot;')}" />
+              <input class="form-input" type="text" id="404-btn2-href" value="${(btn2.href || btn2.link || '/contact').replace(/"/g, '&quot;')}" />
             </div>
           </div>
           <div style="margin-top:1.25rem;">
@@ -2112,14 +2112,14 @@ window.MB_CMS_ADMIN = (function () {
     hero.btnPrimary = {
       label: getVal('404-btn1-text') || 'Back to Homepage',
       text: getVal('404-btn1-text') || 'Back to Homepage',
-      href: getVal('404-btn1-href') || 'index.html',
-      link: getVal('404-btn1-href') || 'index.html'
+      href: getVal('404-btn1-href') || '/',
+      link: getVal('404-btn1-href') || '/'
     };
     hero.btnSecondary = {
       label: getVal('404-btn2-text') || 'Contact Support',
       text: getVal('404-btn2-text') || 'Contact Support',
-      href: getVal('404-btn2-href') || 'contact.html',
-      link: getVal('404-btn2-href') || 'contact.html'
+      href: getVal('404-btn2-href') || '/contact',
+      link: getVal('404-btn2-href') || '/contact'
     };
 
     markDirty();
@@ -3714,9 +3714,9 @@ window.MB_CMS_ADMIN = (function () {
     updateThumbPreview('hero-field-mobile-img', 'preview-hero-mobile-img');
 
     setVal('hero-field-btn1-text', hero.btnPrimary?.text || hero.btnPrimary?.label || 'Explore Sweets');
-    setVal('hero-field-btn1-link', hero.btnPrimary?.link || hero.btnPrimary?.href || '#categories');
+    setVal('hero-field-btn1-link', hero.btnPrimary?.link || hero.btnPrimary?.href || '/#categories');
     setVal('hero-field-btn2-text', hero.btnSecondary?.text || hero.btnSecondary?.label || 'Partner With Us');
-    setVal('hero-field-btn2-link', hero.btnSecondary?.link || hero.btnSecondary?.href || 'partner.html');
+    setVal('hero-field-btn2-link', hero.btnSecondary?.link || hero.btnSecondary?.href || '/partner');
 
     renderHeroInlinePreview();
   }
@@ -3855,7 +3855,7 @@ window.MB_CMS_ADMIN = (function () {
     hero.posterImage = deskImg;
 
     const b1Text = getVal('hero-field-btn1-text') || 'Explore Sweets';
-    const b1Link = getVal('hero-field-btn1-link') || '#categories';
+    const b1Link = getVal('hero-field-btn1-link') || '/#categories';
     hero.btnPrimary = {
       text: b1Text,
       label: b1Text,
@@ -3863,7 +3863,7 @@ window.MB_CMS_ADMIN = (function () {
       href: b1Link
     };
     const b2Text = getVal('hero-field-btn2-text') || 'Partner With Us';
-    const b2Link = getVal('hero-field-btn2-link') || 'partner.html';
+    const b2Link = getVal('hero-field-btn2-link') || '/partner';
     hero.btnSecondary = {
       text: b2Text,
       label: b2Text,
@@ -4548,7 +4548,7 @@ window.MB_CMS_ADMIN = (function () {
       { title: 'General Enquiries', badge: '', desc: 'Customer feedback, sweet maker partnerships, business questions and account assistance.', action: 'info@mittaibandi.com', url: 'mailto:info@mittaibandi.com' },
       { title: 'Food Safety & Hygiene', badge: '', desc: 'Dedicated desk for food hygiene reports, quality audits and health concerns.', action: 'hygiene@mittaibandi.com', url: 'mailto:hygiene@mittaibandi.com' },
       { title: 'Legal & Regulatory', badge: '', desc: 'Statutory communications, legal notices, copyright, IP and trademark matters.', action: 'legal@mittaibandi.com', url: 'mailto:legal@mittaibandi.com' },
-      { title: 'Vendor Partnerships', badge: '', desc: 'List your traditional sweet shop or regional confectionery on MITTAI BANDI.', action: 'Join as a Partner', url: 'partner.html' }
+      { title: 'Vendor Partnerships', badge: '', desc: 'List your traditional sweet shop or regional confectionery on MITTAI BANDI.', action: 'Join as a Partner', url: '/partner' }
     ];
 
     for (let i = 1; i <= 6; i++) {
@@ -4573,7 +4573,7 @@ window.MB_CMS_ADMIN = (function () {
     setVal('c-panel-vendor-p1', vendorOnb.p1 || 'If you own a sweet shop, bakery, or confectionery and want to expand your reach with MITTAI BANDI, email us at info@mittaibandi.com with your shop name, location, contact number, and FSSAI license number.');
     setVal('c-panel-vendor-p2', vendorOnb.p2 || 'Our vendor onboarding team will review your details and guide you through storefront setup, packaging standards, and digital order management.');
     setVal('c-panel-vendor-btntext', vendorOnb.btnText || 'Partner With Us Page');
-    setVal('c-panel-vendor-btnlink', vendorOnb.btnLink || 'partner.html');
+    setVal('c-panel-vendor-btnlink', vendorOnb.btnLink || '/partner');
 
     // 4. Food Safety
     setCheck('c-safety-enabled', safety.enabled !== false && safety.visible !== false);
@@ -4804,11 +4804,11 @@ window.MB_CMS_ADMIN = (function () {
   let legalSourceMode = false;
 
   const LEGAL_ROUTES = {
-    privacy: 'privacy-policy.html',
-    terms: 'terms-of-service.html',
-    refund: 'cancellation-refund.html',
-    api: 'api-policy.html',
-    grievance: 'contact.html#grievance'
+    privacy: '/privacy-policy',
+    terms: '/terms-of-service',
+    refund: '/cancellation-refund',
+    api: '/api-policy',
+    grievance: '/contact#grievance'
   };
 
   const LEGAL_NAMES = {
@@ -5007,7 +5007,7 @@ window.MB_CMS_ADMIN = (function () {
 
     // Synchronize visibility of matching legal links in draftData.footer
     if (draftData.footer) {
-      const matchRoute = LEGAL_ROUTES[activeLegalKey] || `${activeLegalKey}.html`;
+      const matchRoute = (LEGAL_ROUTES[activeLegalKey] || activeLegalKey).replace(/^\//, '').replace(/\.html$/, '');
       if (Array.isArray(draftData.footer.legalLinks)) {
         draftData.footer.legalLinks.forEach(l => {
           if (l && ((l.href && l.href.includes(matchRoute)) || (l.id && l.id.includes(activeLegalKey)))) {

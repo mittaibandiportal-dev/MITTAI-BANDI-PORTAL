@@ -99,10 +99,15 @@ function initNavigation() {
   }
 
   // Active link for non-anchor (page) links
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const rawPath = window.location.pathname.replace(/\/$/, '') || '/';
+  const cleanPath = rawPath.replace(/\.html$/, '');
   document.querySelectorAll('.nav-link[href]:not([href^="#"])').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+    let href = link.getAttribute('href') || '';
+    if (href.startsWith('http')) {
+      try { href = new URL(href).pathname; } catch (_) {}
+    }
+    const cleanHref = href.replace(/\/$/, '').replace(/\.html$/, '') || '/';
+    if (cleanHref === cleanPath || (cleanPath === '/' && (cleanHref === '/' || cleanHref === '/index'))) {
       link.classList.add('active');
     }
   });

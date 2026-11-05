@@ -703,11 +703,16 @@
     const visibleLinks = rawLinks.filter(l => l && l.visible !== false);
     if (visibleLinks.length > 0) {
       const navLinksUl = document.querySelector('.nav-links');
-      const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+      const curPath = (window.location.pathname.replace(/\/$/, '') || '/').replace(/\.html$/, '');
       if (navLinksUl) {
         navLinksUl.innerHTML = visibleLinks.map(link => {
-          const href = link.href || link.url || '#';
-          const isActive = (currentPath === href || (currentPath === '' && href === 'index.html'));
+          let href = link.href || link.url || '#';
+          let linkPath = href;
+          if (linkPath.startsWith('http')) {
+            try { linkPath = new URL(linkPath).pathname; } catch (_) {}
+          }
+          const cleanLink = (linkPath.replace(/\/$/, '') || '/').replace(/\.html$/, '');
+          const isActive = (cleanLink === curPath || (curPath === '/' && (cleanLink === '/' || cleanLink === '/index')));
           return `<li><a href="${href}" class="nav-link ${isActive ? 'active' : ''}" target="${link.target || '_self'}">${link.label}</a></li>`;
         }).join('');
       }
@@ -797,7 +802,7 @@
                 <div style="font-size:3rem; margin-bottom:1rem;">📋</div>
                 <h2 style="font-size:1.75rem; color:#1F2937; margin-bottom:0.75rem; font-weight:800;">${cfg.label} Unavailable</h2>
                 <p style="color:#6B7280; max-width:540px; margin:0 auto 1.75rem; line-height:1.65; font-size:1rem;">This policy document is currently inactive or being updated. Please check back shortly or explore our website.</p>
-                <a href="index.html" class="btn btn-primary" style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 2rem; border-radius:999px; background:#E60046; color:#FFFFFF; text-decoration:none; font-weight:700; box-shadow:0 4px 14px rgba(230,0,70,0.3);">Return to Homepage</a>
+                <a href="/" class="btn btn-primary" style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 2rem; border-radius:999px; background:#E60046; color:#FFFFFF; text-decoration:none; font-weight:700; box-shadow:0 4px 14px rgba(230,0,70,0.3);">Return to Homepage</a>
               </div>
             `;
           }
@@ -883,13 +888,13 @@
           .map(l => `<a href="${l.href || l.url || '#'}" class="footer-bottom-link">${l.label}</a>`);
 
         // Ensure "Contact" and "Admin CMS" remain accessible in the footer bottom bar
-        const hasContact = btmSource.some(l => l && /contact\.html$/i.test(l.href || l.url || ''));
+        const hasContact = btmSource.some(l => l && /(?:contact|contact\.html)$/i.test(l.href || l.url || ''));
         if (!hasContact) {
-          renderedBottom.push(`<a href="contact.html" class="footer-bottom-link">Contact</a>`);
+          renderedBottom.push(`<a href="/contact" class="footer-bottom-link">Contact</a>`);
         }
         const hasAdmin = btmSource.some(l => l && /admin/i.test(l.href || l.url || ''));
         if (!hasAdmin) {
-          renderedBottom.push(`<a href="admin/login.html" class="footer-bottom-link" style="opacity: 0.7;">Admin CMS</a>`);
+          renderedBottom.push(`<a href="/admin/login.html" class="footer-bottom-link" style="opacity: 0.7;">Admin CMS</a>`);
         }
 
         btmLinks.innerHTML = renderedBottom.join('');
@@ -2495,7 +2500,7 @@
               <div style="font-size:2.5rem; margin-bottom:1rem;">📄</div>
               <h2 style="font-size:1.5rem; color:#252525; margin-bottom:0.75rem; font-weight:700;">Policy Document Unavailable</h2>
               <p style="color:#666666; max-width:520px; margin:0 auto 1.5rem; line-height:1.6;">This policy document is currently inactive or being updated. Please check back shortly or return to our homepage.</p>
-              <a href="index.html" class="btn btn-primary" style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 1.75rem; border-radius:50px; background:#E60046; color:#FFFFFF; text-decoration:none; font-weight:600;">Return to Home</a>
+              <a href="/" class="btn btn-primary" style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 1.75rem; border-radius:50px; background:#E60046; color:#FFFFFF; text-decoration:none; font-weight:600;">Return to Home</a>
             </div>
           `;
         }
@@ -2657,7 +2662,7 @@
       const desc = banner.description || '';
       const img = (isMobile && banner.mobileImage) ? banner.mobileImage : (banner.image || 'assets/images/wedding_sweets.png');
       const pText = banner.ctaPrimaryText || banner.btnPrimary?.text || 'Explore Collection';
-      const pUrl = banner.ctaPrimaryUrl || banner.btnPrimary?.url || 'index.html#categories';
+      const pUrl = banner.ctaPrimaryUrl || banner.btnPrimary?.url || '/#categories';
       const sText = banner.ctaSecondaryText || banner.btnSecondary?.text || '';
       const sUrl = banner.ctaSecondaryUrl || banner.btnSecondary?.url || '#';
       const hasSec = Boolean(sText && (banner.btnSecondary?.visible !== false));
